@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-timeline',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './timeline.html',
-  styleUrl: './timeline.scss'
+  styleUrl: './timeline.scss',
 })
-export class Timeline {
-
-}
+export class Timeline {}

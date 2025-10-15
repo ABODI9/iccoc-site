@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-links',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './links.html',
-  styleUrl: './links.scss'
+  styleUrl: './links.scss',
 })
-export class Links {
-
-}
+export class Links {}
