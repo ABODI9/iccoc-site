@@ -1,0 +1,64 @@
+<header class="header">
+  <nav class="container nav">
+    <div class="brand">
+    <img src="assets/images/logo.jpeg?v=1" alt="ICCOC logo">
+      <strong>{{ 'app.brand' | translate }}</strong>
+    </div>
+    <div class="tabs">
+      <a href="#home">{{ 'nav.home' | translate }}</a>
+      <a href="#about">{{ 'nav.about' | translate }}</a>
+      <a href="#who">{{ 'nav.who' | translate }}</a>
+      <a href="#activities">{{ 'nav.activities' | translate }}</a>
+      <a href="#media">{{ 'nav.media' | translate }}</a>
+      <a href="#news">{{ 'nav.news' | translate }}</a>
+      <a href="#initiative">{{ 'nav.initiative' | translate }}</a>
+      <a href="#links">{{ 'nav.links' | translate }}</a>
+      <a href="#contact" class="btn">{{ 'nav.contact' | translate }}</a>
+
+      <select class="lang" (change)="useLang($any($event.target).value)">
+        <option *ngFor="let l of langs" [value]="l.code" [selected]="l.code === currentLang">
+          {{ l.label | translate }}
+        </option>
+      </select>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <!-- Hero -->
+  <section id="home" class="section">
+    <div class="container">
+      <div class="hero" style="background-image:url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=1800&auto=format&fit=crop')">
+        <div class="wrap card soft">
+          <h1>{{ 'hero.home_title' | translate:{ org_full: (('app.org_full' | translate)) } }}</h1>
+          <p class="muted">{{ 'hero.home_sub' | translate }}</p>
+          <p class="muted small">
+            • {{ 'app.org_full' | translate }}
+            • {{ 'app.org_full_en' | translate }}
+            • {{ 'app.org_full_fr' | translate }}
+            • {{ 'app.org_full_zh' | translate }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- مثال قسم مبسّط -->
+  <section id="about" class="section">
+    <div class="container">
+      <h2>{{ 'hero.about_title' | translate }}</h2>
+      <div class="grid cols-3">
+        <div class="card soft">
+          <strong>{{ 'about.goals_title' | translate }}</strong>
+          <p>{{ 'home.welcome' | translate }}</p>
+        </div>
+        <div class="card soft"><strong>Vision</strong><p>{{ 'about.vision' | translate }}</p></div>
+        <div class="card soft"><strong>Mission</strong><p>{{ 'about.mission' | translate }}</p></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  {{ 'app.footer' | translate:{ year: year } }}
+</footer>

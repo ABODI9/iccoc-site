@@ -1,0 +1,80 @@
+{
+  "app": {
+    "org_full": "International Commission Against Corruption and Organised Crime",
+    "org_full_en": "International Commission Against Corruption and Organised Crime",
+    "org_full_zh": "國際反貪污同有組織犯罪委員會",
+    "org_full_fr": "Commission internationale contre la corruption et le crime organisé",
+    "brand": "ICCOC",
+    "footer": "© {{year}} ICCOC – All rights reserved"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "who": "Who we are",
+    "activities": "What we do",
+    "media": "Media",
+    "news": "Reports & News",
+    "initiative": "Initiative",
+    "links": "Links",
+    "contact": "Contact"
+  },
+  "hero": {
+    "home_title": "{{org_full}}",
+    "home_sub": "Welcome to the official website – a non-governmental, non-profit body based in Geneva, Switzerland.",
+    "about_title": "About ICCOC",
+    "about_sub": "Goals, Vision, Mission, Values",
+    "who_title": "Who we are",
+    "who_sub": "Extended overview",
+    "activities_title": "What we do",
+    "activities_sub": "Programs and practical activities",
+    "media_title": "Media",
+    "media_sub": "We welcome media contributions",
+    "news_title": "Reports & News",
+    "news_sub": "Subscribe to receive our reports and studies",
+    "initiative_title": "Initiative",
+    "initiative_sub": "Report suspected corruption confidentially",
+    "links_title": "Related links",
+    "contact_title": "Contact us"
+  },
+  "home": {
+    "welcome": "Welcome to ICCOC. We are a non-governmental and non-profit body based in Geneva, Switzerland."
+  },
+  "about": {
+    "goals_title": "Goals",
+    "vision": "Global leadership against corruption and organized crime.",
+    "mission": "Human societies free of corruption and organized crime.",
+    "values": "Transparency, humanity, universality, quality and craftsmanship."
+  },
+  "media": {
+    "blurb": "We welcome media contributions and coverage related to our work. For coordination, contact {{email}}."
+  },
+  "news": {
+    "subscribe_blurb": "News and reports related to ICCOC. Please subscribe and send your details to receive them.",
+    "samples": "Recent items",
+    "sample_1": "Awareness campaign on integrity.",
+    "sample_2": "Partnership with a university for specialized training.",
+    "sample_3": "Workshop on asset recovery.",
+    "subscribe": "Subscribe"
+  },
+  "initiative": {
+    "blurb": "Report any cross-border corruption or organized crime suspicions without personal data. Our investigators will follow up and update you.",
+    "msg": "Report text (no personal data)",
+    "email_optional": "Email for follow-up (optional)",
+    "send": "Send report",
+    "direct": "You can also contact us directly: {{email}}"
+  },
+  "contact": {
+    "name": "Name",
+    "email": "Email",
+    "subject": "Subject",
+    "message": "Your message…",
+    "send": "Send"
+  },
+  "lang": {
+    "label": "Language",
+    "ar": "العربية",
+    "en": "English",
+    "fr": "Français",
+    "zh": "繁體中文"
+  }
+}

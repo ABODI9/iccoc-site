@@ -1,0 +1,80 @@
+{
+  "app": {
+    "org_full": "Commission internationale contre la corruption et le crime organisé",
+    "org_full_en": "International Commission Against Corruption and Organised Crime",
+    "org_full_zh": "國際反貪污同有組織犯罪委員會",
+    "org_full_fr": "Commission internationale contre la corruption et le crime organisé",
+    "brand": "ICCOC",
+    "footer": "© {{year}} ICCOC – Tous droits réservés"
+  },
+  "nav": {
+    "home": "Accueil",
+    "about": "À propos",
+    "who": "Qui sommes-nous",
+    "activities": "Nos actions",
+    "media": "Médias",
+    "news": "Rapports & Actus",
+    "initiative": "Initiative",
+    "links": "Liens",
+    "contact": "Contact"
+  },
+  "hero": {
+    "home_title": "{{org_full}}",
+    "home_sub": "Bienvenue sur le site officiel – organisation non gouvernementale et à but non lucratif basée à Genève, Suisse.",
+    "about_title": "À propos",
+    "about_sub": "Objectifs, Vision, Mission, Valeurs",
+    "who_title": "Qui sommes-nous",
+    "who_sub": "Présentation détaillée",
+    "activities_title": "Nos actions",
+    "activities_sub": "Programmes et activités pratiques",
+    "media_title": "Médias",
+    "media_sub": "Nous accueillons les contributions des médias",
+    "news_title": "Rapports & Actus",
+    "news_sub": "Abonnez-vous pour recevoir nos rapports et études",
+    "initiative_title": "Initiative",
+    "initiative_sub": "Signalez anonymement toute suspicion de corruption",
+    "links_title": "Liens utiles",
+    "contact_title": "Nous contacter"
+  },
+  "home": {
+    "welcome": "Bienvenue à l'ICCOC. Organisation non gouvernementale et à but non lucratif basée à Genève."
+  },
+  "about": {
+    "goals_title": "Objectifs",
+    "vision": "Leadership mondial contre la corruption et le crime organisé.",
+    "mission": "Des sociétés humaines sans corruption ni crime organisé.",
+    "values": "Transparence, humanité, universalité, qualité et professionnalisme."
+  },
+  "media": {
+    "blurb": "Nous accueillons les initiatives médiatiques liées à nos travaux. Pour la coordination, contactez {{email}}."
+  },
+  "news": {
+    "subscribe_blurb": "Actualités et rapports liés à l'ICCOC. Veuillez vous abonner pour les recevoir.",
+    "samples": "Exemples récents",
+    "sample_1": "Campagne de sensibilisation à l'intégrité.",
+    "sample_2": "Partenariat universitaire pour une formation spécialisée.",
+    "sample_3": "Atelier sur le recouvrement des avoirs.",
+    "subscribe": "S'abonner"
+  },
+  "initiative": {
+    "blurb": "Signalez toute suspicion transfrontalière sans données personnelles. Nos enquêteurs assureront le suivi.",
+    "msg": "Texte du signalement (sans données personnelles)",
+    "email_optional": "Email pour suivi (optionnel)",
+    "send": "Envoyer",
+    "direct": "Vous pouvez aussi nous écrire directement : {{email}}"
+  },
+  "contact": {
+    "name": "Nom",
+    "email": "Email",
+    "subject": "Objet",
+    "message": "Votre message…",
+    "send": "Envoyer"
+  },
+  "lang": {
+    "label": "Langue",
+    "ar": "العربية",
+    "en": "English",
+    "fr": "Français",
+    "zh": "繁體中文"
+  }
+}
