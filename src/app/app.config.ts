@@ -1,16 +1,16 @@
+// app.config.ts
 import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { provideRouter, withInMemoryScrolling } from '@angular/router';
 import { routes } from './app.routes';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateLoader, TranslateModule, TranslationObject } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 
-// لودر مخصص بدل TranslateHttpLoader
 export class JsonTranslateLoader implements TranslateLoader {
   constructor(private http: HttpClient) {}
-  getTranslation(lang: string): Observable<any> {
-    // Angular سيخدم الملفات من /assets
-    return this.http.get(`/assets/i18n/${lang}.json`);
+  // ✅ نوع الإرجاع الصحيح + مسار نسبي يعمل على GitHub Pages
+  getTranslation(lang: string): Observable<TranslationObject> {
+    return this.http.get<TranslationObject>(`assets/i18n/${lang}.json`);
   }
 }
 
@@ -20,19 +20,12 @@ export function loaderFactory(http: HttpClient) {
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(
-      routes,
-      withInMemoryScrolling({ scrollPositionRestoration: 'enabled' })
-    ),
+    provideRouter(routes, withInMemoryScrolling({ scrollPositionRestoration: 'enabled' })),
     importProvidersFrom(
       HttpClientModule,
       TranslateModule.forRoot({
         defaultLanguage: 'ar',
-        loader: {
-          provide: TranslateLoader,
-          useFactory: loaderFactory,
-          deps: [HttpClient]
-        }
+        loader: { provide: TranslateLoader, useFactory: loaderFactory, deps: [HttpClient] }
       })
     )
   ]
