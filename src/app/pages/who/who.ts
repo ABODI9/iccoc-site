@@ -7,25 +7,15 @@ import { HeaderComponent } from '../../layout/header/header';
 
 @Component({
   standalone: true,
-  selector: 'app-about',
+  selector: 'app-who',
   imports: [CommonModule, TranslateModule, HeaderComponent, FooterComponent],
-  templateUrl: './about.html'
+  templateUrl: './who.html'
 })
-export class About implements OnInit, OnDestroy {
-  goals: string[] = [];
+export class Who implements OnInit, OnDestroy {
+  body: string[] = [];
   private sub?: Subscription;
-
   constructor(private t: TranslateService) {}
-
-  ngOnInit() {
-    this.load();
-    this.sub = this.t.onLangChange.subscribe(() => this.load());
-  }
-  ngOnDestroy() { this.sub?.unsubscribe(); }
-
-  private load() {
-    this.t.get('about.goals').subscribe((arr: string[]) => {
-      this.goals = Array.isArray(arr) ? arr : [];
-    });
-  }
+  ngOnInit(){ this.load(); this.sub = this.t.onLangChange.subscribe(()=>this.load()); }
+  ngOnDestroy(){ this.sub?.unsubscribe(); }
+  private load(){ this.t.get('who.body').subscribe((arr:string[]) => this.body = Array.isArray(arr) ? arr : []); }
 }

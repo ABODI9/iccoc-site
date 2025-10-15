@@ -1,80 +1,142 @@
 {
+  "lang": { "ar": "Arabe", "en": "Anglais", "fr": "Français", "zh": "Chinois" },
+
   "app": {
+    "brand": "ICCOC",
+    "footer": "© ICCOC {{year}} – Tous droits réservés",
     "org_full": "Commission internationale contre la corruption et le crime organisé",
     "org_full_en": "International Commission Against Corruption and Organised Crime",
-    "org_full_zh": "國際反貪污同有組織犯罪委員會",
     "org_full_fr": "Commission internationale contre la corruption et le crime organisé",
-    "brand": "ICCOC",
-    "footer": "© {{year}} ICCOC – Tous droits réservés"
+    "org_full_zh": "国际反腐败与有组织犯罪委员会"
   },
-  "nav": {
-    "home": "Accueil",
-    "about": "À propos",
-    "who": "Qui sommes-nous",
-    "activities": "Nos actions",
-    "media": "Médias",
-    "news": "Rapports & Actus",
-    "initiative": "Initiative",
-    "links": "Liens",
-    "contact": "Contact"
-  },
+
+"nav": {
+  "home": "Accueil",
+  "about": "À propos",
+  "who": "Qui sommes-nous",
+  "what": "Que faisons-nous",
+  "reports": "Rapports",
+  "initiative": "Initiative",
+  "links": "Liens",
+  "contact": "Contact"
+}
+,
+
   "hero": {
-    "home_title": "{{org_full}}",
-    "home_sub": "Bienvenue sur le site officiel – organisation non gouvernementale et à but non lucratif basée à Genève, Suisse.",
-    "about_title": "À propos",
-    "about_sub": "Objectifs, Vision, Mission, Valeurs",
-    "who_title": "Qui sommes-nous",
-    "who_sub": "Présentation détaillée",
-    "activities_title": "Nos actions",
-    "activities_sub": "Programmes et activités pratiques",
-    "media_title": "Médias",
-    "media_sub": "Nous accueillons les contributions des médias",
-    "news_title": "Rapports & Actus",
-    "news_sub": "Abonnez-vous pour recevoir nos rapports et études",
-    "initiative_title": "Initiative",
-    "initiative_sub": "Signalez anonymement toute suspicion de corruption",
-    "links_title": "Liens utiles",
-    "contact_title": "Nous contacter"
+    "home_title": "Commission internationale contre la corruption et le crime organisé",
+    "home_sub": "Bienvenue sur le site officiel – organisation non gouvernementale et à but non lucratif basée à Genève, Suisse."
   },
+
   "home": {
-    "welcome": "Bienvenue à l'ICCOC. Organisation non gouvernementale et à but non lucratif basée à Genève."
+    "welcome": "Bienvenue sur le site officiel de la Commission internationale contre la corruption et le crime organisé. Organisation non gouvernementale et à but non lucratif dont le siège est à Genève, en Suisse."
   },
+
   "about": {
+    "title": "À propos de la Commission",
     "goals_title": "Objectifs",
-    "vision": "Leadership mondial contre la corruption et le crime organisé.",
+    "vision": "Leadership mondial dans la lutte contre la corruption et le crime organisé.",
     "mission": "Des sociétés humaines sans corruption ni crime organisé.",
-    "values": "Transparence, humanité, universalité, qualité et professionnalisme."
+    "values": "Transparence, humanité, universalité, qualité et professionnalisme.",
+    "goals": [
+      "Contribuer aux efforts internationaux pour lutter contre la corruption et le crime organisé, et mettre en place des mesures préventives efficaces.",
+      "Plaider pour la mise en œuvre des mécanismes, plans et programmes internationaux, en particulier la Convention des Nations unies contre la corruption.",
+      "Sensibiliser aux risques et aux impacts sociaux de la corruption.",
+      "Encourager et soutenir les organisations de la société civile afin qu’elles contribuent activement à la lutte anticorruption.",
+      "Mener des études juridiques pour évaluer et revoir les législations nationales et internationales pertinentes, leur efficacité et leur adéquation avec les objectifs visés.",
+      "Inviter les pays dépourvus de législation anticorruption à l’adopter et fournir une assistance technique si nécessaire.",
+      "Contribuer au suivi des affaires de corruption et soumettre des dossiers aux autorités compétentes aux niveaux national et international.",
+      "Mettre en œuvre des programmes de renforcement des capacités pour les organismes spécialisés, la société civile et les parties prenantes.",
+      "Promouvoir l’intégrité en tant que principe moral et sensibiliser aux risques de la corruption.",
+      "Fournir une assistance technique pour l’application des décisions internationales (p. ex. recouvrement d’avoirs) en coordination avec les parties concernées.",
+      "Fournir une assistance technique concernant les mesures nécessaires à l’exécution des décisions internationales relatives à la corruption, en coordination avec les autorités compétentes."
+    ]
   },
+
+  "who": {
+    "title": "Qui sommes-nous",
+    "body": [
+      "La Commission est une organisation indépendante, non gouvernementale et à but non lucratif basée à Genève. Elle se concentre sur des enjeux majeurs touchant la vie des personnes, notamment la corruption et le crime organisé.",
+      "Nous coopérons avec des entités et des personnes partageant nos objectifs et prêtes à contribuer à cette lutte.",
+      "Établie au cœur de l’Europe, à proximité de l’ONU à Genève, la Commission contribue à la paix et à la sécurité internationales, soutient les forces de l’ordre et renforce le rôle de la société civile."
+    ],
+    "brochure_hint": "Une brochure PDF de présentation peut être ajoutée ici."
+  },
+"what": {
+  "title": "Que faisons-nous",
+  "subtitle": "Programmes et actions concrètes",
+  "items": [
+    { "img": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=800&auto=format&fit=crop", "text": "Organisation et participation à des séminaires, conférences et ateliers sur la lutte contre la corruption et le crime organisé." },
+    { "img": "https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=800&auto=format&fit=crop", "text": "Formation d’équipes locales et internationales pour élaborer et améliorer les législations pertinentes." },
+    { "img": "https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?q=80&w=800&auto=format&fit=crop", "text": "Établissement de partenariats et d’accords de coopération avec les entités compétentes." },
+    { "img": "https://images.unsplash.com/photo-1517976487492-576ea346b021?q=80&w=800&auto=format&fit=crop", "text": "Signature de protocoles d’accord avec des institutions internationales." },
+    { "img": "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=800&auto=format&fit=crop", "text": "Coopération avec les universités et les organisations de la société civile dans le cadre de programmes de formation et de sensibilisation." },
+    { "img": "https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?q=80&w=800&auto=format&fit=crop", "text": "Réception des signalements et transmission pour vérification et suivi par les autorités compétentes." },
+    { "img": "https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=800&auto=format&fit=crop", "text": "Mise en œuvre de campagnes de sensibilisation du public via les médias." },
+    { "img": "https://images.unsplash.com/photo-1496134731652-92ad7d726f48?q=80&w=800&auto=format&fit=crop", "text": "Exploitation des journées internationales pour promouvoir l’intégrité et la transparence." },
+    { "img": "https://images.unsplash.com/photo-1483478550801-ceba5fe50e8e?q=80&w=800&auto=format&fit=crop", "text": "Renforcement des partenariats communautaires entre les différentes parties prenantes." },
+    { "img": "https://images.unsplash.com/photo-1557800636-894a64c1696f?q=80&w=800&auto=format&fit=crop", "text": "Participation aux prix internationaux d’excellence en matière de lutte contre la corruption." }
+  ]
+}
+
+,
+
+  "activities": {
+    "title": "Nos actions",
+    "items": [
+      "Organiser et participer à des séminaires, conférences et ateliers sur la lutte contre la corruption et le crime organisé aux niveaux local, régional et international.",
+      "Constituer des équipes locales et internationales pour adapter et développer les lois.",
+      "Conclure des partenariats, accords et protocoles d’entente avec les organismes compétents.",
+      "Signer des protocoles d’entente avec des institutions internationales.",
+      "Coopérer avec des universités et des ONG pour offrir des programmes éducatifs, de formation et de sensibilisation.",
+      "Recevoir les signalements et plaintes, les transmettre pour vérification et en assurer le suivi auprès des autorités compétentes.",
+      "Collaborer avec les médias pour mener des campagnes de sensibilisation.",
+      "Profiter des journées internationales, comme la Journée internationale de lutte contre la corruption, pour promouvoir l’intégrité.",
+      "Encourager la coopération entre les parties prenantes et renforcer le partenariat communautaire.",
+      "Encourager la participation aux prix internationaux de lutte contre la corruption."
+    ]
+  },
+
   "media": {
-    "blurb": "Nous accueillons les initiatives médiatiques liées à nos travaux. Pour la coordination, contactez {{email}}."
+    "title": "Médias",
+    "welcome": "Nous accueillons les contributions et couvertures médiatiques liées à nos activités. Coordination : media@iccoc.eu"
   },
+
   "news": {
-    "subscribe_blurb": "Actualités et rapports liés à l'ICCOC. Veuillez vous abonner pour les recevoir.",
-    "samples": "Exemples récents",
-    "sample_1": "Campagne de sensibilisation à l'intégrité.",
-    "sample_2": "Partenariat universitaire pour une formation spécialisée.",
-    "sample_3": "Atelier sur le recouvrement des avoirs.",
-    "subscribe": "S'abonner"
+    "title": "Rapports & actualités",
+    "subscribe_title": "Abonnez-vous pour recevoir nos publications",
+    "form": {
+      "name": "Nom complet",
+      "phone": "Numéro mobile (Telegram/Signal)",
+      "country": "Pays",
+      "city": "Ville",
+      "email": "Adresse e-mail",
+      "submit": "S’abonner"
+    }
   },
+
   "initiative": {
-    "blurb": "Signalez toute suspicion transfrontalière sans données personnelles. Nos enquêteurs assureront le suivi.",
-    "msg": "Texte du signalement (sans données personnelles)",
-    "email_optional": "Email pour suivi (optionnel)",
-    "send": "Envoyer",
-    "direct": "Vous pouvez aussi nous écrire directement : {{email}}"
+    "title": "Initiative",
+    "lead": "Signalez en toute confidentialité les cas présumés de corruption ou de criminalité transfrontalière.",
+    "body": "E-mail : reporting@iccoc.eu"
   },
+
+  "links": {
+    "title": "Liens utiles",
+    "items": [
+      ["Transparency International", "https://www.transparency.org/en/"],
+      ["ROLACC – Centre État de droit & Lutte contre la corruption", "https://www.rolacc.qa/"],
+      ["Banque mondiale – Programme anticorruption pour le développement", "https://www.worldbank.org/en/programs/anticorruption-for-development/priority-themes"],
+      ["CPI – Cour pénale internationale", "https://www.icc-cpi.int/"],
+      ["CIJ – Cour internationale de Justice", "https://www.icj-cij.org/home"],
+      ["Europol", "https://www.europol.europa.eu/"],
+      ["INTERPOL", "https://www.interpol.int/en"],
+      ["ONUDC – Office des Nations unies contre la drogue et le crime", "https://www.unodc.org/"],
+      ["Prix international d’excellence anticorruption", "https://www.aceaward.com/ar"]
+    ]
+  },
+
   "contact": {
-    "name": "Nom",
-    "email": "Email",
-    "subject": "Objet",
-    "message": "Votre message…",
-    "send": "Envoyer"
-  },
-  "lang": {
-    "label": "Langue",
-    "ar": "العربية",
-    "en": "English",
-    "fr": "Français",
-    "zh": "繁體中文"
+    "title": "Contactez-nous",
+    "emails": ["info@iccoc.eu", "media@iccoc.eu", "manager@iccoc.eu"]
   }
 }

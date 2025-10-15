@@ -1,32 +1,28 @@
-<section>
+
+
+<section class="section">
   <div class="container">
-    <div class="hero" style="background:url('https://images.unsplash.com/photo-1495727034151-8fdc73e332a8?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;">
-      <div class="wrap">
-        <div class="card soft" style="max-width:920px">
-          <h1>اتصل بنا</h1>
-        </div>
+    <div class="hero" style="background-image:url('https://images.unsplash.com/photo-1495727034151-8fdc73e332a8?q=80&w=1600&auto=format&fit=crop')">
+      <div class="wrap card soft">
+        <h1>{{ 'contact.title' | translate }}</h1>
+      </div>
+    </div>
+
+    <div class="grid cols-2" style="margin-top:16px">
+      <div class="card soft">
+        <ul>
+          <li *ngFor="let e of emails"><a [href]="'mailto:'+e">{{ e }}</a></li>
+        </ul>
+      </div>
+      <div class="card soft">
+        <input class="input" [placeholder]="'news.form.name'  | translate">
+        <input class="input" [placeholder]="'news.form.email' | translate" type="email">
+        <input class="input" [placeholder]="'news.form.country' | translate">
+        <textarea class="input" rows="6" placeholder="Message"></textarea>
+        <a class="btn" [href]="'mailto:'+ (emails[0] || 'info@iccoc.eu')">{{ 'nav.contact' | translate }}</a>
       </div>
     </div>
   </div>
 </section>
 
-<section>
-  <div class="container">
-    <div class="grid cols-2">
-      <div class="card soft">
-        <ul>
-          <li><a href="mailto:info@iccoc.eu">info@iccoc.eu</a></li>
-          <li><a href="mailto:media@iccoc.eu">media@iccoc.eu</a></li>
-          <li><a href="mailto:manager@iccoc.eu">manager@iccoc.eu</a></li>
-        </ul>
-      </div>
-      <div class="card soft">
-        <input class="input" placeholder="الاسم">
-        <input class="input" type="email" placeholder="البريد الإلكتروني">
-        <input class="input" placeholder="الموضوع">
-        <textarea class="input" rows="6" placeholder="رسالتك…"></textarea>
-        <a class="btn" href="mailto:info@iccoc.eu">إرسال</a>
-      </div>
-    </div>
-  </div>
-</section>
+

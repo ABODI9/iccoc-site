@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-reports',
+  selector: 'app-footer',
   standalone: true,
   imports: [CommonModule, TranslateModule],
-  templateUrl: './reports.html',
-  styleUrls: ['./reports.scss'],
+  templateUrl: './footer.html'
 })
-export class Reports {}
+export class FooterComponent {
+  year = new Date().getFullYear();
+}

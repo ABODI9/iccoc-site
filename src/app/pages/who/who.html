@@ -1,0 +1,15 @@
+
+<section class="section">
+  <div class="container">
+    <div class="hero" style="background-image:url('https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?q=80&w=1600&auto=format&fit=crop')">
+      <div class="wrap card soft">
+        <h1>{{ 'who.title' | translate }}</h1>
+      </div>
+    </div>
+
+    <div class="card soft" style="margin-top:16px">
+      <p *ngFor="let p of body" style="margin:0 0 10px">{{ p }}</p>
+      <p class="muted">{{ 'who.brochure_hint' | translate }}</p>
+    </div>
+  </div>
+</section>

@@ -1,1 +1,10 @@
+<!-- لو ما ظهر الهيدر لسبب ما، هذا النص الأحمر يساعدنا نتأكد إن القالب يُعرض -->
+<!-- <div style="background:#ffeded;padding:6px;border:1px solid #f99">DEBUG: app.html mounted</div> -->
+
+<app-header></app-header>
+
 <router-outlet></router-outlet>
+
+<footer class="footer">
+  {{ 'app.footer' | translate:{ year: year } }}
+</footer>

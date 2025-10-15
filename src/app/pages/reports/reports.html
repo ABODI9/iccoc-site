@@ -1,38 +1,32 @@
-<section>
+<section class="section">
   <div class="container">
     <div class="hero" style="background:url('https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;">
-      <div class="wrap">
-        <div class="card soft" style="max-width:920px">
-          <h1>تقارير وأخبار</h1>
-          <p class="muted">اشترك لتصلك تقاريرنا ودراساتنا</p>
-        </div>
+      <div class="wrap card soft">
+        <h1>{{ 'news.title' | translate }}</h1>
+        <p class="muted">{{ 'news.subscribe_title' | translate }}</p>
       </div>
     </div>
-  </div>
-</section>
 
-<section>
-  <div class="container">
-    <div class="grid cols-2">
+    <div class="grid cols-2" style="margin-top:16px">
       <div class="card soft">
-        <p>أخبار الهيئة والأعمال المتعلقة بالإضافة إلى ما نصدره من تقارير ودراسات. الرجاء الاشتراك وإرسال بياناتك للحصول على هذه المواد.</p>
         <div class="grid">
-          <input class="input" placeholder="اسم المشترك بالكامل">
-          <input class="input" placeholder="رقم الموبايل (تلغرام/سِغنال)">
+          <input class="input" [placeholder]="'news.form.name'    | translate">
+          <input class="input" [placeholder]="'news.form.phone'   | translate">
           <div class="grid cols-2">
-            <input class="input" placeholder="بلد الإقامة">
-            <input class="input" placeholder="المدينة">
+            <input class="input" [placeholder]="'news.form.country' | translate">
+            <input class="input" [placeholder]="'news.form.city'    | translate">
           </div>
-          <input class="input" type="email" placeholder="عنوان البريد الإلكتروني">
-          <a class="btn" href="#" onclick="alert('تجربة: تم الاشتراك');return false;">اشتراك</a>
+          <input class="input" type="email" [placeholder]="'news.form.email' | translate">
+          <a class="btn" href="#" onclick="alert('OK');return false;">{{ 'news.form.submit' | translate }}</a>
         </div>
       </div>
+
       <div class="card soft">
-        <strong>نماذج من المستجدات</strong>
+        <strong>{{ 'news.examples_title' | translate:({default:'Examples'}) }}</strong>
         <ul>
-          <li>إطلاق حملة توعية حول النزاهة.</li>
-          <li>شراكة مع جامعة لتعزيز التدريب المتخصص.</li>
-          <li>ورشة عمل حول استرداد الأصول.</li>
+          <li>{{ 'news.ex1' | translate:({default:'Example 1'}) }}</li>
+          <li>{{ 'news.ex2' | translate:({default:'Example 2'}) }}</li>
+          <li>{{ 'news.ex3' | translate:({default:'Example 3'}) }}</li>
         </ul>
       </div>
     </div>

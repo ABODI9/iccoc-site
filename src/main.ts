@@ -1,7 +1,6 @@
 import { bootstrapApplication } from '@angular/platform-browser';
 import { appConfig } from './app/app.config';
-import { HomeComponent } from './app/pages/home/home';
+import { AppComponent } from './app/app';   // <-- الجذر
 
-
-bootstrapApplication(HomeComponent, appConfig)
-.catch(err => console.error(err));
+bootstrapApplication(AppComponent, appConfig)
+  .catch(err => console.error(err));

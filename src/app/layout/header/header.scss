@@ -1,0 +1,10 @@
+.header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-bottom:1px solid #e2e8f0}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px 0}
+.brand{display:flex;gap:10px;align-items:center}
+.brand img{width:44px;height:44px;object-fit:contain}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.tabs a{padding:10px 12px;border-radius:999px;text-decoration:none;color:inherit}
+.tabs a.active{background:linear-gradient(135deg,#0ea5e9,#38bdf8);color:#fff}
+.tabs a:hover{background:#eef6ff}
+.lang{padding:8px 10px;border-radius:10px;border:1px solid #dbe7fb;background:#fff}
+.btn{background:linear-gradient(135deg,#0ea5e9,#38bdf8);color:#fff;border-radius:999px}

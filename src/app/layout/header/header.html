@@ -1,0 +1,26 @@
+<header class="header">
+  <nav class="container nav">
+    <div class="brand">
+      <img src="assets/images/logo.jpeg" alt="ICCOC">
+      <strong>{{ 'app.brand' | translate }}</strong>
+    </div>
+
+    <div class="tabs">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        {{ 'nav.home' | translate }}
+      </a>
+      <a routerLink="/about" routerLinkActive="active">{{ 'nav.about' | translate }}</a>
+      <a routerLink="/who" routerLinkActive="active">{{ 'nav.who' | translate }}</a>
+      <a routerLink="/what-we-do" routerLinkActive="active">{{ 'nav.what' | translate }}</a>
+      <a routerLink="/reports" routerLinkActive="active">{{ 'nav.reports' | translate }}</a>
+      <a routerLink="/initiative" routerLinkActive="active">{{ 'nav.initiative' | translate }}</a>
+      <a routerLink="/links" routerLinkActive="active">{{ 'nav.links' | translate }}</a>
+      <a routerLink="/contact" class="btn" routerLinkActive="active">{{ 'nav.contact' | translate }}</a>
+
+      <!-- ملاحظة: استخدمنا $any لتفادي خطأ الـParser -->
+      <select class="lang" [value]="currentLang" (change)="useLang(($any($event.target)).value)">
+        <option *ngFor="let l of langs" [value]="l.code">{{ l.label | translate }}</option>
+      </select>
+    </div>
+  </nav>
+</header>

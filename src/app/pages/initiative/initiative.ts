@@ -6,11 +6,8 @@ import { HeaderComponent } from '../../layout/header/header';
 
 @Component({
   standalone: true,
-  selector: 'app-home',
+  selector: 'app-initiative',
   imports: [CommonModule, TranslateModule, HeaderComponent, FooterComponent],
-  templateUrl: './home.html',
-  styleUrls: ['./home.scss']
+  templateUrl: './initiative.html'
 })
-export class HomeComponent {
-  year = new Date().getFullYear();
-}
+export class Initiative {}

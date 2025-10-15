@@ -1,60 +1,28 @@
-<section>
+<section class="section">
   <div class="container">
-    <div class="hero" style="background:url('https://images.unsplash.com/photo-1542744173-05336fcc7ad4?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;">
+    <div
+      class="hero"
+      style="background:url('https://images.unsplash.com/photo-1542744173-05336fcc7ad4?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;"
+    >
       <div class="wrap">
         <div class="card soft" style="max-width:920px">
-          <h1>ماذا نفعل</h1>
-          <p class="muted">برامج وأنشطة عملية</p>
+          <h1>{{ title }}</h1>
+          <p class="muted">{{ subtitle }}</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section>
+<section class="section">
   <div class="container">
     <div class="grid cols-3">
-      <!-- 10 عناصر نشاط كما في القالب -->
-      <!-- (اختصرنا: نفس النصوص/الصور من القالب) -->
-      <div class="card goal">
-        <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=800&auto=format&fit=crop" alt="نشاط">
-        <div><div class="muted">1.</div><div>عقد ندوات ومؤتمرات وورش عمل…</div></div>
-      </div>
-      <div class="card goal">
-        <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=800&auto=format&fit=crop" alt="نشاط">
-        <div><div class="muted">2.</div><div>إنشاء فريق محلي ودولي لتعديل وتطوير القوانين.</div></div>
-      </div>
-      <div class="card goal">
-        <img src="https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?q=80&w=800&auto=format&fit=crop" alt="نشاط">
-        <div><div class="muted">3.</div><div>عقد شراكات وتفاهمات مع الجهات ذات الاختصاص.</div></div>
-      </div>
-      <div class="card goal">
-        <img src="https://images.unsplash.com/photo-1517976487492-576ea346b021?q=80&w=800&auto=format&fit=crop" alt="نشاط">
-        <div><div class="muted">4.</div><div>مذكرات تفاهم مع المؤسسات الدولية ذات العلاقة.</div></div>
-      </div>
-      <div class="card goal">
-        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=800&auto=format&fit=crop" alt="نشاط">
-        <div><div class="muted">5.</div><div>التعاون مع الجامعات ومنظمات المجتمع المدني…</div></div>
-      </div>
-      <div class="card goal">
-        <img src="https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?q=80&w=800&auto=format&fit=crop" alt="نشاط">
-        <div><div class="muted">6.</div><div>تلقي البلاغات وإحالتها للتحقق والمتابعة.</div></div>
-      </div>
-      <div class="card goal">
-        <img src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=800&auto=format&fit=crop" alt="نشاط">
-        <div><div class="muted">7.</div><div>حملات توعية مجتمعية عبر الإعلام.</div></div>
-      </div>
-      <div class="card goal">
-        <img src="https://images.unsplash.com/photo-1496134731652-92ad7d726f48?q=80&w=800&auto=format&fit=crop" alt="نشاط">
-        <div><div class="muted">8.</div><div>استثمار المناسبات الدولية للترويج للنزاهة.</div></div>
-      </div>
-      <div class="card goal">
-        <img src="https://images.unsplash.com/photo-1483478550801-ceba5fe50e8e?q=80&w=800&auto=format&fit=crop" alt="نشاط">
-        <div><div class="muted">9.</div><div>تعزيز الشراكة المجتمعية بين الأطراف المختلفة.</div></div>
-      </div>
-      <div class="card goal">
-        <img src="https://images.unsplash.com/photo-1557800636-894a64c1696f?q=80&w=800&auto=format&fit=crop" alt="نشاط">
-        <div><div class="muted">10.</div><div>المشاركة في الجوائز الدولية لمكافحة الفساد.</div></div>
+      <div class="card goal" *ngFor="let a of activities; let i = index">
+        <img [src]="a.img" alt="activity {{ i + 1 }}">
+        <div>
+          <div class="muted">{{ i + 1 }}.</div>
+          <div>{{ a.text }}</div>
+        </div>
       </div>
     </div>
   </div>

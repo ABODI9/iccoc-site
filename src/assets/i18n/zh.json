@@ -1,0 +1,144 @@
+{
+  "lang": { "ar": "阿拉伯语", "en": "英语", "fr": "法语", "zh": "中文" },
+
+  "app": {
+    "brand": "ICCOC",
+    "footer": "© ICCOC {{year}} – 保留所有权利",
+    "org_full": "国际反腐败与有组织犯罪委员会",
+    "org_full_en": "International Commission Against Corruption and Organised Crime",
+    "org_full_fr": "Commission internationale contre la corruption et le crime organisé",
+    "org_full_zh": "国际反腐败与有组织犯罪委员会"
+  },
+
+"nav": {
+  "home": "首页",
+  "about": "关于机构",
+  "who": "我们是谁",
+  "what": "我们在做什么",
+  "reports": "报告与新闻",
+  "initiative": "主动行动",
+  "links": "相关链接",
+  "contact": "联系我们"
+}
+,
+
+  "hero": {
+    "home_title": "国际反腐败与有组织犯罪委员会",
+    "home_sub": "欢迎访问官方网站——一家总部位于瑞士日内瓦的非政府、非营利组织。"
+  },
+
+  "home": {
+    "welcome": "欢迎访问国际反腐败与有组织犯罪委员会官方网站。本机构为非政府、非营利组织，总部设在瑞士日内瓦。"
+  },
+
+  "about": {
+    "title": "关于本机构",
+    "goals_title": "目标",
+    "vision": "在全球范围内引领反腐败与打击有组织犯罪。",
+    "mission": "建设没有腐败与有组织犯罪的人类社会。",
+    "values": "透明、人文、普适、质量与专业。",
+    "goals": [
+      "参与国际社会打击腐败和有组织犯罪的努力，并制定有效的预防措施；",
+      "倡导落实国际机制、计划和项目，尤其是《联合国反腐败公约》；",
+      "提高公众对腐败风险及其社会影响的认识；",
+      "鼓励并支持民间社会组织积极参与反腐败工作；",
+      "开展法律研究，评估和审视相关国内外立法的有效性及其与既定目标的一致性；",
+      "敦促尚未建立反腐败法制的国家尽快立法，并在需要时提供技术咨询；",
+      "跟进腐败案件，并向国家及国际层面的主管机关提交研究档案；",
+      "为专门机构、民间组织及相关群体实施能力建设项目；",
+      "将“廉洁”作为伦理原则进行推广，并宣传腐败的危害；",
+      "为落实国际决定（如追赃追逃、非法所得返还）提供技术援助，与相关方协调；",
+      "就执行与反腐相关的国际决定所需措施提供技术支持，并与主管机关协调合作。"
+    ]
+  },
+
+  "who": {
+    "title": "我们是谁",
+    "body": [
+      "国际反腐败与有组织犯罪委员会是一家独立、非政府、非营利机构，总部设在瑞士日内瓦，专注于对人们生活产生重大影响的议题，尤其是腐败与有组织犯罪。",
+      "我们与共享目标、愿意共同推进反腐与打击犯罪的机构与个人开展合作。",
+      "机构设立于欧洲中心、毗邻联合国日内瓦办事处，旨在促进国际和平与安全、支持执法并赋能民间社会。"
+    ],
+    "brochure_hint": "此处可添加机构介绍手册（PDF）。"
+  },
+
+
+"what": {
+  "title": "我们在做什么",
+  "subtitle": "务实的项目与行动",
+  "items": [
+    { "img": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=800&auto=format&fit=crop", "text": "举办并参与关于反腐败和打击有组织犯罪的研讨会、会议和工作坊。" },
+    { "img": "https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=800&auto=format&fit=crop", "text": "组建本地与国际团队，推动相关法律法规的修订与完善。" },
+    { "img": "https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?q=80&w=800&auto=format&fit=crop", "text": "与相关机构建立合作伙伴关系并签署合作协议。" },
+    { "img": "https://images.unsplash.com/photo-1517976487492-576ea346b021?q=80&w=800&auto=format&fit=crop", "text": "与国际机构签署谅解备忘录以促进合作。" },
+    { "img": "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=800&auto=format&fit=crop", "text": "与高校和民间组织合作开展培训与宣传活动。" },
+    { "img": "https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?q=80&w=800&auto=format&fit=crop", "text": "接收举报并移交核查，跟进相关调查与处理。" },
+    { "img": "https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=800&auto=format&fit=crop", "text": "通过媒体开展公众宣传和意识提升活动。" },
+    { "img": "https://images.unsplash.com/photo-1496134731652-92ad7d726f48?q=80&w=800&auto=format&fit=crop", "text": "利用国际纪念日等机会推广廉洁与透明理念。" },
+    { "img": "https://images.unsplash.com/photo-1483478550801-ceba5fe50e8e?q=80&w=800&auto=format&fit=crop", "text": "加强多方协作，促进社区伙伴关系发展。" },
+    { "img": "https://images.unsplash.com/photo-1557800636-894a64c1696f?q=80&w=800&auto=format&fit=crop", "text": "积极参与国际反腐败卓越奖及相关活动。" }
+  ]
+}
+
+,
+
+  "activities": {
+    "title": "我们在做什么",
+    "items": [
+      "在地方、区域及国际层面举办/参与有关反腐败与打击有组织犯罪的研讨会、会议和工作坊；",
+      "组建本地与国际团队，推动相关立法修订与完善；",
+      "与相关机构建立伙伴关系、达成合作与谅解备忘录；",
+      "与国际机构签署合作备忘录；",
+      "与高校及民间组织合作，实施教育、培训与宣传项目；",
+      "接收有关腐败与有组织犯罪的举报与投诉，转交核查并跟进处理；",
+      "与媒体合作开展公众宣传与意识提升活动；",
+      "利用“国际反腐败日”等重要国际节点推广廉洁理念；",
+      "鼓励多方协作，促进社区伙伴关系；",
+      "倡导并参与国际反腐败奖项。"
+    ]
+  },
+
+  "media": {
+    "title": "媒体",
+    "welcome": "欢迎与本机构工作相关的媒体报道与合作。协调联系：media@iccoc.eu"
+  },
+
+  "news": {
+    "title": "报告与新闻",
+    "subscribe_title": "订阅以接收我们的出版物",
+    "form": {
+      "name": "姓名",
+      "phone": "手机号（Telegram/Signal）",
+      "country": "国家",
+      "city": "城市",
+      "email": "电子邮箱",
+      "submit": "订阅"
+    }
+  },
+
+  "initiative": {
+    "title": "主动行动",
+    "lead": "可匿名、保密地举报涉嫌腐败或跨境犯罪。",
+    "body": "邮箱：reporting@iccoc.eu"
+  },
+
+  "links": {
+    "title": "相关链接",
+    "items": [
+      ["透明国际（Transparency International）", "https://www.transparency.org/en/"],
+      ["ROLACC 法治与反腐中心", "https://www.rolacc.qa/"],
+      ["世界银行：发展领域反腐项目", "https://www.worldbank.org/en/programs/anticorruption-for-development/priority-themes"],
+      ["国际刑事法院（ICC）", "https://www.icc-cpi.int/"],
+      ["国际法院（ICJ）", "https://www.icj-cij.org/home"],
+      ["欧洲刑警组织（Europol）", "https://www.europol.europa.eu/"],
+      ["国际刑警组织（INTERPOL）", "https://www.interpol.int/en"],
+      ["联合国毒品和犯罪问题办公室（UNODC）", "https://www.unodc.org/"],
+      ["国际反腐败卓越奖", "https://www.aceaward.com/ar"]
+    ]
+  },
+
+  "contact": {
+    "title": "联系我们",
+    "emails": ["info@iccoc.eu", "media@iccoc.eu", "manager@iccoc.eu"]
+  }
+}

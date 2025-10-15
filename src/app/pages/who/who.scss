@@ -1,0 +1,17 @@
+.section { padding: 42px 0; }
+.container { max-width: var(--max); margin-inline: auto; padding: 0 20px; }
+
+.hero {
+  min-height: 36vh; display: grid; place-items: center;
+  border-radius: 18px; background-position: center; background-size: cover;
+  position: relative; overflow: hidden;
+}
+.hero::after { content:""; position:absolute; inset:0;
+  background: linear-gradient(180deg, rgba(2,132,199,.35), rgba(2,6,23,.25)); }
+.hero .wrap { position:relative; z-index:1; }
+
+.card { background:#fff; border:1px solid #e5eef9; border-radius:18px; box-shadow:0 10px 30px rgba(2,6,23,.08); padding:18px; }
+.soft { background: linear-gradient(180deg, #fff, var(--soft)); }
+.muted { color: var(--muted); }
+
+.prose p { margin: 0 0 12px; line-height: 1.9; }
