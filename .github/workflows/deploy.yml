@@ -19,21 +19,43 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
+
       - run: npm ci
+
+      # 👇 إبنِ المشروع (base-href مضبوط عندك في package.json)
       - run: npm run build
-      - name: SPA fallback
+
+      # 👇 اكتشف مجلد الإخراج الذي يحتوي index.html (سواء dist/iccoc أو dist/**/browser)
+      - name: Locate dist dir
+        id: locate
+        shell: bash
         run: |
-          shopt -s globstar nullglob
-          for d in dist/**/browser; do
-            if [ -f "$d/index.html" ]; then cp "$d/index.html" "$d/404.html"; fi
-          done
+          set -e
+          INDEX_FILE=$(find dist -type f -name index.html | head -n 1)
+          if [ -z "$INDEX_FILE" ]; then
+            echo "No index.html found under dist/"
+            exit 1
+          fi
+          DIST_DIR=$(dirname "$INDEX_FILE")
+          echo "Found dist dir: $DIST_DIR"
+          echo "dir=$DIST_DIR" >> "$GITHUB_OUTPUT"
+
+      # 👇 انسخ index.html إلى 404.html للـ SPA routing على Pages
+      - name: SPA fallback (copy index -> 404)
+        if: steps.locate.outputs.dir != ''
+        shell: bash
+        run: |
+          cp "${{ steps.locate.outputs.dir }}/index.html" "${{ steps.locate.outputs.dir }}/404.html"
+
+      # 👇 ارفع المجلد الصحيح كأرتيفاكت للنشر
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: dist/**/browser
+          path: ${{ steps.locate.outputs.dir }}
 
   deploy:
     needs: build
