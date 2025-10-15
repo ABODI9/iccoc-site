@@ -23,15 +23,39 @@ jobs:
         with:
           node-version: 20
           cache: npm
+
       - run: npm ci
       - run: npm run build
-      # SPA fallback للراوتنج
-      - name: SPA fallback
-        run: cp dist/iccoc/index.html dist/iccoc/404.html
-      # ارفع مجلد الإخراج الصحيح
+
+      # فقط للتأكد—اطبع هيكل مجلد dist
+      - name: List dist tree
+        run: |
+          echo "==== DIST CONTENTS ===="
+          find dist -maxdepth 3 -type f -printf "%p\n" || true
+
+      # اكتشف المجلد الذي يحوي index.html (سواء dist/iccoc أو dist/iccoc/browser)
+      - name: Find dist directory
+        id: find-dist
+        shell: bash
+        run: |
+          set -e
+          INDEX_FILE="$(find dist -type f -name index.html | head -n 1)"
+          if [ -z "$INDEX_FILE" ]; then
+            echo "❌ No index.html found under dist/"
+            exit 1
+          fi
+          DIST_DIR="$(dirname "$INDEX_FILE")"
+          echo "✅ Found dist dir: $DIST_DIR"
+          echo "dist_dir=$DIST_DIR" >> "$GITHUB_OUTPUT"
+
+      # انسخ index.html ➜ 404.html ليدعم الراوتنج على Pages
+      - name: SPA fallback (copy index -> 404)
+        run: cp "${{ steps.find-dist.outputs.dist_dir }}/index.html" "${{ steps.find-dist.outputs.dist_dir }}/404.html"
+
+      # ارفع المجلد الصحيح كأرتيفاكت
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: dist/iccoc
+          path: ${{ steps.find-dist.outputs.dist_dir }}
 
   deploy:
     needs: build
