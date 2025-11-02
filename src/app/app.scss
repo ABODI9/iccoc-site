@@ -1,6 +1,8 @@
-/* حتى لا يضيف العنصر الجذري غلافًا بصريًا حول المحتوى */
+/* هذا الملف يخصّ جذر تطبيق Angular.
+   :host { display: contents; } يمنع إضافة عنصر ملفوف حول المحتوى (Wrapper). */
 :host { display: contents; }
 
+/* تذييل عام (لو عندك Footer Component مستقل، خليه هناك بدل هنا) */
 .footer {
   padding: 20px 0;
   border-top: 1px solid #e2e8f0;

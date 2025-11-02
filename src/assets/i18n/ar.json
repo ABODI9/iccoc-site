@@ -10,18 +10,19 @@
     "org_full_zh": "国际反腐败与有组织犯罪委员会"
   },
 
-"nav": {
-  "home": "الرئيسية",
-  "about": "حول الهيئة",
-  "who": "من نحن",
-  "what": "ماذا نفعل",
-  "reports": "تقارير",
-  "initiative": "زمام المبادرة",
-  "links": "الروابط",
-  "contact": "اتصل بنا"
-}
-
-,
+  "nav": {
+    "home": "الرئيسية",
+    "menu": "القائمة",
+    "company": "الشركة",
+    "services": "الخدمات",
+    "about": "حول الهيئة",
+    "who": "من نحن",
+    "what": "ماذا نفعل",
+    "reports": "تقارير",
+    "initiative": "زمام المبادرة",
+    "links": "الروابط",
+    "contact": "اتصل بنا"
+  },
 
   "hero": {
     "home_title": "الهيئة الدولية لمكافحة الفساد والجريمة المنظمة",
@@ -63,24 +64,22 @@
     "brochure_hint": "هنا يمكن إضافة كتيب التعريف بالهيئة (PDF)."
   },
 
-"what": {
-  "title": "ماذا نفعل",
-  "subtitle": "برامج وأنشطة عملية",
-  "items": [
-    { "img": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=800&auto=format&fit=crop", "text": "عقد ندوات ومؤتمرات وورش عمل…" },
-    { "img": "https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=800&auto=format&fit=crop", "text": "إنشاء فريق محلي ودولي لتعديل وتطوير القوانين." },
-    { "img": "https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?q=80&w=800&auto=format&fit=crop", "text": "عقد شراكات وتفاهمات مع الجهات ذات الاختصاص." },
-    { "img": "https://images.unsplash.com/photo-1517976487492-576ea346b021?q=80&w=800&auto=format&fit=crop", "text": "مذكرات تفاهم مع المؤسسات الدولية ذات العلاقة." },
-    { "img": "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=800&auto=format&fit=crop", "text": "التعاون مع الجامعات ومنظمات المجتمع المدني…" },
-    { "img": "https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?q=80&w=800&auto=format&fit=crop", "text": "تلقي البلاغات وإحالتها للتحقق والمتابعة." },
-    { "img": "https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=800&auto=format&fit=crop", "text": "حملات توعية مجتمعية عبر الإعلام." },
-    { "img": "https://images.unsplash.com/photo-1496134731652-92ad7d726f48?q=80&w=800&auto=format&fit=crop", "text": "استثمار المناسبات الدولية للترويج للنزاهة." },
-    { "img": "https://images.unsplash.com/photo-1483478550801-ceba5fe50e8e?q=80&w=800&auto=format&fit=crop", "text": "تعزيز الشراكة المجتمعية بين الأطراف المختلفة." },
-    { "img": "https://images.unsplash.com/photo-1557800636-894a64c1696f?q=80&w=800&auto=format&fit=crop", "text": "المشاركة في الجوائز الدولية لمكافحة الفساد." }
-  ]
-}
-,
-
+  "what": {
+    "title": "ماذا نفعل",
+    "subtitle": "برامج وأنشطة عملية",
+    "items": [
+      { "img": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=800&auto=format&fit=crop", "text": "عقد ندوات ومؤتمرات وورش عمل…" },
+      { "img": "https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=800&auto=format&fit=crop", "text": "إنشاء فريق محلي ودولي لتعديل وتطوير القوانين." },
+      { "img": "https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?q=80&w=800&auto=format&fit=crop", "text": "عقد شراكات وتفاهمات مع الجهات ذات الاختصاص." },
+      { "img": "https://images.unsplash.com/photo-1517976487492-576ea346b021?q=80&w=800&auto=format&fit=crop", "text": "مذكرات تفاهم مع المؤسسات الدولية ذات العلاقة." },
+      { "img": "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=800&auto=format&fit=crop", "text": "التعاون مع الجامعات ومنظمات المجتمع المدني…" },
+      { "img": "https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?q=80&w=800&auto=format&fit=crop", "text": "تلقي البلاغات وإحالتها للتحقق والمتابعة." },
+      { "img": "https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=800&auto=format&fit=crop", "text": "حملات توعية مجتمعية عبر الإعلام." },
+      { "img": "https://images.unsplash.com/photo-1496134731652-92ad7d726f48?q=80&w=800&auto=format&fit=crop", "text": "استثمار المناسبات الدولية للترويج للنزاهة." },
+      { "img": "https://images.unsplash.com/photo-1483478550801-ceba5fe50e8e?q=80&w=800&auto=format&fit=crop", "text": "تعزيز الشراكة المجتمعية بين الأطراف المختلفة." },
+      { "img": "https://images.unsplash.com/photo-1557800636-894a64c1696f?q=80&w=800&auto=format&fit=crop", "text": "المشاركة في الجوائز الدولية لمكافحة الفساد." }
+    ]
+  },
 
   "activities": {
     "title": "ماذا نفعل",
@@ -106,6 +105,11 @@
   "news": {
     "title": "تقارير وأخبار",
     "subscribe_title": "اشترك لتصلك تقاريرنا",
+    "body": "أخبار الهيئة والمواد المتعلقة بأعمالها بالإضافة إلى ما نصدره من تقارير ودراسات. الرجاء الاشتراك وإرسال بياناتك للحصول على هذه المواد.",
+    "examples_title": "نماذج مما نرسله للمشتركين",
+    "ex1": "نشرات دورية عن تطوّرات مكافحة الفساد عالميًا.",
+    "ex2": "تقارير خاصة وتحليلات قانونية مختصرة.",
+    "ex3": "دعوات للفعاليات وورش العمل.",
     "form": {
       "name": "اسم المشترك بالكامل",
       "phone": "رقم الموبايل (تلغرام/سِغنال)",
@@ -113,7 +117,16 @@
       "city": "المدينة",
       "email": "البريد الإلكتروني",
       "submit": "اشتراك"
-    }
+    },
+    "hints": {
+      "phone": "فضّل رقم مرتبط بتلغرام أو سِغنال للتواصل الآمن."
+    },
+    "errors": {
+      "name": "الاسم مطلوب (4 أحرف فأكثر).",
+      "phone": "رقم الموبايل مطلوب.",
+      "email": "بريد إلكتروني صحيح مطلوب."
+    },
+    "success": "شكرًا لاشتراكك! تم استلام بياناتك."
   },
 
   "initiative": {
@@ -140,5 +153,30 @@
   "contact": {
     "title": "اتصل بنا",
     "emails": ["info@iccoc.eu", "media@iccoc.eu", "manager@iccoc.eu"]
-  }
+  },
+
+  "mail": {
+    "subject_user": "اشتراكك في تقارير {{brand}}",
+    "subject_admin": "مشترك جديد عبر الموقع",
+    "heading_user": "شكرًا لاشتراكك!",
+    "lead_user": "سنعمل على إرسال التقارير والدراسات المختصرة الخاصة بـ{{org}} إلى بريدك.",
+    "cta_user": "يمكنك الرد على هذه الرسالة لأي استفسار.",
+    "footer_line": "© {{brand}} – جميع الحقوق محفوظة",
+    "heading_admin": "بيانات مشترك جديد",
+    "fields": {
+      "name": "الاسم",
+      "phone": "الهاتف",
+      "country": "الدولة",
+      "city": "المدينة",
+      "email": "البريد الإلكتروني",
+      "lang": "اللغة المختارة"
+    }
+  },
+
+
+"reports": {
+  "title": "تقارير وأخبار"
+}
+
+
 }

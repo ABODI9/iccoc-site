@@ -1,25 +1,42 @@
+<main class="container">
+  <!-- HERO -->
+  <header class="hero" role="banner" aria-label="{{ 'about.title' | translate }}">
+    <img class="hero-img" [src]="heroImage" alt="Hero" />
+    <div class="hero-content">
+      <h1 class="hero-title">{{ titleKey | translate }}</h1>
+      <p class="hero-subtitle">{{ subtitleKey | translate }}</p>
+    </div>
+  </header>
 
-<section class="section">
-  <div class="container">
-    <div class="hero" style="background-image:url('https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?q=80&w=1600&auto=format&fit=crop')">
-      <div class="wrap card soft">
-        <h1>{{ 'about.title' | translate }}</h1>
+  <!-- FEATURE CARDS -->
+  <section class="grid cols-3" aria-label="Highlights">
+    <article class="card" *ngFor="let f of features; trackBy: trackByIndex">
+      <img class="card-thumb" [src]="f.img" [alt]="(f.titleKey | translate)" loading="lazy" />
+      <div class="soft">
+        <h3 class="card-title">{{ f.titleKey | translate }}</h3>
+        <p class="muted">{{ f.descKey | translate }}</p>
       </div>
-    </div>
+    </article>
+  </section>
 
-    <div class="grid cols-3" style="margin-top:16px">
-      <div class="card soft"><strong>{{ 'about.vision'  | translate }}</strong></div>
-      <div class="card soft"><strong>{{ 'about.mission' | translate }}</strong></div>
-      <div class="card soft"><strong>{{ 'about.values'  | translate }}</strong></div>
-    </div>
+  <!-- OBJECTIVES -->
+  <h2 class="section-title">{{ 'about.goals_title' | translate }}</h2>
 
-    <h2 style="margin-top:24px">{{ 'about.goals_title' | translate }}</h2>
-    <div class="grid cols-3">
-      <div class="card goal" *ngFor="let g of goals; let i = index">
-        <div class="muted">{{ i + 1 }}.</div>
-        <div>{{ g }}</div>
+  <section class="objectives-grid" *ngIf="(goals$ | async) as goals">
+    <article class="objective-card"
+             *ngFor="let goal of goals; let i = index; trackBy: trackByIndex">
+      <div class="image-wrapper">
+        <img [src]="goal.img"
+             [attr.alt]="goal.alt || ('goal ' + (i + 1))"
+             loading="lazy"
+             (error)="onImgError(goal)" />
+        <div class="idx">{{ i + 1 }}</div>
       </div>
-    </div>
-  </div>
-</section>
+      <p class="objective-text">{{ goal.text }}</p>
+    </article>
+  </section>
 
+  <footer class="footer">
+    {{ 'app.footer' | translate : { year: currentYear } }}
+  </footer>
+</main>

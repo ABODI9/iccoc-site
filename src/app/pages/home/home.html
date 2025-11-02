@@ -1,23 +1,98 @@
-
-
-<section class="section">
+<section class="section" dir="rtl">
   <div class="container">
-    <div class="hero" style="background-image:url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=1800&auto=format&fit=crop')">
-      <div class="wrap card soft">
-        <h1>{{ 'hero.home_title' | translate }}</h1>
-        <p class="muted">{{ 'hero.home_sub' | translate }}</p>
-        <p class="muted small">
-          • {{ 'app.org_full' | translate }}
-          • {{ 'app.org_full_en' | translate }}
-          • {{ 'app.org_full_fr' | translate }}
-          • {{ 'app.org_full_zh' | translate }}
-        </p>
+
+    <div class="hero-shell" (mouseenter)="pause()" (mouseleave)="resume()">
+
+      <!-- Backgrounds -->
+      <ng-container *ngFor="let s of slides; let i = index">
+        <div class="bg-layer"
+             [class.bg-active]="i === index"
+             [style.background-image]="'url(' + s.bg + ')'">
+          <div class="bg-grad" [ngClass]="s.gradient"></div>
+        </div>
+      </ng-container>
+
+      <!-- Content -->
+      <div class="hero-content">
+        <a class="icon-wrap"
+           [routerLink]="slides[index].route"
+           [attr.aria-label]="(slides[index].titleKey | translate)">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path [attr.d]="iconPath(slides[index].icon)"></path>
+          </svg>
+        </a>
+
+        <h1 class="hero-title">{{ slides[index].titleKey | translate }}</h1>
+        <p class="hero-sub">{{ slides[index].subtitleKey | translate }}</p>
+
+        <div class="tags">
+          <span class="tag" *ngFor="let t of tags">{{ t }}</span>
+        </div>
+
+        <a class="cta-btn" [routerLink]="slides[index].route">
+          {{ (slides[index].ctaKey || slides[index].titleKey) | translate }}
+        </a>
+
+        <!-- Progress / timer -->
+        <div class="progress">
+          <div
+            class="bar"
+            #bar
+            (animationend)="onProgressDone()"
+            [style.animationPlayState]="paused ? 'paused' : 'running'">
+          </div>
+        </div>
+      </div>
+
+      <!-- Arrows -->
+      <button class="nav-btn left" type="button" (click)="prev()" aria-label="السابق">
+        <svg viewBox="0 0 24 24">
+          <path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2" fill="none"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <button class="nav-btn right" type="button" (click)="next()" aria-label="التالي">
+        <svg viewBox="0 0 24 24">
+          <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" fill="none"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <!-- Dots -->
+      <div class="dots">
+        <button
+          *ngFor="let _ of slides; let i = index"
+          class="dot"
+          [class.active]="i === index"
+          (click)="go(i)"
+          aria-label="اذهب إلى الشريحة {{ i + 1 }}">
+        </button>
       </div>
     </div>
 
-    <div class="card soft" style="margin-top:16px">
-      {{ 'home.welcome' | translate }}
+    <!-- CTA grid -->
+    <div class="cta-grid mt-16">
+      <div class="cta cta-blue">
+        <div class="cta-icon">💡</div>
+        <h4>{{ 'initiative.title' | translate }}</h4>
+        <p>{{ 'initiative.lead' | translate }}</p>
+        <a href="mailto:reporting@iccoc.eu" class="btn">reporting@iccoc.eu</a>
+      </div>
+
+      <div class="cta cta-amber">
+        <div class="cta-icon">📰</div>
+        <h4>{{ 'news.subscribe_title' | translate }}</h4>
+        <p>{{ 'home.welcome' | translate }}</p>
+        <a class="btn" [routerLink]="'/what-we-do'">{{ 'what.title' | translate }}</a>
+      </div>
+
+      <div class="cta cta-emerald">
+        <div class="cta-icon">✉️</div>
+        <h4>{{ 'nav.contact' | translate }}</h4>
+        <p>{{ 'about.mission' | translate }}</p>
+        <a href="mailto:info@iccoc.eu" class="btn">info@iccoc.eu</a>
+      </div>
     </div>
+
   </div>
 </section>
-

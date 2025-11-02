@@ -1,10 +1,354 @@
-.header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-bottom:1px solid #e2e8f0}
-.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px 0}
-.brand{display:flex;gap:10px;align-items:center}
-.brand img{width:44px;height:44px;object-fit:contain}
-.tabs{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
-.tabs a{padding:10px 12px;border-radius:999px;text-decoration:none;color:inherit}
-.tabs a.active{background:linear-gradient(135deg,#0ea5e9,#38bdf8);color:#fff}
-.tabs a:hover{background:#eef6ff}
-.lang{padding:8px 10px;border-radius:10px;border:1px solid #dbe7fb;background:#fff}
-.btn{background:linear-gradient(135deg,#0ea5e9,#38bdf8);color:#fff;border-radius:999px}
+/* ======================= */
+/* Vars                    */
+/* ======================= */
+:root { --header-h: 76px; }
+@media (max-width: 520px) { :root { --header-h: 60px; } }
+
+/* ======================= */
+/* Header container        */
+/* ======================= */
+.header {
+  position: sticky; top: 0; z-index: 1000;
+  background: #0a1b3d; color: #fff;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.header .wrap {
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 8px 12px;
+  min-height: var(--header-h);
+
+  display: grid;
+  /* موبايل + تابلت: عمودان فقط (نزيل العمود الأوسط الفاضي) */
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 12px;
+}
+
+/* ديسكتوب: نرجّع 3 أعمدة (براند - مينيو - أكشنز) */
+@media (min-width: 992px) {
+  .header .wrap {
+    grid-template-columns: 1fr auto 1fr;
+  }
+}
+
+/* ======================= */
+/* Layout positions        */
+/* ======================= */
+.brand      { justify-self: start; }
+.nav        { justify-self: center; }
+.lang,
+.hamburger  { justify-self: end; }
+
+/* حاوية للأكشنز لتجميع زر اللغة + الهامبرغر عندما يلزم */
+.actions {
+  justify-self: end;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ======================= */
+/* Brand (logo + texts)    */
+/* ======================= */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  color: inherit;
+  min-width: 0;
+  /* ألغِ الهامش السالب افتراضياً لتفادي القصّ في التابلت */
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+}
+/* الهامش السالب فقط على الديسكتوب */
+@media (min-width: 992px) {
+  .brand { margin-inline-start: -28px; }
+  html[dir='rtl'] .brand {
+    margin-inline-start: 0;
+    margin-inline-end: -28px;
+  }
+}
+
+.logo {
+  width: 72px; height: 72px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+@media (max-width: 520px) {
+  .logo { width: 56px; height: 56px; }
+}
+
+.brand-texts {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+  min-width: 0;
+  /* تضييق أذكى على التابلت لتفادي تكسّر السطر */
+  max-width: clamp(360px, 50vw, 720px);
+}
+@media (max-width: 991px) {
+  .brand-texts { max-width: min(64vw, 560px); }
+}
+
+.brand-name {
+  font-size: 20px;
+  font-weight: 800;
+  color: #fff;
+  white-space: nowrap;
+}
+.brand-sub {
+  color: #cfd8ff;
+  font-weight: 500;
+  line-height: 1.25;
+  display: block;
+  white-space: normal;
+  overflow: visible;
+  word-break: normal;
+  hyphens: auto;
+}
+@media (max-width: 520px) { .brand-sub { display: none; } }
+
+/* ======================= */
+/* Nav                     */
+/* ======================= */
+.nav {
+  display: none;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: nowrap;
+  /* في حالة كثرة العناصر بالديسكتوب؛ تفعيل تمرير أفقي لطيف */
+  overflow: hidden;
+}
+.nav a {
+  color: #dbe4ff;
+  text-decoration: none;
+  white-space: nowrap;
+  padding: 6px 10px;
+  border-radius: 8px;
+  transition: background .15s ease, color .15s ease;
+}
+.nav a:hover, .nav a.active {
+  background: rgba(255,255,255,.12);
+  color: #fff;
+}
+
+/* ======================= */
+/* Language dropdown       */
+/* ======================= */
+.lang { position: relative; display: none; }
+.lang-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid rgba(255,255,255,.25);
+  background: rgba(255,255,255,.1);
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.chev { font-size: 12px; opacity: .9; transition: transform .18s ease; }
+.chev.rotate { transform: rotate(180deg); }
+.lang-menu {
+  position: absolute; top: calc(100% + 6px); inset-inline-end: 0;
+  background: #fff; color: #111827;
+  border: 1px solid #e5e7eb; border-radius: 10px;
+  box-shadow: 0 10px 28px rgba(2,8,20,.15);
+  min-width: 160px; padding: 6px;
+  opacity: 0; pointer-events: none; transform: translateY(6px);
+  transition: opacity .16s ease, transform .16s ease; z-index: 1200;
+}
+.lang-menu.open { opacity: 1; pointer-events: auto; transform: translateY(0); }
+.lang-menu button {
+  width: 100%;
+  text-align: start;
+  border: 0;
+  background: transparent;
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.lang-menu button:hover { background: #f3f4f6; }
+.lang-menu button.active { background: #eef2ff; font-weight: 700; }
+
+/* ======================= */
+/* Mobile hamburger        */
+/* ======================= */
+.hamburger {
+  width: 38px; height: 34px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255,255,255,.25);
+  background: rgba(255,255,255,.1);
+  border-radius: 10px;
+  cursor: pointer;
+}
+.hamburger span {
+  display: block;
+  width: 16px; height: 2px;
+  background: #fff; border-radius: 2px;
+}
+.hamburger span + span { margin-top: 4px; }
+
+/* ======================= */
+/* Mobile drawer           */
+/* ======================= */
+.mobile {
+  position: fixed;
+  inset: var(--header-h) 0 0 auto;
+  width: 320px;
+  max-width: 90%;
+  height: calc(100vh - var(--header-h));
+  overflow-y: auto;
+  background: #f9fafc; /* خلفية صافية وغير شفافة */
+  color: #0a1b3d;
+  z-index: 1100;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 18px 16px 32px;
+  border-left: 1px solid #e5e7eb;
+  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
+  border-top-left-radius: 14px;
+  border-bottom-left-radius: 14px;
+
+  /* الإخفاء الصريح */
+  transform: translateX(100%);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: transform 0.25s ease, opacity 0.2s ease, visibility 0s linear 0.25s;
+}
+
+.mobile.open {
+  transform: translateX(0);
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition: transform 0.25s ease, opacity 0.2s ease, visibility 0s;
+}
+
+
+/* رأس القائمة */
+.mobile-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 8px;
+}
+
+.mobile-head .title {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #0a1b3d;
+}
+
+.mobile-head .lang-inline button {
+  border: 1px solid #cbd5e1;
+  background: #fff;
+  color: #0a1b3d;
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.mobile-head .lang-inline button:hover {
+  background: #e2e8f0;
+}
+.mobile-head .lang-inline button.active {
+  background: #dbeafe;
+  border-color: #93c5fd;
+  font-weight: 600;
+}
+
+.mobile-head .close {
+  background: transparent;
+  border: none;
+  color: #64748b;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+.mobile-head .close:hover {
+  color: #0a1b3d;
+}
+
+/* عناوين الأقسام */
+.mobile .section-title {
+  margin-top: 14px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #1e293b;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 4px;
+}
+
+/* الروابط */
+.mobile a {
+  display: block;
+  padding: 8px 6px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #0f172a;
+  font-size: 0.95rem;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.mobile a:hover {
+  background: #e2e8f0;
+}
+.mobile a.active {
+  background: #1e3a8a;
+  color: #fff;
+  font-weight: 600;
+}
+
+
+html[dir='rtl'] .mobile {
+  inset: var(--header-h) auto 0 0;
+  border-left: 0;
+  border-right: 1px solid #e5e7eb;
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.15);
+  border-top-right-radius: 14px;
+  border-bottom-right-radius: 14px;
+  transform: translateX(-100%);
+}
+html[dir='rtl'] .mobile.open {
+  transform: translateX(0);
+}
+
+.backdrop {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.45);
+  opacity: 0; pointer-events: none;
+  transition: opacity .2s ease;
+  z-index: 1050;
+}
+.backdrop.show { opacity: 1; pointer-events: auto; }
+
+/* ======================= */
+/* Breakpoints             */
+/* ======================= */
+/* تابلت: نخفي الـnav واللغة، نُبقي الهامبرغر، ونضمن عمودين فقط */
+@media (max-width: 991px) {
+  .nav { display: none; }
+  .lang { display: none; }
+  .hamburger { display: grid; }
+}
+
+/* ديسكتوب: نظهر الـnav واللغة ونخفي الهامبرغر */
+@media (min-width: 992px) {
+  .nav { display: inline-flex; }
+  .lang { display: inline-block; }
+  .hamburger { display: none; }
+  .mobile { display: none; }
+}
+
+/* تحسين RTL لمسافات زر اللغة */
+.lang-btn { margin-inline: 0; }

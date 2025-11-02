@@ -9,16 +9,29 @@
 
     <div class="grid cols-2" style="margin-top:16px">
       <div class="card soft">
-        <div class="grid">
-          <input class="input" [placeholder]="'news.form.name'    | translate">
-          <input class="input" [placeholder]="'news.form.phone'   | translate">
+        <form [formGroup]="form" (ngSubmit)="submit()" class="grid">
+          <input class="input" formControlName="name" [placeholder]="'news.form.name' | translate">
+          <div class="muted" *ngIf="ctrl('name').touched && ctrl('name').invalid">{{ 'news.errors.name' | translate }}</div>
+
+          <input class="input" formControlName="phone" [placeholder]="'news.form.phone' | translate">
+          <div class="muted" *ngIf="ctrl('phone').touched && ctrl('phone').invalid">{{ 'news.errors.phone' | translate }}</div>
+
           <div class="grid cols-2">
-            <input class="input" [placeholder]="'news.form.country' | translate">
-            <input class="input" [placeholder]="'news.form.city'    | translate">
+            <input class="input" formControlName="country" [placeholder]="'news.form.country' | translate">
+            <input class="input" formControlName="city"    [placeholder]="'news.form.city'    | translate">
           </div>
-          <input class="input" type="email" [placeholder]="'news.form.email' | translate">
-          <a class="btn" href="#" onclick="alert('OK');return false;">{{ 'news.form.submit' | translate }}</a>
-        </div>
+
+          <input class="input" type="email" formControlName="email" [placeholder]="'news.form.email' | translate">
+          <div class="muted" *ngIf="ctrl('email').touched && ctrl('email').invalid">{{ 'news.errors.email' | translate }}</div>
+
+          <button class="btn" [disabled]="loading" type="submit">
+            <span *ngIf="!loading">{{ 'news.form.submit' | translate }}</span>
+            <span *ngIf="loading">…</span>
+          </button>
+
+          <div class="muted" *ngIf="done" style="color:#16a34a">{{ 'news.success' | translate }}</div>
+          <div class="muted" *ngIf="error" style="color:#dc2626">{{ error }}</div>
+        </form>
       </div>
 
       <div class="card soft">

@@ -1,32 +1,69 @@
-:root {
-  --bg:#f6f9ff; --ink:#0f172a; --muted:#475569; --brand:#0ea5e9; --green:#10b981;
-  --soft:#eef6ff; --card:#fff; --radius:18px;
-  --shadow:0 10px 30px rgba(2,6,23,.08); --max:1200px;
+/* ===== الثيم العام للتطبيق =====
+   عدّل قيم المتغيّرات هنا لتغيير الألوان والخامات لجميع الصفحات.
+   --brand و --brand-2 هما درجات الأزرق الرئيسية للتصاميم النشطة (أزرار/تبويبات). */
+:root{
+  --bg:#ffffff;     /* لون الخلفية العام (أبيض) */
+  --ink:#0f172a;    /* لون النص الداكن الأساسي */
+  --muted:#475569;  /* لون النص الثانوي */
+  --brand:#002b5c;  /* الأزرق الغامق الأساسي */
+  --brand-2:#004c99;/* أزرق أفتح للتدرجات والحالات النشطة */
+  --green:#10b981;  /* لون ثانوي للأزرار الخضراء إن وجدت */
+
+  --soft:#f2f6ff;   /* خلفيات ناعمة فاتحة */
+  --card:#ffffff;   /* خلفية البطاقات */
+  --radius:18px;    /* نصف القطر الموحد للحواف */
+  --shadow:0 10px 30px rgba(0,43,92,.12); /* ظل بطعم الأزرق */
+  --max:1200px;     /* عرض الحاوية القصوى */
 }
+
+/* قواعد أساسية */
 *{box-sizing:border-box}
-html,body{margin:0;background:var(--bg);color:var(--ink);
-  font-family:system-ui,-apple-system,Segoe UI,Roboto,"Noto Kufi Arabic","Noto Sans Arabic","Cairo",Arial,sans-serif}
+html,body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,"Noto Kufi Arabic","Noto Sans Arabic","Cairo",Arial,sans-serif
+}
 img{max-width:100%;display:block}
 .container{max-width:var(--max);margin:auto;padding:0 20px}
 
-/* Header (لو عندك هيدر مشترك) */
-header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);
-  backdrop-filter:blur(8px);border-bottom:1px solid #e2e8f0}
+/* Header (لو عندك هيدر عام بدل كومبوننت، تقدر تزيله)
+   ملاحظة: عندك هيدر خاص في header.scss، هذا للنسخ القديمة فقط. */
+header{
+  position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);
+  backdrop-filter:blur(8px);border-bottom:1px solid #dbe7fb
+}
 nav{display:flex;align-items:center;gap:14px;justify-content:space-between;padding:10px 0}
 .brand{display:flex;align-items:center;gap:10px}
-.brand img{width:44px;height:44px;object-fit:contain}
+.brand img{width:72px;height:72px;object-fit:contain}
+@media (max-width:720px){.brand img{width:56px;height:56px}}
+
+/* Tabs عامة (لمن يحتاجها خارج الهيدر) */
 .tabs{display:flex;flex-wrap:wrap;gap:8px}
 .tabs a{padding:10px 12px;border-radius:999px;color:inherit;text-decoration:none}
-.tabs a.active{background:linear-gradient(135deg,var(--brand),#38bdf8);color:#fff}
-.tabs a:hover{background:#eef2ff}
+.tabs a.active{background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#fff}
+.tabs a:hover{background:#e6efff}
 
-/* Sections / helpers */
+/* أقسام ومساعدات */
 main section{padding:42px 0}
 .hero{min-height:42vh;display:grid;place-items:center;position:relative;overflow:hidden;border-radius:18px}
-.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(2,132,199,.45),rgba(2,6,23,.25))}
+/* تراكب أزرق غامق أعلى صور الهيرو */
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,43,92,.50),rgba(2,6,23,.25))}
 .hero .wrap{position:relative;z-index:1}
+
+/* بطاقة قياسية */
 .card{background:var(--card);border:1px solid #e5eef9;border-radius:var(--radius);box-shadow:var(--shadow);padding:18px}
 .soft{background:linear-gradient(180deg,#fff,var(--soft))}
+
+/* مكوّن مميز بلون أزرق غامق (للهيرو أو تنبيه) */
+.component{
+  background:linear-gradient(135deg,var(--brand),var(--brand-2));
+  color:#fff;border-color:rgba(0,43,92,.25);
+}
+.component .muted{color:rgba(255,255,255,.85)}
+.component a{color:#fff;text-decoration:underline}
+
+/* عناصر أخرى */
 h1,h2{margin:0 0 14px}
 .muted{color:var(--muted)}
 .grid{display:grid;gap:16px}
@@ -36,7 +73,7 @@ h1,h2{margin:0 0 14px}
 @media (max-width:720px){.cols-2,.cols-3{grid-template-columns:1fr}}
 .input,textarea{width:100%;background:#fff;border:1.2px solid #dbe7fb;border-radius:14px;padding:12px 14px;color:var(--ink);font:inherit;box-shadow:0 1px 0 rgba(2,6,23,.02)}
 textarea{min-height:140px}
-.btn{display:inline-block;background:linear-gradient(135deg,var(--brand),#38bdf8);color:#fff;padding:12px 18px;border-radius:999px;font-weight:700;text-decoration:none}
+.btn{display:inline-block;background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#fff;padding:12px 18px;border-radius:999px;font-weight:700;text-decoration:none}
 .btn.green{background:linear-gradient(135deg,var(--green),#34d399)}
 .goal{display:grid;grid-template-columns:120px 1fr;gap:12px;align-items:center}
 .goal img{width:100%;height:96px;object-fit:cover;border-radius:12px}

@@ -1,1 +1,158 @@
-/* يعتمد على styles.scss العام؛ هنا فقط إضافات صغيرة إن لزم */
+:root {
+  --bg: #f8fafc;
+  --card: #ffffff;
+  --text: #1e293b;
+  --muted: #64748b;
+  --brand: #0f766e;
+  --accent: #14b8a6;
+  --border: #e2e8f0;
+
+  /* تحكم سريع بارتفاع الصورة داخل كل بطاقة */
+  /* غيّرها لـ 16/9 أو 4/3 حسب ما تحب */
+  /* ملاحظة: لا يمكن استخدام custom property داخل aspect-ratio مباشرة حتى الآن */
+}
+
+:host {
+  display: block;
+  color: var(--text);
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 18px;
+}
+
+/* HERO (كما هي) */
+.hero {
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  margin: 24px 0 40px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+
+  .hero-img { width: 100%; height: 420px; object-fit: cover; display: block; }
+
+  .hero-content {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    color: #fff;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    padding: 18px;
+  }
+
+  .hero-title { font-size: clamp(28px, 6vw, 48px); margin: 0; }
+  .hero-subtitle { font-size: 1.2rem; margin-top: 8px; max-width: 780px; }
+}
+
+/* GRID & CARDS */
+.grid { display: grid; gap: 18px; }
+.cols-3 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  transition: transform .2s, box-shadow .2s;
+
+  &:hover { transform: translateY(-5px); box-shadow: 0 10px 24px rgba(0,0,0,.08); }
+
+  .card-thumb { width: 100%; height: 200px; object-fit: cover; display: block; }
+  .soft { padding: 18px; }
+  .card-title { color: var(--brand); margin: 0 0 6px; font-size: 1.1rem; }
+}
+
+.muted { color: var(--muted); }
+
+/* SECTION TITLES */
+.section-title { margin-top: 40px; font-size: 26px; color: var(--brand); }
+
+/* ===================== OBJECTIVES ===================== */
+.objectives-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 20px;
+  margin-top: 16px;
+}
+
+.objective-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0,0,0,.05);
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  display: flex;
+  flex-direction: column;
+  min-height: 320px; /* بطاقات أطول لراحة القراءة */
+  text-align: center;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 24px rgba(0,0,0,.08);
+    border-color: rgba(20,184,166,.35);
+  }
+}
+
+/* صورة متناسقة بنسبة أبعاد ثابتة */
+.image-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 2; /* اجعلها 16/9 أو 4/3 حسب ذوقك */
+  overflow: hidden;
+  background: #eef2f7;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform .35s ease;
+  }
+
+  &:hover img { transform: scale(1.05); }
+
+  .idx {
+    position: absolute;
+    inset-inline-start: 10px; /* يدعم RTL */
+    top: 10px;
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    background: var(--accent);
+    color: #fff;
+    display: grid; place-items: center;
+    font-weight: 800; font-size: 1rem;
+    box-shadow: 0 3px 10px rgba(0,0,0,.25);
+  }
+}
+
+.objective-text {
+  padding: 16px 18px 22px;
+  color: var(--text);
+  line-height: 1.7;
+  font-size: 1rem;
+  flex: 1; /* يملأ بقية مساحة البطاقة لارتفاعات متساوية */
+}
+
+/* FOOTER */
+.footer {
+  margin: 50px 0;
+  text-align: center;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+  padding-top: 20px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 640px) {
+  .hero .hero-img { height: 300px; }
+  .objective-card { min-height: 300px; }
+}

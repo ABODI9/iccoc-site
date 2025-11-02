@@ -1,26 +1,97 @@
-<header class="header">
-  <nav class="container nav">
-    <div class="brand">
-      <img src="assets/images/logo.jpeg" alt="ICCOC">
-      <strong>{{ 'app.brand' | translate }}</strong>
-    </div>
+<header class="header" aria-label="Site header">
+  <div class="wrap">
+    <!-- البراند: شعار + اسم قصير + اسم طويل يلتف/يُقص -->
+    <a class="brand" routerLink="/" aria-label="Home">
+      <img src="assets/images/logo.jpeg" alt="ICCOC" class="logo" />
+      <div class="brand-texts">
+        <!-- الاسم القصير يبقى بسطر واحد -->
+        <strong class="brand-name">{{ 'app.brand' | translate }}</strong>
+        <!-- الاسم الكامل أسفله (يلف حتى سطرين) -->
+        <span class="brand-sub" [title]="orgFullKey | translate">
+          {{ orgFullKey | translate }}
+        </span>
+      </div>
+    </a>
 
-    <div class="tabs">
+    <!-- روابط الديسكتوب -->
+    <nav class="nav" aria-label="Main navigation">
       <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
         {{ 'nav.home' | translate }}
       </a>
-      <a routerLink="/about" routerLinkActive="active">{{ 'nav.about' | translate }}</a>
-      <a routerLink="/who" routerLinkActive="active">{{ 'nav.who' | translate }}</a>
-      <a routerLink="/what-we-do" routerLinkActive="active">{{ 'nav.what' | translate }}</a>
-      <a routerLink="/reports" routerLinkActive="active">{{ 'nav.reports' | translate }}</a>
-      <a routerLink="/initiative" routerLinkActive="active">{{ 'nav.initiative' | translate }}</a>
-      <a routerLink="/links" routerLinkActive="active">{{ 'nav.links' | translate }}</a>
-      <a routerLink="/contact" class="btn" routerLinkActive="active">{{ 'nav.contact' | translate }}</a>
 
-      <!-- ملاحظة: استخدمنا $any لتفادي خطأ الـParser -->
-      <select class="lang" [value]="currentLang" (change)="useLang(($any($event.target)).value)">
-        <option *ngFor="let l of langs" [value]="l.code">{{ l.label | translate }}</option>
-      </select>
+      <a *ngFor="let l of companyLinks" [routerLink]="l.to" routerLinkActive="active">
+        {{ l.key | translate }}
+      </a>
+
+      <a *ngFor="let l of servicesLinks" [routerLink]="l.to" routerLinkActive="active">
+        {{ l.key | translate }}
+      </a>
+
+      <a routerLink="/contact" routerLinkActive="active">
+        {{ 'nav.contact' | translate }}
+      </a>
+    </nav>
+
+    <!-- اختيار اللغة (يظهر بالديسكتوب) -->
+    <div class="lang" (click)="$event.stopPropagation()">
+      <button class="lang-btn" type="button" (click)="toggleLang()">
+        <span class="current">{{ label(current) }}</span>
+        <span class="chev" [class.rotate]="isLangOpen">▾</span>
+      </button>
+      <div class="lang-menu" [class.open]="isLangOpen">
+        <button *ngFor="let c of langs" type="button"
+                [class.active]="c===current"
+                (click)="useLang(c)">
+          {{ label(c) }}
+        </button>
+      </div>
     </div>
+
+    <!-- زر همبرغر للموبايل -->
+    <button class="hamburger" type="button"
+            (click)="toggleMenu()" [attr.aria-expanded]="isOpen"
+            aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <!-- قائمة الموبايل الجانبية -->
+<nav class="mobile"
+     [class.open]="isOpen"
+     [attr.aria-hidden]="!isOpen"
+     [attr.inert]="!isOpen ? '' : null"
+     (click)="$event.stopPropagation()">
+         <div class="mobile-head">
+      <span class="title">{{ 'nav.menu' | translate }}</span>
+
+      <div class="lang-inline">
+        <button *ngFor="let c of langs" type="button"
+                [class.active]="c===current"
+                (click)="useLang(c)">
+          {{ c.toUpperCase() }}
+        </button>
+      </div>
+
+      <button class="close" type="button" (click)="closeMenu()" aria-label="Close">×</button>
+    </div>
+
+    <a routerLink="/" routerLinkActive="active"
+       [routerLinkActiveOptions]="{ exact: true }"
+       (click)="closeMenu()">{{ 'nav.home' | translate }}</a>
+
+    <div class="section-title">{{ 'nav.company' | translate }}</div>
+    <a *ngFor="let l of companyLinks" [routerLink]="l.to" (click)="closeMenu()">
+      {{ l.key | translate }}
+    </a>
+
+    <div class="section-title">{{ 'nav.services' | translate }}</div>
+    <a *ngFor="let l of servicesLinks" [routerLink]="l.to" (click)="closeMenu()">
+      {{ l.key | translate }}
+    </a>
+
+    <a routerLink="/contact" (click)="closeMenu()">{{ 'nav.contact' | translate }}</a>
   </nav>
+
+  <!-- خلفية تغطي الصفحة عند فتح القائمة -->
+  <div class="backdrop" [class.show]="isOpen" (click)="closeMenu()"></div>
 </header>
