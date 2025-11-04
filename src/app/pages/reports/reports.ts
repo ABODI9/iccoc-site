@@ -14,11 +14,19 @@ type FormModel = {
   country: FormControl<string>;
   city: FormControl<string>;
   email: FormControl<string>;
+  message: FormControl<string>; // 🆕
 };
 
-const ADMIN_INBOX = 'media@iccoc.eu'; // ← هنا بريد الإدارة
+// بريد الإدارة
+const ADMIN_INBOX = 'media@iccoc.eu';
+
+// شعار (رابط Google Drive مباشر يعمل مع عملاء البريد)
 const LOGO =
-  'https://drive.google.com/file/d/1YOyaPSUuhfUxFcGseqIE_FXlDqpSYxgl/view?usp=sharing'; // ضع رابط شعارك النهائي
+  'https://drive.google.com/uc?export=view&id=1YOyaPSUuhfUxFcGseqIE_FXlDqpSYxgl';
+
+// صورة خلفية الهيرو (غيّر الـ id لو أردت)
+const HERO_BG =
+  'https://drive.google.com/uc?export=view&id=1TcqCQOWapiGIHxbrnSAd5Ha4dfWVEO1t';
 
 @Component({
   selector: 'app-reports',
@@ -33,6 +41,8 @@ export class Reports {
   done = false;
   error = '';
 
+  heroBg = HERO_BG; // للـ hero
+
   constructor(private fb: FormBuilder, private i18n: TranslateService) {
     this.form = this.fb.nonNullable.group<FormModel>({
       name: this.fb.nonNullable.control('', {
@@ -43,6 +53,9 @@ export class Reports {
       city: this.fb.nonNullable.control(''),
       email: this.fb.nonNullable.control('', {
         validators: [Validators.required, Validators.email],
+      }),
+      message: this.fb.nonNullable.control('', {
+        validators: [Validators.required, Validators.minLength(10)],
       }),
     });
 
@@ -63,22 +76,20 @@ export class Reports {
   }
 
   private adminTable(data: any) {
-    // عناوين الحقول (يمكنك استبدالها بترجماتك)
     const f = {
       name: 'الاسم الكامل',
       phone: 'رقم الجوال',
       country: 'بلد الإقامة',
       city: 'المدينة',
       email: 'البريد الإلكتروني',
+      message: 'رسالة المشترك', // 🆕
       lang: 'اللغة',
     };
 
     const esc = (s: string) =>
       String(s || '')
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;').replace(/"/g, '&quot;')
         .replace(/'/g, '&#039;');
 
     return `
@@ -90,6 +101,7 @@ export class Reports {
           <tr><td style="padding:10px;border-bottom:1px solid #e5eef9"><strong>${f.country}</strong></td><td style="padding:10px">${esc(data.country)}</td></tr>
           <tr><td style="padding:10px;border-bottom:1px solid #e5eef9"><strong>${f.city}</strong></td><td style="padding:10px">${esc(data.city)}</td></tr>
           <tr><td style="padding:10px;border-bottom:1px solid #e5eef9"><strong>${f.email}</strong></td><td style="padding:10px">${esc(data.email)}</td></tr>
+          <tr><td style="padding:10px;border-bottom:1px solid #e5eef9"><strong>${f.message}</strong></td><td style="padding:10px">${esc(data.message)}</td></tr>
           <tr><td style="padding:10px"><strong>${f.lang}</strong></td><td style="padding:10px">${esc(data.lang)}</td></tr>
         </tbody>
       </table>
@@ -112,7 +124,6 @@ export class Reports {
 
     const vals = this.form.getRawValue();
 
-    // نصوص بسيطة افتراضية (بدون ترجمة) – غيّرها إذا أردت استخدام ngx-translate
     const brand = 'ICCOC';
     const org = 'International Commission for Combating Corruption & Organized Crime';
     const footer = `هذه الرسالة مُرسلة تلقائيًا من موقع ${brand}.`;
@@ -129,44 +140,44 @@ export class Reports {
     };
 
     try {
-      // (1) رسالة للمشترك (شكر وتأكيد)
+      // (1) رسالة للمشترك
       await emailjs.send(
         environment.emailjs.serviceId,
         environment.emailjs.templateUserId,
         {
           ...common,
-          to_email: vals.email,            // يجب أن يطابق {{to_email}} في القالب المستخدم للمشترك
+          to_email: vals.email,
           reply_to: vals.email,
-          subject: `شكراً لاشتراكك مع ${brand}`,
+          subject: `شكرًا لاشتراكك مع ${brand}`,
           heading: 'تم استلام طلب اشتراكك',
-          lead: 'سنقوم بمراجعة طلبك والتواصل معكم عند الحاجة.',
-          // لا ترسل table هنا إن كان قالب المشترك لا يحتويه
+          lead: 'وصلتنا بياناتك ورسالتك وسنتواصل عند الحاجة.',
           name: vals.name,
           phone: vals.phone,
           country: vals.country,
           city: vals.city,
           user_email: vals.email,
+          message: vals.message, // 🆕 لو قالب المشترك يعرضها
         }
       );
 
-      // (2) رسالة للإدارة (media@iccoc.eu) مع جدول البيانات
+      // (2) رسالة للإدارة
       await emailjs.send(
         environment.emailjs.serviceId,
         environment.emailjs.templateAdminId,
         {
           ...common,
-          to_email: ADMIN_INBOX,           // ← تصلك نسخة الإدارة هنا
+          to_email: ADMIN_INBOX,
           reply_to: vals.email,
           subject: 'طلب اشتراك جديد عبر الموقع',
           heading: 'تفاصيل المشترك الجديد',
           lead: '',
           table: this.adminTable({ ...vals, lang }),
-          // لو كان قالب الإدارة يعرض هذه الحقول أيضًا
           name: vals.name,
           phone: vals.phone,
           country: vals.country,
           city: vals.city,
           user_email: vals.email,
+          message: vals.message, // 🆕
         }
       );
 
@@ -174,8 +185,7 @@ export class Reports {
       this.form.reset();
     } catch (e: any) {
       console.error('EMAILJS ERROR →', e);
-      this.error =
-        e?.text || e?.message || 'تعذّر إرسال الرسائل. تحقق من إعدادات EmailJS.';
+      this.error = e?.text || e?.message || 'تعذّر إرسال الرسائل. تحقق من إعدادات EmailJS.';
     } finally {
       this.loading = false;
     }

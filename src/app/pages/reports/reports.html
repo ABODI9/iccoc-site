@@ -1,6 +1,9 @@
 <section class="section">
   <div class="container">
-    <div class="hero" style="background:url('https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;">
+
+    <!-- Hero -->
+    <div class="hero"
+         [style.background]="'url(' + heroBg + ') center/cover no-repeat'">
       <div class="wrap card soft">
         <h1>{{ 'news.title' | translate }}</h1>
         <p class="muted">{{ 'news.subscribe_title' | translate }}</p>
@@ -8,13 +11,19 @@
     </div>
 
     <div class="grid cols-2" style="margin-top:16px">
+      <!-- Form -->
       <div class="card soft">
         <form [formGroup]="form" (ngSubmit)="submit()" class="grid">
+
           <input class="input" formControlName="name" [placeholder]="'news.form.name' | translate">
-          <div class="muted" *ngIf="ctrl('name').touched && ctrl('name').invalid">{{ 'news.errors.name' | translate }}</div>
+          <div class="muted" *ngIf="ctrl('name').touched && ctrl('name').invalid">
+            {{ 'news.errors.name' | translate }}
+          </div>
 
           <input class="input" formControlName="phone" [placeholder]="'news.form.phone' | translate">
-          <div class="muted" *ngIf="ctrl('phone').touched && ctrl('phone').invalid">{{ 'news.errors.phone' | translate }}</div>
+          <div class="muted" *ngIf="ctrl('phone').touched && ctrl('phone').invalid">
+            {{ 'news.errors.phone' | translate }}
+          </div>
 
           <div class="grid cols-2">
             <input class="input" formControlName="country" [placeholder]="'news.form.country' | translate">
@@ -22,7 +31,18 @@
           </div>
 
           <input class="input" type="email" formControlName="email" [placeholder]="'news.form.email' | translate">
-          <div class="muted" *ngIf="ctrl('email').touched && ctrl('email').invalid">{{ 'news.errors.email' | translate }}</div>
+          <div class="muted" *ngIf="ctrl('email').touched && ctrl('email').invalid">
+            {{ 'news.errors.email' | translate }}
+          </div>
+
+          <!-- 🆕 رسالة المشترك -->
+          <textarea class="input textarea"
+                    rows="5"
+                    formControlName="message"
+                    placeholder="اكتب لنا أي التقارير تهمّك أو رسالتك لنا"></textarea>
+          <div class="muted" *ngIf="ctrl('message').touched && ctrl('message').invalid">
+            الرجاء كتابة رسالة مفيدة (10 أحرف على الأقل).
+          </div>
 
           <button class="btn" [disabled]="loading" type="submit">
             <span *ngIf="!loading">{{ 'news.form.submit' | translate }}</span>
@@ -34,6 +54,7 @@
         </form>
       </div>
 
+      <!-- Examples -->
       <div class="card soft">
         <strong>{{ 'news.examples_title' | translate:({default:'Examples'}) }}</strong>
         <ul>

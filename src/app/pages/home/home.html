@@ -38,7 +38,8 @@
           <div
             class="bar"
             #bar
-            (animationend)="onProgressDone()"
+            (animationend)="onProgressDone()
+            "
             [style.animationPlayState]="paused ? 'paused' : 'running'">
           </div>
         </div>
@@ -68,6 +69,43 @@
           aria-label="اذهب إلى الشريحة {{ i + 1 }}">
         </button>
       </div>
+    </div>
+
+    <!-- Featured Report -->
+    <div class="featured-report mt-24" dir="rtl">
+      <div class="thumb"
+           [style.background-image]="'url(' + featuredReport.img + ')'"
+           [style.background-color]="'#0b2240'">
+      </div>
+
+      <div class="body">
+        <h3 class="title">{{ featuredReport.title }}</h3>
+        <p class="excerpt">{{ featuredReport.excerpt }}</p>
+
+        <div class="actions">
+          <a class="btn primary" [routerLink]="'/reports'" [queryParams]="{ r: featuredReport.slug }">
+            للمزيد من التفصيل
+          </a>
+          
+        </div>
+      </div>
+    </div>
+
+    <!-- Reports cards -->
+    <div class="reports-grid mt-16" dir="rtl">
+      <a class="rep-card" *ngFor="let r of reportCards"
+         [routerLink]="r.localLink || '/reports'" [queryParams]="r.slug ? { r: r.slug } : null"
+         aria-label="{{ r.title }}">
+        <img class="rep-img"
+             [src]="r.img"
+             [alt]="r.title"
+             loading="lazy" decoding="async"
+             (error)="onImgError($event)"
+>
+        <div class="rep-info">
+          <h5 class="rep-title">{{ r.title }}</h5>
+        </div>
+      </a>
     </div>
 
     <!-- CTA grid -->

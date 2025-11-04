@@ -78,21 +78,12 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
       route: '/reports', ctaKey: 'reports.title'
     },
     {
-      icon: 'image',
+      icon: 'link',
       bg: 'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?q=80&w=1700&auto=format&fit=crop',
       titleKey: 'links.title',
       subtitleKey: 'media.welcome',
       tagsKeys: ['links.title'],
       gradient: 'grad-blue-2',
-      route: '/links', ctaKey: 'links.title'
-    },
-    {
-      icon: 'link',
-      bg: 'https://images.unsplash.com/photo-1518081461904-9ac0923246a8?q=80&w=1700&auto=format&fit=crop',
-      titleKey: 'links.title',
-      subtitleKey: 'about.values',
-      tagsKeys: ['links.title'],
-      gradient: 'grad-blue-3',
       route: '/links', ctaKey: 'links.title'
     },
     {
@@ -234,4 +225,87 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
       default:       return '';
     }
   }
+
+  /* ---------------- Google Drive helpers + data ---------------- */
+// صورة بديلة عند فشل تحميل أي صورة
+placeholderImg = 'assets/placeholder.jpg';
+
+/** يُستدعى من القالب عند فشل تحميل الصورة */
+onImgError(ev: Event): void {
+  const img = ev.target as HTMLImageElement | null;
+  if (!img) return;
+
+  // امنع حلقة لا نهائية لو فشلت الـ placeholder أيضًا
+  if ((img as any).dataset && (img as any).dataset.fallback === '1') return;
+  if ((img as any).dataset) (img as any).dataset.fallback = '1';
+
+  img.src = this.placeholderImg;
+}
+
+
+
+  /** يستخرج الـ ID من أي رابط Google Drive */
+  private gId(url: string): string {
+    const m = url.match(/\/d\/([^/]+)\//) || url.match(/[?&]id=([^&]+)/);
+    return m ? m[1] : url;
+  }
+
+  /** رابط صورة مصغّرة سريع من Google Drive */
+  private gThumb(urlOrId: string, width = 1200): string {
+    const id = /^(http|https):\/\//.test(urlOrId) ? this.gId(urlOrId) : urlOrId;
+    return `https://drive.google.com/thumbnail?id=${id}&sz=w${width}`;
+  }
+
+  /** بديل (uc) إن احتجته لبعض الملفات */
+  private gPreview(urlOrId: string): string {
+    const id = /^(http|https):\/\//.test(urlOrId) ? this.gId(urlOrId) : urlOrId;
+    return `https://drive.google.com/uc?export=view&id=${id}`;
+  }
+
+  /** Placeholder محلي عند فشل التحميل */
+
+  /** التقرير المميّز */
+  featuredReport = {
+    slug: 'mali-fuel-terror-smuggling',
+    title: 'مالي: تقاطع التهريب والإرهاب والجريمة العابرة للحدود',
+    excerpt:
+      'تعاني مالي من أزمة وقود حادة تتظافر مع أزمات أمنية وسياسية ومالية. فقدت الحكومة السيطرة على مناطق شمالية، ' +
+      'وتتقاطع هناك شبكات التهريب والإرهاب والجريمة المنظمة مع تراجع سلطة الدولة وتداخل أزمات إقليمية ودولية.',
+    img: this.gThumb('https://drive.google.com/file/d/1XXTW0v2-YQuNuqGY9cxBnuUSxxY0uE67/view?usp=drive_link', 1600),
+    localLink: '/reports'
+  };
+
+  /** بطاقات تقارير */
+  reportCards = [
+    {
+      slug: 'haftar-empire',
+      title: 'حفتر: إمبراطورية المال والسلطة والفساد',
+      img: this.gThumb('https://drive.google.com/file/d/1kH_ssE4l2fiUG9ewiMs4ExQV0oRHHwSj/view?usp=drive_link', 1200),
+      localLink: '/reports'
+    },
+    {
+      slug: 'morocco-crises',
+      title: 'المغرب: أزمات متراكمة وفساد ينخر جهود الإصلاح',
+      img: this.gThumb('https://drive.google.com/file/d/1m07pTIvBIgZahG2NIVt68R_vLlTeWOnP/view?usp=drive_link', 1200),
+      localLink: '/reports'
+    },
+    {
+      slug: 'europe-russian-gas',
+      title: 'أوروبا: هل تفطم نفسها عن الغاز الروسي؟',
+      img: this.gThumb('https://drive.google.com/file/d/19NoCh9RTdEtu3zNDjs_E8NmI4BCf1WKZ/view?usp=drive_link', 1200),
+      localLink: '/reports'
+    },
+    {
+      slug: 'human-smuggling',
+      title: 'تهريب البشر: الشبكات والأبعاد السياسية',
+      img: this.gThumb('https://drive.google.com/file/d/1U54cX42cnNOguHTyJRj-AKF_07iAblru/view?usp=drive_link', 1200),
+      localLink: '/reports'
+    },
+    {
+      slug: 'sudan-rsf-support',
+      title: 'الدعم السريع في السودان: خطوط الدعم والإسناد',
+      img: this.gThumb('https://drive.google.com/file/d/1S5dgT_C_ZWcG31kVrQDQYeC9Sh5ohOmo/view?usp=drive_link', 1200),
+      localLink: '/reports'
+    }
+  ];
 }
