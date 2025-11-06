@@ -1,28 +1,61 @@
-
-
 <section class="section">
   <div class="container">
+    <!-- هيرو بسيط -->
     <div class="hero" style="background-image:url('https://images.unsplash.com/photo-1495727034151-8fdc73e332a8?q=80&w=1600&auto=format&fit=crop')">
       <div class="wrap card soft">
         <h1>{{ 'contact.title' | translate }}</h1>
+        <p class="muted">{{ 'media.welcome' | translate }}</p>
       </div>
     </div>
 
-    <div class="grid cols-2" style="margin-top:16px">
+    <div class="grid cols-2 mt-24">
+      <!-- معلومات التواصل -->
       <div class="card soft">
-        <ul>
+        <h3 class="card-title">{{ 'nav.contact' | translate }}</h3>
+        <ul class="emails">
           <li *ngFor="let e of emails"><a [href]="'mailto:'+e">{{ e }}</a></li>
         </ul>
       </div>
+
+      <!-- نموذج مثل الريبورت -->
       <div class="card soft">
-        <input class="input" [placeholder]="'news.form.name'  | translate">
-        <input class="input" [placeholder]="'news.form.email' | translate" type="email">
-        <input class="input" [placeholder]="'news.form.country' | translate">
-        <textarea class="input" rows="6" placeholder="Message"></textarea>
-        <a class="btn" [href]="'mailto:'+ (emails[0] || 'info@iccoc.eu')">{{ 'nav.contact' | translate }}</a>
+        <form [formGroup]="form" (ngSubmit)="send()">
+          <input class="input" formControlName="name" [placeholder]="'news.form.name' | translate">
+          <div class="err" *ngIf="ctrl('name').touched && ctrl('name').invalid">
+            {{ 'news.errors.name' | translate }}
+          </div>
+
+          <input class="input" formControlName="email" type="email" [placeholder]="'news.form.email' | translate">
+          <div class="err" *ngIf="ctrl('email').touched && ctrl('email').invalid">
+            {{ 'news.errors.email' | translate }}
+          </div>
+
+          <input class="input" formControlName="phone" [placeholder]="'news.form.phone' | translate">
+          <div class="err" *ngIf="ctrl('phone').touched && ctrl('phone').invalid">
+            {{ 'news.errors.phone' | translate }}
+          </div>
+
+          <div class="row">
+            <input class="input" formControlName="country" [placeholder]="'news.form.country' | translate">
+            <input class="input" formControlName="city" [placeholder]="'news.form.city' | translate">
+          </div>
+
+          <input class="input" formControlName="interest" [placeholder]="'contact.form.interest_ph' | translate">
+
+          <textarea
+            class="input textarea"
+            rows="6"
+            formControlName="message"
+            [placeholder]="'contact.message_placeholder' | translate"></textarea>
+          <div class="err" *ngIf="ctrl('message').touched && ctrl('message').invalid">
+            {{ 'contact.message_error' | translate }}
+          </div>
+
+          <button class="btn primary" type="submit" [disabled]="form.invalid">
+            {{ 'nav.contact' | translate }}
+          </button>
+        </form>
       </div>
     </div>
   </div>
 </section>
-
-

@@ -36,13 +36,17 @@
           </div>
 
           <!-- 🆕 رسالة المشترك -->
-          <textarea class="input textarea"
-                    rows="5"
-                    formControlName="message"
-                    placeholder="اكتب لنا أي التقارير تهمّك أو رسالتك لنا"></textarea>
+          <textarea
+            class="input textarea"
+            rows="5"
+            formControlName="message"
+            [placeholder]="'contact.message_placeholder' | translate">
+          </textarea>
+          
           <div class="muted" *ngIf="ctrl('message').touched && ctrl('message').invalid">
-            الرجاء كتابة رسالة مفيدة (10 أحرف على الأقل).
+            {{ 'contact.message_error' | translate }}
           </div>
+          
 
           <button class="btn" [disabled]="loading" type="submit">
             <span *ngIf="!loading">{{ 'news.form.submit' | translate }}</span>

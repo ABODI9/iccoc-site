@@ -1,1 +1,28 @@
-/* يعتمد على الأنماط العامة */
+/* تنسيقات بسيطة للصفحة */
+.hero { background-size: cover; background-position: center; border-radius: 16px; padding: 18px; }
+.wrap.card.soft { background: rgba(255,255,255,.92); border-radius: 12px; padding: 16px; }
+
+.grid.cols-2 { display: grid; grid-template-columns: 1fr; gap: 16px; }
+@media (min-width: 900px){ .grid.cols-2{ grid-template-columns: 1fr 1fr; } }
+
+.card.soft { background: #fff; border: 1px solid #e5eef9; border-radius: 12px; padding: 16px; box-shadow: 0 10px 24px rgba(2,6,23,.08); }
+.card-title{ margin:0 0 8px; font-weight: 800; }
+
+.emails{ list-style: none; padding: 0; margin: 0; }
+.emails li{ margin: 6px 0; }
+.emails a{ color:#0b2240; text-decoration: none; }
+.emails a:hover{ text-decoration: underline; }
+
+.input{ width: 100%; padding: 10px 12px; border: 1px solid #e5eef9; border-radius: 10px; margin: 6px 0; }
+.row{ display: grid; grid-template-columns: 1fr; gap: 8px; }
+@media (min-width: 600px){ .row{ grid-template-columns: 1fr 1fr; } }
+.textarea{ min-height: 120px; }
+
+.err{ color: #b91c1c; font-size: 12px; margin-top: 2px; }
+
+.btn.primary{
+  display:inline-block; padding:10px 16px; border-radius:12px; border:0; cursor:pointer;
+  background: linear-gradient(135deg, #1d4ed8, #0ea5e9, #0b2240); color:#fff; font-weight:800;
+  box-shadow: 0 12px 24px rgba(2,6,23,.12);
+}
+.btn.primary:disabled{ opacity:.6; cursor:not-allowed; }

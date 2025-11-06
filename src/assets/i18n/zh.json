@@ -40,7 +40,7 @@
       "title": "马里：走私、恐怖主义与跨境犯罪的交汇点",
       "excerpt": "马里正经历严重的燃料危机，这场危机与安全、政治和财政问题交织在一起。政府已失去对北部地区的控制，在那里，走私网络、恐怖主义和有组织犯罪与国家权力的衰退以及区域和国际危机相互交织。"
     },
-    
+
     "cards": {
       "haftar": { "title": "哈夫塔尔：金钱、权力与腐败的帝国" },
       "morocco": { "title": "摩洛哥：积重难返的危机与腐败侵蚀改革努力" },
@@ -168,9 +168,17 @@
   },
 
   "contact": {
-    "title": "联系我们",
-    "emails": ["info@iccoc.eu", "media@iccoc.eu", "manager@iccoc.eu"]
-  },
+  "title": "联系我们",
+  "emails": ["info@iccoc.eu", "media@iccoc.eu", "manager@iccoc.eu"],
+  "message_placeholder": "请写下您感兴趣的报告或给我们的留言",
+  "message_error": "请填写有意义的信息（至少10个字符）。",
+  "form": {
+    "interest": "您感兴趣的报告",
+    "interest_ph": "告诉我们您感兴趣的报告",
+    "message": "留言"
+  }
+}
+,
 
   "mail": {
     "subject_user": "您已订阅 {{brand}} 的报告",

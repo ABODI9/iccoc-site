@@ -172,10 +172,18 @@
     ]
   },
 
-  "contact": {
-    "title": "Contact Us",
-    "emails": ["info@iccoc.eu", "media@iccoc.eu", "manager@iccoc.eu"]
-  },
+"contact": {
+  "title": "Contact Us",
+  "emails": ["info@iccoc.eu", "media@iccoc.eu", "manager@iccoc.eu"],
+  "message_placeholder": "Write to us about the reports you're interested in or your message",
+  "message_error": "Please write a meaningful message (at least 10 characters).",
+  "form": {
+    "interest": "Reports you’re interested in",
+    "interest_ph": "Tell us which reports interest you",
+    "message": "Message"
+  }
+}
+,
 
   "mail": {
     "subject_user": "Your subscription to {{brand}} reports",
