@@ -24,14 +24,32 @@
     "contact": "Contact"
   },
 
+
   "hero": {
     "home_title": "Commission internationale contre la corruption et le crime organisé",
     "home_sub": "Bienvenue sur le site officiel – organisation non gouvernementale et à but non lucratif basée à Genève, Suisse."
   },
 
   "home": {
-    "welcome": "Bienvenue sur le site officiel de la Commission internationale contre la corruption et le crime organisé. Nous sommes une organisation indépendante, non gouvernementale et à but non lucratif, dont le siège est à Genève."
+    "welcome": "Bienvenue sur le site officiel de la Commission internationale contre la corruption et le crime organisé. Nous sommes une organisation indépendante, non gouvernementale et à but non lucratif, dont le siège est à Genève.",
+    "more_details": "Pour plus de détails",
+    "prev": "Précédent",
+    "next": "Suivant",
+    "goto_slide": "Aller à la diapositive {{num}}",
+  
+    "featured": {
+      "title": "Mali : au carrefour de la contrebande, du terrorisme et de la criminalité transnationale",
+      "excerpt": "Le Mali est confronté à une grave crise du carburant qui s’ajoute à des crises sécuritaires, politiques et financières. Le gouvernement a perdu le contrôle des régions du nord, où les réseaux de contrebande, de terrorisme et de criminalité organisée se croisent avec le recul de l’autorité de l’État et l’imbrication des crises régionales et internationales."
+    },
+    "cards": {
+      "haftar": { "title": "Haftar : l’empire de l’argent, du pouvoir et de la corruption" },
+      "morocco": { "title": "Maroc : des crises accumulées et une corruption qui mine les efforts de réforme" },
+      "europe_gas": { "title": "Europe : sevrage du gaz russe ?" },
+      "human_smuggling": { "title": "Trafic de personnes : réseaux et dimensions politiques" },
+      "sudan_rsf": { "title": "RSF au Soudan : lignes de soutien et d’appui" }
+    }
   },
+
 
   "about": {
     "title": "À propos de la Commission",

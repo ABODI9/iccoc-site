@@ -1,9 +1,9 @@
 <section class="section" dir="rtl">
   <div class="container">
 
+    <!-- سلايدر المقدّمة -->
     <div class="hero-shell" (mouseenter)="pause()" (mouseleave)="resume()">
-
-      <!-- Backgrounds -->
+      <!-- خلفيات السلايدر -->
       <ng-container *ngFor="let s of slides; let i = index">
         <div class="bg-layer"
              [class.bg-active]="i === index"
@@ -12,7 +12,7 @@
         </div>
       </ng-container>
 
-      <!-- Content -->
+      <!-- محتوى السلايدر -->
       <div class="hero-content">
         <a class="icon-wrap"
            [routerLink]="slides[index].route"
@@ -25,6 +25,7 @@
         <h1 class="hero-title">{{ slides[index].titleKey | translate }}</h1>
         <p class="hero-sub">{{ slides[index].subtitleKey | translate }}</p>
 
+        <!-- شارات ديناميكية من مفاتيح الترجمة -->
         <div class="tags">
           <span class="tag" *ngFor="let t of tags">{{ t }}</span>
         </div>
@@ -33,45 +34,49 @@
           {{ (slides[index].ctaKey || slides[index].titleKey) | translate }}
         </a>
 
-        <!-- Progress / timer -->
+        <!-- شريط التقدم -->
         <div class="progress">
-          <div
-            class="bar"
-            #bar
-            (animationend)="onProgressDone()
-            "
-            [style.animationPlayState]="paused ? 'paused' : 'running'">
+          <div class="bar"
+               #bar
+               (animationend)="onProgressDone()"
+               [style.animationPlayState]="paused ? 'paused' : 'running'">
           </div>
         </div>
       </div>
 
-      <!-- Arrows -->
-      <button class="nav-btn left" type="button" (click)="prev()" aria-label="السابق">
+      <!-- أزرار السلايدر -->
+      <button class="nav-btn left" type="button"
+              (click)="prev()"
+              [attr.aria-label]="'home.prev' | translate">
         <svg viewBox="0 0 24 24">
-          <path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2" fill="none"
-                stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
-      <button class="nav-btn right" type="button" (click)="next()" aria-label="التالي">
-        <svg viewBox="0 0 24 24">
-          <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" fill="none"
+          <path d="M15 6l-6 6 6 6"
+                stroke="currentColor" stroke-width="2" fill="none"
                 stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </button>
 
-      <!-- Dots -->
+      <button class="nav-btn right" type="button"
+              (click)="next()"
+              [attr.aria-label]="'home.next' | translate">
+        <svg viewBox="0 0 24 24">
+          <path d="M9 18l6-6-6-6"
+                stroke="currentColor" stroke-width="2" fill="none"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <!-- النقاط -->
       <div class="dots">
-        <button
-          *ngFor="let _ of slides; let i = index"
-          class="dot"
-          [class.active]="i === index"
-          (click)="go(i)"
-          aria-label="اذهب إلى الشريحة {{ i + 1 }}">
+        <button *ngFor="let _ of slides; let i = index"
+                class="dot"
+                [class.active]="i === index"
+                (click)="go(i)"
+                [attr.aria-label]="'home.goto_slide' | translate:{ num: i + 1 }">
         </button>
       </div>
     </div>
 
-    <!-- Featured Report -->
+    <!-- التقرير المميز -->
     <div class="featured-report mt-24" dir="rtl">
       <div class="thumb"
            [style.background-image]="'url(' + featuredReport.img + ')'"
@@ -79,36 +84,41 @@
       </div>
 
       <div class="body">
-        <h3 class="title">{{ featuredReport.title }}</h3>
-        <p class="excerpt">{{ featuredReport.excerpt }}</p>
+        <h3 class="title">{{ 'home.featured.title' | translate }}</h3>
+        <p class="excerpt">{{ 'home.featured.excerpt' | translate }}</p>
 
         <div class="actions">
-          <a class="btn primary" [routerLink]="'/reports'" [queryParams]="{ r: featuredReport.slug }">
-            للمزيد من التفصيل
+          <a class="btn primary"
+             [routerLink]="'/reports'"
+             [queryParams]="{ r: featuredReport.slug }">
+            {{ 'home.more_details' | translate }}
           </a>
-          
         </div>
       </div>
     </div>
 
-    <!-- Reports cards -->
+    <!-- بطاقات التقارير -->
     <div class="reports-grid mt-16" dir="rtl">
-      <a class="rep-card" *ngFor="let r of reportCards"
-         [routerLink]="r.localLink || '/reports'" [queryParams]="r.slug ? { r: r.slug } : null"
-         aria-label="{{ r.title }}">
-        <img class="rep-img"
-             [src]="r.img"
-             [alt]="r.title"
-             loading="lazy" decoding="async"
-             (error)="onImgError($event)"
->
+      <a class="rep-card"
+         *ngFor="let r of reportCards"
+         [routerLink]="r.localLink || '/reports'"
+         [queryParams]="r.slug ? { r: r.slug } : null"
+         [attr.aria-label]="(r.titleKey | translate)">
+        <div class="rep-media">
+          <img class="rep-img"
+               [src]="r.img"
+               [alt]="(r.titleKey | translate)"
+               loading="lazy" decoding="async"
+               (error)="onImgError($event)">
+        </div>
+
         <div class="rep-info">
-          <h5 class="rep-title">{{ r.title }}</h5>
+          <h5 class="rep-title">{{ r.titleKey | translate }}</h5>
         </div>
       </a>
     </div>
 
-    <!-- CTA grid -->
+    <!-- الدعوات (CTA) -->
     <div class="cta-grid mt-16">
       <div class="cta cta-blue">
         <div class="cta-icon">💡</div>

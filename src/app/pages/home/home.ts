@@ -7,15 +7,16 @@ import { RouterModule } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
+/** تعريف بنية الشريحة في السلايدر */
 type Slide = {
   icon: 'globe' | 'users' | 'target' | 'file' | 'news' | 'image' | 'link' | 'bulb' | 'mail';
-  bg: string;
-  titleKey: string;
-  subtitleKey: string;
-  tagsKeys: string | string[];
-  gradient: string;
-  route: string;
-  ctaKey?: string;
+  bg: string;             // رابط خلفية الشريحة
+  titleKey: string;       // مفتاح الترجمة لعنوان الشريحة
+  subtitleKey: string;    // مفتاح الترجمة للوصف
+  tagsKeys: string | string[]; // مفاتيح الترجمة للشارات الصغيرة تحت العنوان
+  gradient: string;       // كلاس التدرّج اللوني أعلى الخلفية
+  route: string;          // الرابط الذي تذهب إليه الشريحة
+  ctaKey?: string;        // مفتاح نص زر النداء
 };
 
 @Component({
@@ -28,89 +29,44 @@ type Slide = {
 export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('bar') barRef!: ElementRef<HTMLDivElement>;
 
-  /** duration for each slide (ms) */
+  /** مدة بقاء كل شريحة (ملّي ثانية) */
   readonly durationMs = 3000;
 
+  /** بيانات الشرائح – كلها مفاتيح ترجمة؛ الصور من Unsplash */
   slides: Slide[] = [
-    {
-      icon: 'globe',
-      bg: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=1800&auto=format&fit=crop',
-      titleKey: 'hero.home_title',
-      subtitleKey: 'hero.home_sub',
-      tagsKeys: ['app.org_full', 'app.org_full_fr', 'app.org_full_en', 'app.org_full_zh'],
-      gradient: 'grad-blue-1',
-      route: '/', ctaKey: 'hero.home_title'
-    },
-    {
-      icon: 'users',
-      bg: 'https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1700&auto=format&fit=crop',
-      titleKey: 'who.title',
-      subtitleKey: 'who.body.0',
-      tagsKeys: ['who.body.1', 'who.body.2'],
-      gradient: 'grad-blue-2',
-      route: '/who', ctaKey: 'who.title'
-    },
-    {
-      icon: 'target',
-      bg: 'https://images.unsplash.com/photo-1538688423619-a81d3f23454b?q=80&w=1700&auto=format&fit=crop',
-      titleKey: 'about.title',
-      subtitleKey: 'about.vision',
-      tagsKeys: ['about.values'],
-      gradient: 'grad-blue-3',
-      route: '/about', ctaKey: 'about.title'
-    },
-    {
-      icon: 'file',
-      bg: 'https://images.unsplash.com/photo-1556761175-4b46a572b786?q=80&w=1700&auto=format&fit=crop',
-      titleKey: 'what.title',
-      subtitleKey: 'what.subtitle',
-      tagsKeys: ['activities.title'],
-      gradient: 'grad-blue-4',
-      route: '/what-we-do', ctaKey: 'what.title'
-    },
-    {
-      icon: 'news',
-      bg: 'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1700&auto=format&fit=crop',
-      titleKey: 'reports.title',
-      subtitleKey: 'home.welcome',
-      tagsKeys: ['news.subscribe_title'],
-      gradient: 'grad-blue-1',
-      route: '/reports', ctaKey: 'reports.title'
-    },
-    {
-      icon: 'link',
-      bg: 'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?q=80&w=1700&auto=format&fit=crop',
-      titleKey: 'links.title',
-      subtitleKey: 'media.welcome',
-      tagsKeys: ['links.title'],
-      gradient: 'grad-blue-2',
-      route: '/links', ctaKey: 'links.title'
-    },
-    {
-      icon: 'bulb',
-      bg: 'https://images.unsplash.com/photo-1543269865-0a740d43b90c?q=80&w=1700&auto=format&fit=crop',
-      titleKey: 'initiative.title',
-      subtitleKey: 'initiative.lead',
-      tagsKeys: ['initiative.body'],
-      gradient: 'grad-blue-4',
-      route: '/initiative', ctaKey: 'initiative.title'
-    },
-    {
-      icon: 'mail',
-      bg: 'https://images.unsplash.com/photo-1504384764586-bb4cdc1707b0?q=80&w=1700&auto=format&fit=crop',
-      titleKey: 'contact.title',
-      subtitleKey: 'home.welcome',
-      tagsKeys: ['contact.emails.0', 'contact.emails.1', 'contact.emails.2'],
-      gradient: 'grad-blue-1',
-      route: '/contact', ctaKey: 'contact.title'
-    },
+    { icon:'globe', bg:'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=1800&auto=format&fit=crop',
+      titleKey:'hero.home_title', subtitleKey:'hero.home_sub',
+      tagsKeys:['app.org_full','app.org_full_fr','app.org_full_en','app.org_full_zh'],
+      gradient:'grad-blue-1', route:'/', ctaKey:'hero.home_title' },
+    { icon:'users', bg:'https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1700&auto=format&fit=crop',
+      titleKey:'who.title', subtitleKey:'who.body.0',
+      tagsKeys:['who.body.1','who.body.2'], gradient:'grad-blue-2', route:'/who', ctaKey:'who.title' },
+    { icon:'target', bg:'https://images.unsplash.com/photo-1538688423619-a81d3f23454b?q=80&w=1700&auto=format&fit=crop',
+      titleKey:'about.title', subtitleKey:'about.vision', tagsKeys:['about.values'],
+      gradient:'grad-blue-3', route:'/about', ctaKey:'about.title' },
+    { icon:'file', bg:'https://images.unsplash.com/photo-1556761175-4b46a572b786?q=80&w=1700&auto=format&fit=crop',
+      titleKey:'what.title', subtitleKey:'what.subtitle', tagsKeys:['activities.title'],
+      gradient:'grad-blue-4', route:'/what-we-do', ctaKey:'what.title' },
+    { icon:'news', bg:'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1700&auto=format&fit=crop',
+      titleKey:'reports.title', subtitleKey:'home.welcome', tagsKeys:['news.subscribe_title'],
+      gradient:'grad-blue-1', route:'/reports', ctaKey:'reports.title' },
+    { icon:'link', bg:'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?q=80&w=1700&auto=format&fit=crop',
+      titleKey:'links.title', subtitleKey:'media.welcome', tagsKeys:['links.title'],
+      gradient:'grad-blue-2', route:'/links', ctaKey:'links.title' },
+    { icon:'bulb', bg:'https://images.unsplash.com/photo-1543269865-0a740d43b90c?q=80&w=1700&auto=format&fit=crop',
+      titleKey:'initiative.title', subtitleKey:'initiative.lead', tagsKeys:['initiative.body'],
+      gradient:'grad-blue-4', route:'/initiative', ctaKey:'initiative.title' },
+    { icon:'mail', bg:'https://images.unsplash.com/photo-1504384764586-bb4cdc1707b0?q=80&w=1700&auto=format&fit=crop',
+      titleKey:'contact.title', subtitleKey:'home.welcome',
+      tagsKeys:['contact.emails.0','contact.emails.1','contact.emails.2'],
+      gradient:'grad-blue-1', route:'/contact', ctaKey:'contact.title' },
   ];
 
-  index = 0;
-  tags: string[] = [];
-  paused = false;
+  index = 0;           // مؤشر الشريحة الحالية
+  tags: string[] = []; // الشارات المترجمة
+  paused = false;      // حالة الإيقاف المؤقّت عند المرور
 
-  // timer state
+  // حالة المؤقّت
   private timerId: any = null;
   private startedAt = 0;
   private remaining = this.durationMs;
@@ -121,19 +77,18 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit(): void {
     this.computeTags(this.index);
+    // إعادة حساب الشارات عند تغيير اللغة
     this.langSub = this.i18n.onLangChange.subscribe(() => this.computeTags(this.index));
   }
 
-  ngAfterViewInit(): void {
-    this.restartProgress();
-  }
+  ngAfterViewInit(): void { this.restartProgress(); }
 
   ngOnDestroy(): void {
     this.clearTimer();
     this.langSub?.unsubscribe();
   }
 
-  /* ---------- navigation ---------- */
+  /* ---------- تنقّل السلايدر ---------- */
   next(): void { this.go(this.index + 1); }
   prev(): void { this.go(this.index - 1); }
 
@@ -144,12 +99,10 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     this.restartProgress();
   }
 
-  /* fallback if CSS animationend fires */
-  onProgressDone(): void {
-    if (!this.paused) this.next();
-  }
+  // احتياط لو ما اشتغل حدث انتهاء الأنيميشن
+  onProgressDone(): void { if (!this.paused) this.next(); }
 
-  /* ---------- pause/resume on hover ---------- */
+  /* ---------- إيقاف/استئناف عند المرور ---------- */
   pause(): void {
     if (this.paused) return;
     this.paused = true;
@@ -167,41 +120,31 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     this.timerId = setTimeout(() => this.next(), Math.max(0, this.remaining));
   }
 
-  /* ---------- progress + timer ---------- */
+  /* ---------- المؤقّت + الشريط ---------- */
   private restartProgress(): void {
-    // reset visual animation
+    // إعادة ضبط أنيميشن الشريط
     const el = this.barRef?.nativeElement;
     if (el) {
       el.style.animation = 'none';
       el.style.transform = 'scaleX(0)';
-      void el.offsetWidth; // force reflow
+      void el.offsetWidth; // إجبار إعادة التدفق
       el.style.animation = `heroGrow ${this.durationMs}ms linear forwards`;
       el.style.animationPlayState = this.paused ? 'paused' : 'running';
     }
 
-    // reset logical timer
+    // إعادة ضبط المؤقّت المنطقي
     this.clearTimer();
     this.remaining = this.durationMs;
     this.startedAt = performance.now();
-    if (!this.paused) {
-      this.timerId = setTimeout(() => this.next(), this.remaining);
-    }
+    if (!this.paused) this.timerId = setTimeout(() => this.next(), this.remaining);
   }
 
-  private clearTimer() {
-    if (this.timerId) {
-      clearTimeout(this.timerId);
-      this.timerId = null;
-    }
-  }
+  private clearTimer(){ if (this.timerId){ clearTimeout(this.timerId); this.timerId = null; } }
+  private setBarPlayState(state:'running'|'paused'){ const el = this.barRef?.nativeElement; if (el) el.style.animationPlayState = state; }
 
-  private setBarPlayState(state: 'running' | 'paused') {
-    const el = this.barRef?.nativeElement;
-    if (el) el.style.animationPlayState = state;
-  }
-
-  /* ---------- helpers ---------- */
+  /* ---------- مساعدات ---------- */
   private computeTags(i: number): void {
+    // يحوّل مفاتيح الشارات إلى نصوص مترجمة
     const tk = this.slides[i].tagsKeys;
     if (Array.isArray(tk)) {
       this.tags = tk.map(k => this.i18n.instant(k));
@@ -211,6 +154,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
+  /** مسارات الأيقونات للسلايدر (SVG) */
   iconPath(name: Slide['icon']): string {
     switch (name) {
       case 'globe':  return 'M12 2a10 10 0 100 20 10 10 0 000-20zm0 18c2.5-2 4-5.5 4-8s-1.5-6-4-8c-2.5 2-4 5.5-4 8s1.5 6 4 8zm-8-8h16m-8-8v16';
@@ -226,23 +170,22 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  /* ---------------- Google Drive helpers + data ---------------- */
-// صورة بديلة عند فشل تحميل أي صورة
-placeholderImg = 'assets/placeholder.jpg';
+  /* --------- Google Drive + التعامل مع فشل الصور --------- */
 
-/** يُستدعى من القالب عند فشل تحميل الصورة */
-onImgError(ev: Event): void {
-  const img = ev.target as HTMLImageElement | null;
-  if (!img) return;
+  // صورة بديلة عند فشل تحميل أي صورة
+  placeholderImg = 'assets/placeholder.jpg';
 
-  // امنع حلقة لا نهائية لو فشلت الـ placeholder أيضًا
-  if ((img as any).dataset && (img as any).dataset.fallback === '1') return;
-  if ((img as any).dataset) (img as any).dataset.fallback = '1';
+  /** يُستدعى من القالب عند فشل تحميل الصورة */
+  onImgError(ev: Event): void {
+    const img = ev.target as HTMLImageElement | null;
+    if (!img) return;
 
-  img.src = this.placeholderImg;
-}
+    // منع حلقة لا نهائية لو فشلت الـ placeholder أيضًا
+    if ((img as any).dataset && (img as any).dataset.fallback === '1') return;
+    if ((img as any).dataset) (img as any).dataset.fallback = '1';
 
-
+    img.src = this.placeholderImg;
+  }
 
   /** يستخرج الـ ID من أي رابط Google Drive */
   private gId(url: string): string {
@@ -256,56 +199,39 @@ onImgError(ev: Event): void {
     return `https://drive.google.com/thumbnail?id=${id}&sz=w${width}`;
   }
 
-  /** بديل (uc) إن احتجته لبعض الملفات */
+  /** بديل (uc) لبعض الملفات عند الحاجة */
   private gPreview(urlOrId: string): string {
     const id = /^(http|https):\/\//.test(urlOrId) ? this.gId(urlOrId) : urlOrId;
     return `https://drive.google.com/uc?export=view&id=${id}`;
   }
 
-  /** Placeholder محلي عند فشل التحميل */
+  /** التقرير المميّز – بيانات محتوى */
+  /** التقرير المميّز (مفاتيح ضمن home) */
+featuredReport = {
+  slug: 'mali-fuel-terror-smuggling',
+  titleKey: 'home.featured.title',
+  excerptKey: 'home.featured.excerpt',
+  img: this.gThumb('https://drive.google.com/file/d/1XXTW0v2-YQuNuqGY9cxBnuUSxxY0uE67/view?usp=drive_link', 1600),
+  localLink: '/reports'
+};
 
-  /** التقرير المميّز */
-  featuredReport = {
-    slug: 'mali-fuel-terror-smuggling',
-    title: 'مالي: تقاطع التهريب والإرهاب والجريمة العابرة للحدود',
-    excerpt:
-      'تعاني مالي من أزمة وقود حادة تتظافر مع أزمات أمنية وسياسية ومالية. فقدت الحكومة السيطرة على مناطق شمالية، ' +
-      'وتتقاطع هناك شبكات التهريب والإرهاب والجريمة المنظمة مع تراجع سلطة الدولة وتداخل أزمات إقليمية ودولية.',
-    img: this.gThumb('https://drive.google.com/file/d/1XXTW0v2-YQuNuqGY9cxBnuUSxxY0uE67/view?usp=drive_link', 1600),
-    localLink: '/reports'
-  };
+/** بطاقات التقارير (مفاتيح ضمن home.cards) */
+reportCards = [
+  { slug: 'haftar-empire',      titleKey: 'home.cards.haftar.title',
+    img: this.gThumb('https://drive.google.com/file/d/1kH_ssE4l2fiUG9ewiMs4ExQV0oRHHwSj/view?usp=drive_link', 1200),
+    localLink: '/reports' },
+  { slug: 'morocco-crises',     titleKey: 'home.cards.morocco.title',
+    img: this.gThumb('https://drive.google.com/file/d/1m07pTIvBIgZahG2NIVt68R_vLlTeWOnP/view?usp=drive_link', 1200),
+    localLink: '/reports' },
+  { slug: 'europe-russian-gas', titleKey: 'home.cards.europe_gas.title',
+    img: this.gThumb('https://drive.google.com/file/d/19NoCh9RTdEtu3zNDjs_E8NmI4BCf1WKZ/view?usp=drive_link', 1200),
+    localLink: '/reports' },
+  { slug: 'human-smuggling',    titleKey: 'home.cards.human_smuggling.title',
+    img: this.gThumb('https://drive.google.com/file/d/1U54cX42cnNOguHTyJRj-AKF_07iAblru/view?usp=drive_link', 1200),
+    localLink: '/reports' },
+  { slug: 'sudan-rsf-support',  titleKey: 'home.cards.sudan_rsf.title',
+    img: this.gThumb('https://drive.google.com/file/d/1S5dgT_C_ZWcG31kVrQDQYeC9Sh5ohOmo/view?usp=drive_link', 1200),
+    localLink: '/reports' }
+];
 
-  /** بطاقات تقارير */
-  reportCards = [
-    {
-      slug: 'haftar-empire',
-      title: 'حفتر: إمبراطورية المال والسلطة والفساد',
-      img: this.gThumb('https://drive.google.com/file/d/1kH_ssE4l2fiUG9ewiMs4ExQV0oRHHwSj/view?usp=drive_link', 1200),
-      localLink: '/reports'
-    },
-    {
-      slug: 'morocco-crises',
-      title: 'المغرب: أزمات متراكمة وفساد ينخر جهود الإصلاح',
-      img: this.gThumb('https://drive.google.com/file/d/1m07pTIvBIgZahG2NIVt68R_vLlTeWOnP/view?usp=drive_link', 1200),
-      localLink: '/reports'
-    },
-    {
-      slug: 'europe-russian-gas',
-      title: 'أوروبا: هل تفطم نفسها عن الغاز الروسي؟',
-      img: this.gThumb('https://drive.google.com/file/d/19NoCh9RTdEtu3zNDjs_E8NmI4BCf1WKZ/view?usp=drive_link', 1200),
-      localLink: '/reports'
-    },
-    {
-      slug: 'human-smuggling',
-      title: 'تهريب البشر: الشبكات والأبعاد السياسية',
-      img: this.gThumb('https://drive.google.com/file/d/1U54cX42cnNOguHTyJRj-AKF_07iAblru/view?usp=drive_link', 1200),
-      localLink: '/reports'
-    },
-    {
-      slug: 'sudan-rsf-support',
-      title: 'الدعم السريع في السودان: خطوط الدعم والإسناد',
-      img: this.gThumb('https://drive.google.com/file/d/1S5dgT_C_ZWcG31kVrQDQYeC9Sh5ohOmo/view?usp=drive_link', 1200),
-      localLink: '/reports'
-    }
-  ];
 }

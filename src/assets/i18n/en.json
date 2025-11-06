@@ -24,14 +24,36 @@
     "contact": "Contact Us"
   },
 
+
+
+
+
   "hero": {
     "home_title": "International Commission Against Corruption and Organised Crime",
     "home_sub": "Welcome to the official website – a non-governmental, non-profit body based in Geneva, Switzerland."
   },
 
   "home": {
-    "welcome": "Welcome to the official website of the International Commission Against Corruption and Organised Crime. We are an independent, non-profit organization headquartered in Geneva, Switzerland."
+  "welcome": "Welcome to the official website of the International Commission Against Corruption and Organised Crime. We are an independent, non-profit organization headquartered in Geneva, Switzerland.",
+  "more_details": "More details",
+  "prev": "Previous",
+  "next": "Next",
+  "goto_slide": "Go to slide {{num}}",
+
+  "featured": {
+    "title": "Mali: The Intersection of Smuggling, Terrorism and Transnational Crime",
+    "excerpt": "Mali is experiencing a severe fuel crisis compounded by security, political and financial turmoil. The government has lost control over northern areas, where smuggling networks intersect with terrorism and organized crime amid weakening state authority and overlapping regional and international crises."
   },
+
+  "cards": {
+    "haftar": { "title": "Haftar: An Empire of Money, Power and Corruption" },
+    "morocco": { "title": "Morocco: Accumulating Crises and Corruption Undermining Reform Efforts" },
+    "europe_gas": { "title": "Europe: Can It Wean Itself Off Russian Gas?" },
+    "human_smuggling": { "title": "Human Smuggling: Networks and Political Dimensions" },
+    "sudan_rsf": { "title": "RSF in Sudan: Lines of Support and Backing" }
+  }
+},
+
 
   "about": {
     "title": "About the Commission",
