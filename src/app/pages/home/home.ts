@@ -10,13 +10,13 @@ import { Subscription } from 'rxjs';
 /** تعريف بنية الشريحة في السلايدر */
 type Slide = {
   icon: 'globe' | 'users' | 'target' | 'file' | 'news' | 'image' | 'link' | 'bulb' | 'mail';
-  bg: string;             // رابط خلفية الشريحة
-  titleKey: string;       // مفتاح الترجمة لعنوان الشريحة
-  subtitleKey: string;    // مفتاح الترجمة للوصف
-  tagsKeys: string | string[]; // مفاتيح الترجمة للشارات الصغيرة تحت العنوان
-  gradient: string;       // كلاس التدرّج اللوني أعلى الخلفية
-  route: string;          // الرابط الذي تذهب إليه الشريحة
-  ctaKey?: string;        // مفتاح نص زر النداء
+  bg: string;
+  titleKey: string;
+  subtitleKey: string;
+  tagsKeys: string | string[];
+  gradient: string;
+  route: string;
+  ctaKey?: string;
 };
 
 @Component({
@@ -170,20 +170,15 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  /* --------- Google Drive + التعامل مع فشل الصور --------- */
-
+  /* --------- صور + Google Drive --------- */
   // صورة بديلة عند فشل تحميل أي صورة
   placeholderImg = 'assets/placeholder.jpg';
 
-  /** يُستدعى من القالب عند فشل تحميل الصورة */
   onImgError(ev: Event): void {
     const img = ev.target as HTMLImageElement | null;
     if (!img) return;
-
-    // منع حلقة لا نهائية لو فشلت الـ placeholder أيضًا
-    if ((img as any).dataset && (img as any).dataset.fallback === '1') return;
-    if ((img as any).dataset) (img as any).dataset.fallback = '1';
-
+    if ((img as any).dataset?.fallback === '1') return;
+    (img as any).dataset = { ...(img as any).dataset, fallback: '1' };
     img.src = this.placeholderImg;
   }
 
@@ -194,44 +189,57 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   /** رابط صورة مصغّرة سريع من Google Drive */
-  private gThumb(urlOrId: string, width = 1200): string {
+  private gThumb(urlOrId: string, width = 1600): string {
     const id = /^(http|https):\/\//.test(urlOrId) ? this.gId(urlOrId) : urlOrId;
     return `https://drive.google.com/thumbnail?id=${id}&sz=w${width}`;
   }
 
-  /** بديل (uc) لبعض الملفات عند الحاجة */
-  private gPreview(urlOrId: string): string {
-    const id = /^(http|https):\/\//.test(urlOrId) ? this.gId(urlOrId) : urlOrId;
-    return `https://drive.google.com/uc?export=view&id=${id}`;
-  }
+  /* --------- البيانات (مفاتيح الترجمة) --------- */
+  // ملاحظة: العنوان والملخص للتقرير المميز تحت home.featured.*
+  featuredReport = {
+    slug: 'mali-fuel-terror-smuggling',
+    titleKey: 'home.featured.title',
+    excerptKey: 'home.featured.excerpt',
+    img: this.gThumb('https://drive.google.com/file/d/1XXTW0v2-YQuNuqGY9cxBnuUSxxY0uE67/view?usp=drive_link', 1600),
+    localLink: '/reports'
+  };
 
-  /** التقرير المميّز – بيانات محتوى */
-  /** التقرير المميّز (مفاتيح ضمن home) */
-featuredReport = {
-  slug: 'mali-fuel-terror-smuggling',
-  titleKey: 'home.featured.title',
-  excerptKey: 'home.featured.excerpt',
-  img: this.gThumb('https://drive.google.com/file/d/1XXTW0v2-YQuNuqGY9cxBnuUSxxY0uE67/view?usp=drive_link', 1600),
-  localLink: '/reports'
-};
-
-/** بطاقات التقارير (مفاتيح ضمن home.cards) */
-reportCards = [
-  { slug: 'haftar-empire',      titleKey: 'home.cards.haftar.title',
-    img: this.gThumb('https://drive.google.com/file/d/1kH_ssE4l2fiUG9ewiMs4ExQV0oRHHwSj/view?usp=drive_link', 1200),
-    localLink: '/reports' },
-  { slug: 'morocco-crises',     titleKey: 'home.cards.morocco.title',
-    img: this.gThumb('https://drive.google.com/file/d/1m07pTIvBIgZahG2NIVt68R_vLlTeWOnP/view?usp=drive_link', 1200),
-    localLink: '/reports' },
-  { slug: 'europe-russian-gas', titleKey: 'home.cards.europe_gas.title',
-    img: this.gThumb('https://drive.google.com/file/d/19NoCh9RTdEtu3zNDjs_E8NmI4BCf1WKZ/view?usp=drive_link', 1200),
-    localLink: '/reports' },
-  { slug: 'human-smuggling',    titleKey: 'home.cards.human_smuggling.title',
-    img: this.gThumb('https://drive.google.com/file/d/1U54cX42cnNOguHTyJRj-AKF_07iAblru/view?usp=drive_link', 1200),
-    localLink: '/reports' },
-  { slug: 'sudan-rsf-support',  titleKey: 'home.cards.sudan_rsf.title',
-    img: this.gThumb('https://drive.google.com/file/d/1S5dgT_C_ZWcG31kVrQDQYeC9Sh5ohOmo/view?usp=drive_link', 1200),
-    localLink: '/reports' }
-];
-
+  // ملاحظة: لكل بطاقة: titleKey + excerptKey يجب إضافتهم في ملفات الترجمة
+  reportCards = [
+    {
+      slug: 'europe-russian-gas',
+      titleKey: 'home.cards.europe_gas.title',
+      excerptKey: 'home.cards.europe_gas.excerpt',
+      img: this.gThumb('https://drive.google.com/file/d/19NoCh9RTdEtu3zNDjs_E8NmI4BCf1WKZ/view?usp=drive_link', 1600),
+      localLink: '/reports'
+    },
+    {
+      slug: 'morocco-crises',
+      titleKey: 'home.cards.morocco.title',
+      excerptKey: 'home.cards.morocco.excerpt',
+      img: this.gThumb('https://drive.google.com/file/d/1m07pTIvBIgZahG2NIVt68R_vLlTeWOnP/view?usp=drive_link', 1600),
+      localLink: '/reports'
+    },
+    {
+      slug: 'haftar-empire',
+      titleKey: 'home.cards.haftar.title',
+      excerptKey: 'home.cards.haftar.excerpt',
+      img: this.gThumb('https://drive.google.com/file/d/1kH_ssE4l2fiUG9ewiMs4ExQV0oRHHwSj/view?usp=drive_link', 1600),
+      localLink: '/reports'
+    },
+    {
+      slug: 'human-smuggling',
+      titleKey: 'home.cards.human_smuggling.title',
+      excerptKey: 'home.cards.human_smuggling.excerpt',
+      img: this.gThumb('https://drive.google.com/file/d/1U54cX42cnNOguHTyJRj-AKF_07iAblru/view?usp=drive_link', 1600),
+      localLink: '/reports'
+    },
+    {
+      slug: 'sudan-rsf-support',
+      titleKey: 'home.cards.sudan_rsf.title',
+      excerptKey: 'home.cards.sudan_rsf.excerpt',
+      img: this.gThumb('https://drive.google.com/file/d/1S5dgT_C_ZWcG31kVrQDQYeC9Sh5ohOmo/view?usp=drive_link', 1600),
+      localLink: '/reports'
+    }
+  ];
 }

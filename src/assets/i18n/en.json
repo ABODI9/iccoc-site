@@ -34,25 +34,38 @@
   },
 
   "home": {
-  "welcome": "Welcome to the official website of the International Commission Against Corruption and Organised Crime. We are an independent, non-profit organization headquartered in Geneva, Switzerland.",
-  "more_details": "More details",
-  "prev": "Previous",
-  "next": "Next",
-  "goto_slide": "Go to slide {{num}}",
-
-  "featured": {
-    "title": "Mali: The Intersection of Smuggling, Terrorism and Transnational Crime",
-    "excerpt": "Mali is experiencing a severe fuel crisis compounded by security, political and financial turmoil. The government has lost control over northern areas, where smuggling networks intersect with terrorism and organized crime amid weakening state authority and overlapping regional and international crises."
-  },
-
-  "cards": {
-    "haftar": { "title": "Haftar: An Empire of Money, Power and Corruption" },
-    "morocco": { "title": "Morocco: Accumulating Crises and Corruption Undermining Reform Efforts" },
-    "europe_gas": { "title": "Europe: Can It Wean Itself Off Russian Gas?" },
-    "human_smuggling": { "title": "Human Smuggling: Networks and Political Dimensions" },
-    "sudan_rsf": { "title": "RSF in Sudan: Lines of Support and Backing" }
-  }
-},
+      "welcome": "Welcome to the official website of the International Authority for Combating Corruption and Organized Crime, a non-governmental, non-profit organization headquartered in Geneva, Switzerland.",
+      "more_details": "More details",
+      "prev": "Previous",
+      "next": "Next",
+      "goto_slide": "Go to slide {{num}}",
+      "featured": {
+        "title": "Mali: The crossroads of smuggling, terrorism, and transnational crime",
+        "excerpt": "Mali is suffering from a severe fuel crisis, compounded by other accumulated crises including security, political, and financial instability. International experts estimate that the current regime could collapse within a short time. The government's loss of control in the north, the rise of armed groups, and regional entanglements have turned Mali into a hotspot where terrorism, smuggling, and organized crime intersect."
+      },
+      "cards": {
+        "europe_gas": {
+          "title": "Europe: Can it wean itself off Russian gas?",
+          "excerpt": "Since the start of the Russian war on Ukraine, Europe has been striving to reduce its dependence on Russian gas. However, the lack of viable alternatives and the reliance of several Eastern European countries make this mission extremely difficult."
+        },
+        "morocco": {
+          "title": "Morocco: Accumulated crises and corruption undermine reform",
+          "excerpt": "Moroccan Prime Minister and businessman Aziz Akhannouch came to power with promises of reform and anti-corruption, but little has been achieved. Corruption, unemployment, and mismanagement persist, threatening social stability."
+        },
+        "haftar": {
+          "title": "Haftar: An empire of money, power, and corruption",
+          "excerpt": "Since seizing control of eastern Libya, Khalifa Haftar has built vast wealth through legal and illegal means, consolidating power with his family and expanding influence across Libya and neighboring states."
+        },
+        "human_smuggling": {
+          "title": "Human smuggling: Networks and political dimensions",
+          "excerpt": "Human smuggling intertwines with organized crime, terrorism, drug and arms trafficking, and political corruption, making it one of the toughest challenges for global policymakers."
+        },
+        "sudan_rsf": {
+          "title": "Sudan’s Rapid Support Forces: Lines of support and supply",
+          "excerpt": "Since clashing with the Sudanese army, the Rapid Support Forces have committed numerous atrocities, revealing the involvement of regional and international networks backing their operations."
+        }
+      }
+    },
 
 
   "about": {
