@@ -27,8 +27,7 @@
             "assets": [
               { "glob": "favicon.ico", "input": "src", "output": "/" },
               { "glob": "**/*", "input": "src/assets", "output": "assets" },
-              { "glob": "**/*", "input": "public", "output": "/" },
-              { "glob": "CNAME", "input": "src", "output": "/" }
+              { "glob": "**/*", "input": "public", "output": "/" }
             ],
 
             "styles": [
