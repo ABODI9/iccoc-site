@@ -23,11 +23,13 @@
             ],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-           "assets": [
-  { "glob": "favicon.ico", "input": "src", "output": "/" },
-  { "glob": "**/*", "input": "src/assets", "output": "assets" },
-  { "glob": "**/*", "input": "public", "output": "/" }
-],
+
+            "assets": [
+              { "glob": "favicon.ico", "input": "src", "output": "/" },
+              { "glob": "**/*", "input": "src/assets", "output": "assets" },
+              { "glob": "**/*", "input": "public", "output": "/" },
+              { "glob": "CNAME", "input": "src", "output": "/" }
+            ],
 
             "styles": [
               "src/styles.scss"
@@ -57,6 +59,7 @@
           },
           "defaultConfiguration": "production"
         },
+
         "serve": {
           "builder": "@angular/build:dev-server",
           "configurations": {
@@ -69,9 +72,11 @@
           },
           "defaultConfiguration": "development"
         },
+
         "extract-i18n": {
           "builder": "@angular/build:extract-i18n"
         },
+
         "test": {
           "builder": "@angular/build:karma",
           "options": {
@@ -81,12 +86,13 @@
             ],
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
-"assets": [
-  { "glob": "favicon.ico", "input": "src", "output": "/" },
-  { "glob": "**/*", "input": "src/assets", "output": "assets" },
-  { "glob": "**/*", "input": "public", "output": "/" }
 
+            "assets": [
+              { "glob": "favicon.ico", "input": "src", "output": "/" },
+              { "glob": "**/*", "input": "src/assets", "output": "assets" },
+              { "glob": "**/*", "input": "public", "output": "/" }
             ],
+
             "styles": [
               "src/styles.scss"
             ]
