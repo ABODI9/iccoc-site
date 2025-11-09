@@ -1,4 +1,5 @@
 // src/app/pages/media/media.page.ts
+/* (نسخة كاملة كما أرسلتها سابقًا) */
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { RouterModule, ActivatedRoute, Router } from '@angular/router';
@@ -190,9 +191,8 @@ export class Media implements OnInit, OnDestroy {
   }
 
   openExternal(a: Article) {
-  const lang = this.currentLang.split('-')[0]; // ar / en / fr / zh
-  const url = `/assets/external/${lang}/${a.slug}.html`;
-  window.open(url, "_blank");
-}
-
+    const lang = this.currentLang.split('-')[0];
+    const url = `/assets/external/${lang}/${a.slug}.html`;
+    window.open(url, "_blank");
+  }
 }

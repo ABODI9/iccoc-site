@@ -36,9 +36,6 @@
               <a class="btn" href="#" (click)="openExternal(a); $event.preventDefault()">
                 {{ 'media.read_more' | translate }}
               </a>
-
-              <!-- بديل: رابط لتقارير داخلية (إن أردت استخدامه أزل التعليق) -->
-              <!-- <a class="btn" [routerLink]="['/reports']">{{ 'media.read_more' | translate }}</a> -->
             </div>
           </div>
         </div>
@@ -68,13 +65,9 @@
               <p class="excerpt">{{ (a.bodyKey ? (a.bodyKey | translate) : '') | slice:0:160 }}...</p>
 
               <div class="actions">
-                <!-- دائماً نفتح الصفحة الخارجية اللغوية المولدة -->
                 <a class="btn primary" href="#" (click)="openExternal(a); $event.preventDefault()">
                   {{ 'media.read_more' | translate }}
                 </a>
-
-                <!-- بديل داخلي: افتح صفحة المقال داخل التطبيق -->
-                
 
                 <button class="btn" (click)="goSubscribe()">{{ 'media.subscribe' | translate }}</button>
               </div>

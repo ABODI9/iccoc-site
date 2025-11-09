@@ -1,6 +1,4 @@
-<!-- home.html -->
-<!-- الصفحة الرئيسية: قالب كامل مع سلايدر + تقرير مميّز + قائمة بطاقات تقارير + CTA -->
-<!-- ملاحظة: نستخدم attr.dir على section ليتغير الاتجاه تلقائياً مع اللغة -->
+<!-- src/app/pages/home/home.html -->
 <section class="section" [attr.dir]="currentDir">
   <div class="container">
 
@@ -49,61 +47,73 @@
     </div>
 
     <!-- ===================== التقرير المميّز (ثابت في الأعلى) ===================== -->
-   <!-- ===================== التقرير المميّز (يتغير مع اللغة الآن) ===================== -->
-<div class="featured-report mt-24"
-     *ngIf="featuredReport"
-     [attr.aria-label]="(featuredReport.titleKey | translate)"
-     [class.lang-rtl]="currentDir === 'rtl'"
-     [class.lang-ltr]="currentDir === 'ltr'">
+    <div class="featured-report mt-24"
+         *ngIf="featuredReport"
+         [attr.aria-label]="(featuredReport.titleKey | translate)"
+         [class.lang-rtl]="currentDir === 'rtl'"
+         [class.lang-ltr]="currentDir === 'ltr'">
 
-  <div class="thumb">
-    <img [src]="featuredReport.img" [alt]="(featuredReport.titleKey | translate)"
-         loading="lazy" (error)="onImgError($event)" />
-  </div>
+      <div class="thumb">
+        <img [src]="featuredReport.img" [alt]="(featuredReport.titleKey | translate)"
+             loading="lazy" (error)="onImgError($event)" />
+      </div>
 
-  <div class="body">
-    <h3 class="title">{{ featuredReport.titleKey | translate }}</h3>
-    <p class="excerpt">{{ featuredReport.excerptKey | translate }}</p>
+      <div class="body">
+        <h3 class="title">{{ featuredReport.titleKey | translate }}</h3>
+        <p class="excerpt">{{ featuredReport.excerptKey | translate }}</p>
 
-    <div class="actions">
-      <a class="btn primary" [routerLink]="featuredReport.localLink"
-         [queryParams]="{ r: featuredReport.slug }">
-        {{ 'home.more_details' | translate }}
-      </a>
+        <div class="actions">
+          <!-- زر التفاصيل: يوجّه إلى /media/:slug داخل التطبيق -->
+          <a class="btn" href="https://iccoc.eu/media" target="_blank" rel="noopener noreferrer">
+            {{ 'home.more_details' | translate }}
+          </a>
+
+          <!-- زر الاشتراك -->
+          <a class="btn" [routerLink]="['/reports']">
+            {{ 'home.subscribe' | translate }}
+          </a>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
 
     <!-- ===================== قائمة البطاقات (كلها بمظهر مميّز) ===================== -->
     <div class="reports-list mt-16">
-     <!-- لكل بطاقة نحدّد كلاس لغوي ديناميكي -->
-<a class="report-card"
-   *ngFor="let r of reportCards; let i = index"
-   [routerLink]="r.localLink || '/reports'"
-   [queryParams]="r.slug ? { r: r.slug } : null"
-   [attr.aria-label]="(r.titleKey | translate)"
-   [class.lang-rtl]="currentDir === 'rtl'"
-   [class.lang-ltr]="currentDir === 'ltr'">
-  <div class="thumb">
-    <img [src]="r.img" [alt]="(r.titleKey | translate)" loading="lazy" (error)="onImgError($event)" />
-  </div>
+      <article class="report-card"
+               *ngFor="let r of reportCards; let i = index"
+               [attr.aria-label]="(r.titleKey | translate)"
+               [class.lang-rtl]="currentDir === 'rtl'"
+               [class.lang-ltr]="currentDir === 'ltr'"
+               role="link"
+               tabindex="0"
+               (click)="navigateToReport(r.slug)"
+               (keydown.enter)="navigateToReport(r.slug)">
 
-  <div class="body">
-    <h3 class="title">{{ r.titleKey | translate }}</h3>
-    <p class="excerpt">{{ r.excerptKey | translate }}</p>
+        <div class="thumb">
+          <img [src]="r.img" [alt]="(r.titleKey | translate)" loading="lazy" (error)="onImgError($event)" />
+        </div>
 
-    <div class="actions">
-      <span class="spacer"></span>
-      <a class="btn primary" [routerLink]="r.localLink || '/reports'" [queryParams]="r.slug ? { r: r.slug } : null">
-        {{ 'home.more_details' | translate }}
-      </a>
+        <div class="body">
+          <h3 class="title">{{ r.titleKey | translate }}</h3>
+          <p class="excerpt">{{ r.excerptKey | translate }}</p>
+
+          <div class="actions">
+            <span class="spacer"></span>
+
+            <!-- زر التفاصيل يذهب إلى /media/:slug -->
+            <a class="btn" href="https://iccoc.eu/media" target="_blank" rel="noopener noreferrer">
+              {{ 'home.more_details' | translate }}
+            </a>
+
+            <!-- زر الاشتراك يذهب لصفحة التقارير -->
+            <a class="btn" [routerLink]="['/reports']">
+              {{ 'home.subscribe' | translate }}
+            </a>
+          </div>
+        </div>
+      </article>
     </div>
-  </div>
-</a>
 
-    </div>
-
-    <!-- ===================== CTA grid (كما كان) ===================== -->
+    <!-- ===================== CTA grid ===================== -->
     <div class="cta-grid mt-16">
       <div class="cta cta-blue">
         <div class="cta-icon">💡</div>

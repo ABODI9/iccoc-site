@@ -1,19 +1,14 @@
-/* home.component.ts */
+// src/app/pages/home/home.component.ts
 import {
   Component, OnInit, OnDestroy, AfterViewInit,
   ElementRef, ViewChild
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
-/**
- * ملاحظة: هذا مكوّن مستقل (standalone). إذا مشروعك لا يستعمل standalone components
- * قم بتعديل @Component.imports أو تسجيله في module المناسب.
- */
-
-/** تعريف بنية كل شريحة في السلايدر */
+/** بنية الشريحة */
 type Slide = {
   icon: 'globe' | 'users' | 'target' | 'file' | 'news' | 'image' | 'link' | 'bulb' | 'mail';
   bg: string;
@@ -35,21 +30,20 @@ type Slide = {
 export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('bar') barRef!: ElementRef<HTMLDivElement>;
 
-  /* ---------- إعداد السلايدر ---------- */
-  readonly durationMs = 3000; // مدة الشريحة بالـ ms
+  /* slider timing */
+  readonly durationMs = 3000;
   index = 0;
   paused = false;
   private timerId: any = null;
   private startedAt = 0;
   private remaining = this.durationMs;
 
-  /* ---------- ترجمة + اتجاه ---------- */
-  tags: string[] = [];               // شارات الشريحة الحالية (مترجمة)
-  currentLang = 'en';                // لغة حالية (مثلاً 'ar' أو 'en')
-  currentDir: 'ltr' | 'rtl' = 'ltr'; // اتجاه الصفحة بناءً على اللغة
+  /* i18n + direction */
+  tags: string[] = [];
+  currentLang = 'en';
+  currentDir: 'ltr' | 'rtl' = 'ltr';
   private langSub?: Subscription;
 
-  /* ---------- بيانات الشرائح (السلايدر) ---------- */
   slides: Slide[] = [
     { icon:'globe', bg:'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=1800&auto=format&fit=crop',
       titleKey:'hero.home_title', subtitleKey:'hero.home_sub',
@@ -79,9 +73,9 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
       gradient:'grad-blue-1', route:'/contact', ctaKey:'contact.title' },
   ];
 
-  /* ---------- التقرير المميّز (معاد) + بطاقات التقارير ---------- */
+  /* featured + cards — تأكد أن هذه القيم تتطابق مع slugs في media.page.ts */
   featuredReport = {
-    slug: 'mali-fuel-terror-smuggling',
+    slug: 'mali',
     titleKey: 'home.featured.title',
     excerptKey: 'home.featured.excerpt',
     img: this.gThumb('https://drive.google.com/file/d/1XXTW0v2-YQuNuqGY9cxBnuUSxxY0uE67/view?usp=drive_link', 1600),
@@ -89,67 +83,26 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   };
 
   reportCards = [
-    {
-      slug: 'europe-russian-gas',
-      titleKey: 'home.cards.europe_gas.title',
-      excerptKey: 'home.cards.europe_gas.excerpt',
-      img: this.gThumb('https://drive.google.com/file/d/19NoCh9RTdEtu3zNDjs_E8NmI4BCf1WKZ/view?usp=drive_link', 1600),
-      localLink: '/reports'
-    },
-    {
-      slug: 'morocco-crises',
-      titleKey: 'home.cards.morocco.title',
-      excerptKey: 'home.cards.morocco.excerpt',
-      img: this.gThumb('https://drive.google.com/file/d/1m07pTIvBIgZahG2NIVt68R_vLlTeWOnP/view?usp=drive_link', 1600),
-      localLink: '/reports'
-    },
-    {
-      slug: 'haftar-empire',
-      titleKey: 'home.cards.haftar.title',
-      excerptKey: 'home.cards.haftar.excerpt',
-      img: this.gThumb('https://drive.google.com/file/d/1kH_ssE4l2fiUG9ewiMs4ExQV0oRHHwSj/view?usp=drive_link', 1600),
-      localLink: '/reports'
-    },
-    {
-      slug: 'human-smuggling',
-      titleKey: 'home.cards.human_smuggling.title',
-      excerptKey: 'home.cards.human_smuggling.excerpt',
-      img: this.gThumb('https://drive.google.com/file/d/1U54cX42cnNOguHTyJRj-AKF_07iAblru/view?usp=drive_link', 1600),
-      localLink: '/reports'
-    },
-    {
-      slug: 'sudan-rsf-support',
-      titleKey: 'home.cards.sudan_rsf.title',
-      excerptKey: 'home.cards.sudan_rsf.excerpt',
-      img: this.gThumb('https://drive.google.com/file/d/1S5dgT_C_ZWcG31kVrQDQYeC9Sh5ohOmo/view?usp=drive_link', 1600),
-      localLink: '/reports'
-    }
+    { slug: 'europe', titleKey: 'home.cards.europe_gas.title', excerptKey: 'home.cards.europe_gas.excerpt', img: this.gThumb('https://drive.google.com/file/d/19NoCh9RTdEtu3zNDjs_E8NmI4BCf1WKZ/view?usp=drive_link', 1600), localLink: '/reports' },
+    { slug: 'morocco', titleKey: 'home.cards.morocco.title', excerptKey: 'home.cards.morocco.excerpt', img: this.gThumb('https://drive.google.com/file/d/1m07pTIvBIgZahG2NIVt68R_vLlTeWOnP/view?usp=drive_link', 1600), localLink: '/reports' },
+    { slug: 'haftar', titleKey: 'home.cards.haftar.title', excerptKey: 'home.cards.haftar.excerpt', img: this.gThumb('https://drive.google.com/file/d/1kH_ssE4l2fiUG9ewiMs4ExQV0oRHHwSj/view?usp=drive_link', 1600), localLink: '/reports' },
+    { slug: 'smuggling', titleKey: 'home.cards.human_smuggling.title', excerptKey: 'home.cards.human_smuggling.excerpt', img: this.gThumb('https://drive.google.com/file/d/1U54cX42cnNOguHTyJRj-AKF_07iAblru/view?usp=drive_link', 1600), localLink: '/reports' },
+    { slug: 'sudan', titleKey: 'home.cards.sudan_rsf.title', excerptKey: 'home.cards.sudan_rsf.excerpt', img: this.gThumb('https://drive.google.com/file/d/1S5dgT_C_ZWcG31kVrQDQYeC9Sh5ohOmo/view?usp=drive_link', 1600), localLink: '/reports' }
   ];
 
-  /* ---------- مساعدة البناء ---------- */
-  placeholderImg = 'assets/placeholder.jpg'; // غيّره إذا لزم
+  placeholderImg = 'assets/placeholder.jpg';
 
-  constructor(private i18n: TranslateService) {}
+  constructor(private i18n: TranslateService, private router: Router) {}
 
   ngOnInit(): void {
-    // ضبط اللغة/الاتجاه الافتراضي من ngx-translate
     this.currentLang = this.i18n.currentLang || this.i18n.getDefaultLang?.() || 'en';
     this.currentDir = this.isRtlLang(this.currentLang) ? 'rtl' : 'ltr';
-
-    // ترجمة الشارات للشريحة الحالية
     this.computeTags(this.index);
-
-    // الاشتراك لتحديث الواجهة عند تغيير اللغة
     this.langSub = this.i18n.onLangChange.subscribe(ev => {
       const lang = (ev as any)?.lang || this.i18n.currentLang || 'en';
       this.currentLang = lang;
       this.currentDir = this.isRtlLang(lang) ? 'rtl' : 'ltr';
-
-      // إعادة حساب الشارات (وليس ضروريًا إعادة تحميل الشرائح)
       this.computeTags(this.index);
-
-      // ملاحظة: إذا أردت تغيير dir على مستوى المستند بأكمله:
-      // document.documentElement.dir = this.currentDir;
     });
   }
 
@@ -160,7 +113,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     this.langSub?.unsubscribe();
   }
 
-  /* ---------- سلايدر: التنقّل + التوقيت ---------- */
+  /* ---------- slider navigation ---------- */
   next(): void { this.go(this.index + 1); }
   prev(): void { this.go(this.index - 1); }
 
@@ -209,18 +162,18 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   private clearTimer(){ if (this.timerId){ clearTimeout(this.timerId); this.timerId = null; } }
   private setBarPlayState(state:'running'|'paused'){ const el = this.barRef?.nativeElement; if (el) el.style.animationPlayState = state; }
 
-  /* ---------- ترجمة الشارات للشريحة الحالية ---------- */
+  /* ---------- tags translation ---------- */
   private computeTags(i: number): void {
     const tk = this.slides[i].tagsKeys;
     if (Array.isArray(tk)) {
       this.tags = tk.map(k => this.i18n.instant(k));
     } else {
-      const v = this.i18n.instant(tk);
+      const v = this.i18n.instant(tk as string);
       this.tags = Array.isArray(v) ? v : [v];
     }
   }
 
-  /* ---------- SVG Icons helper ---------- */
+  /* ---------- svg icons helper (هنا دالة iconPath) ---------- */
   iconPath(name: Slide['icon']): string {
     switch (name) {
       case 'globe':  return 'M12 2a10 10 0 100 20 10 10 0 000-20zm0 18c2.5-2 4-5.5 4-8s-1.5-6-4-8c-2.5 2-4 5.5-4 8s1.5 6 4 8zm-8-8h16m-8-8v16';
@@ -236,7 +189,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  /* ---------- صور: placeholder + Google Drive helpers ---------- */
+  /* ---------- helper images + google drive helper ---------- */
   onImgError(ev: Event): void {
     const img = ev.target as HTMLImageElement | null;
     if (!img) return;
@@ -245,22 +198,25 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     img.src = this.placeholderImg;
   }
 
-  // استخراج id من روابط Google Drive الشائعة
   private gId(url: string): string {
     const m = url.match(/\/d\/([^/]+)\//) || url.match(/[?&]id=([^&]+)/);
     return m ? m[1] : url;
   }
 
-  // رابط الصورة المصغّرة من Drive
   private gThumb(urlOrId: string, width = 1600): string {
     const id = /^(http|https):\/\//.test(urlOrId) ? this.gId(urlOrId) : urlOrId;
     return `https://drive.google.com/thumbnail?id=${id}&sz=w${width}`;
   }
 
-  /* ---------- مساعدة: هل اللغة RTL ؟ ---------- */
   private isRtlLang(lang: string): boolean {
     if (!lang) return false;
     const code = lang.split('-')[0].toLowerCase();
     return ['ar', 'he', 'fa', 'ur'].includes(code);
+  }
+
+  /* ---------- navigation for cards ---------- */
+  navigateToReport(slug?: string) {
+    if (slug) this.router.navigate(['/media', slug]);
+    else this.router.navigate(['/reports']);
   }
 }
