@@ -1,3 +1,4 @@
+/* home.component.ts */
 import {
   Component, OnInit, OnDestroy, AfterViewInit,
   ElementRef, ViewChild
@@ -7,7 +8,12 @@ import { RouterModule } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
-/** تعريف بنية الشريحة في السلايدر */
+/**
+ * ملاحظة: هذا مكوّن مستقل (standalone). إذا مشروعك لا يستعمل standalone components
+ * قم بتعديل @Component.imports أو تسجيله في module المناسب.
+ */
+
+/** تعريف بنية كل شريحة في السلايدر */
 type Slide = {
   icon: 'globe' | 'users' | 'target' | 'file' | 'news' | 'image' | 'link' | 'bulb' | 'mail';
   bg: string;
@@ -29,10 +35,21 @@ type Slide = {
 export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('bar') barRef!: ElementRef<HTMLDivElement>;
 
-  /** مدة بقاء كل شريحة (ملّي ثانية) */
-  readonly durationMs = 3000;
+  /* ---------- إعداد السلايدر ---------- */
+  readonly durationMs = 3000; // مدة الشريحة بالـ ms
+  index = 0;
+  paused = false;
+  private timerId: any = null;
+  private startedAt = 0;
+  private remaining = this.durationMs;
 
-  /** بيانات الشرائح – كلها مفاتيح ترجمة؛ الصور من Unsplash */
+  /* ---------- ترجمة + اتجاه ---------- */
+  tags: string[] = [];               // شارات الشريحة الحالية (مترجمة)
+  currentLang = 'en';                // لغة حالية (مثلاً 'ar' أو 'en')
+  currentDir: 'ltr' | 'rtl' = 'ltr'; // اتجاه الصفحة بناءً على اللغة
+  private langSub?: Subscription;
+
+  /* ---------- بيانات الشرائح (السلايدر) ---------- */
   slides: Slide[] = [
     { icon:'globe', bg:'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=1800&auto=format&fit=crop',
       titleKey:'hero.home_title', subtitleKey:'hero.home_sub',
@@ -62,140 +79,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
       gradient:'grad-blue-1', route:'/contact', ctaKey:'contact.title' },
   ];
 
-  index = 0;           // مؤشر الشريحة الحالية
-  tags: string[] = []; // الشارات المترجمة
-  paused = false;      // حالة الإيقاف المؤقّت عند المرور
-
-  // حالة المؤقّت
-  private timerId: any = null;
-  private startedAt = 0;
-  private remaining = this.durationMs;
-
-  private langSub?: Subscription;
-
-  constructor(private i18n: TranslateService) {}
-
-  ngOnInit(): void {
-    this.computeTags(this.index);
-    // إعادة حساب الشارات عند تغيير اللغة
-    this.langSub = this.i18n.onLangChange.subscribe(() => this.computeTags(this.index));
-  }
-
-  ngAfterViewInit(): void { this.restartProgress(); }
-
-  ngOnDestroy(): void {
-    this.clearTimer();
-    this.langSub?.unsubscribe();
-  }
-
-  /* ---------- تنقّل السلايدر ---------- */
-  next(): void { this.go(this.index + 1); }
-  prev(): void { this.go(this.index - 1); }
-
-  go(i: number): void {
-    const n = this.slides.length;
-    this.index = (i + n) % n;
-    this.computeTags(this.index);
-    this.restartProgress();
-  }
-
-  // احتياط لو ما اشتغل حدث انتهاء الأنيميشن
-  onProgressDone(): void { if (!this.paused) this.next(); }
-
-  /* ---------- إيقاف/استئناف عند المرور ---------- */
-  pause(): void {
-    if (this.paused) return;
-    this.paused = true;
-    const now = performance.now();
-    this.remaining -= (now - this.startedAt);
-    this.clearTimer();
-    this.setBarPlayState('paused');
-  }
-
-  resume(): void {
-    if (!this.paused) return;
-    this.paused = false;
-    this.startedAt = performance.now();
-    this.setBarPlayState('running');
-    this.timerId = setTimeout(() => this.next(), Math.max(0, this.remaining));
-  }
-
-  /* ---------- المؤقّت + الشريط ---------- */
-  private restartProgress(): void {
-    // إعادة ضبط أنيميشن الشريط
-    const el = this.barRef?.nativeElement;
-    if (el) {
-      el.style.animation = 'none';
-      el.style.transform = 'scaleX(0)';
-      void el.offsetWidth; // إجبار إعادة التدفق
-      el.style.animation = `heroGrow ${this.durationMs}ms linear forwards`;
-      el.style.animationPlayState = this.paused ? 'paused' : 'running';
-    }
-
-    // إعادة ضبط المؤقّت المنطقي
-    this.clearTimer();
-    this.remaining = this.durationMs;
-    this.startedAt = performance.now();
-    if (!this.paused) this.timerId = setTimeout(() => this.next(), this.remaining);
-  }
-
-  private clearTimer(){ if (this.timerId){ clearTimeout(this.timerId); this.timerId = null; } }
-  private setBarPlayState(state:'running'|'paused'){ const el = this.barRef?.nativeElement; if (el) el.style.animationPlayState = state; }
-
-  /* ---------- مساعدات ---------- */
-  private computeTags(i: number): void {
-    // يحوّل مفاتيح الشارات إلى نصوص مترجمة
-    const tk = this.slides[i].tagsKeys;
-    if (Array.isArray(tk)) {
-      this.tags = tk.map(k => this.i18n.instant(k));
-    } else {
-      const v = this.i18n.instant(tk);
-      this.tags = Array.isArray(v) ? v : [v];
-    }
-  }
-
-  /** مسارات الأيقونات للسلايدر (SVG) */
-  iconPath(name: Slide['icon']): string {
-    switch (name) {
-      case 'globe':  return 'M12 2a10 10 0 100 20 10 10 0 000-20zm0 18c2.5-2 4-5.5 4-8s-1.5-6-4-8c-2.5 2-4 5.5-4 8s1.5 6 4 8zm-8-8h16m-8-8v16';
-      case 'users':  return 'M16 11a3 3 0 100-6 3 3 0 000 6zm-8 0a3 3 0 100-6 3 3 0 000 6zm0 2c-3 0-6 1.5-6 3.5V19h12v-2.5C14 14.5 11 13 8 13zm8 0c-.7 0-1.4.1-2 .3 1.8.8 3 2 3 3.2V19h6v-2.5c0-2-3-3.5-7-3.5z';
-      case 'target': return 'M12 22a10 10 0 110-20 10 10 0 010 20zm0-6a4 4 0 100-8 4 4 0 000 8zm0-4l6-6';
-      case 'file':   return 'M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12V8l-4-6zm0 0v6h6';
-      case 'news':   return 'M4 4h14v12H4zM2 6h2v10a2 2 0 002 2h12a2 2 0 002-2V6';
-      case 'image':  return 'M3 5h18v14H3zM7 9a2 2 0 110-4 2 2 0 010 4zm-4 10l6-6 4 4 3-3 5 5';
-      case 'link':   return 'M10 13a5 5 0 010-7l2-2a5 5 0 017 7l-1 1m-4 4a5 5 0 01-7 0l-2-2a5 5 0 017-7l1 1';
-      case 'bulb':   return 'M9 18h6M10 22h4M12 2a7 7 0 00-4 12c.5.5 1 1.5 1 2h6c0-.5.5-1.5 1-2A7 7 0 0012 2z';
-      case 'mail':   return 'M4 5h16v14H4zM4 7l8 6 8-6';
-      default:       return '';
-    }
-  }
-
-  /* --------- صور + Google Drive --------- */
-  // صورة بديلة عند فشل تحميل أي صورة
-  placeholderImg = 'assets/placeholder.jpg';
-
-  onImgError(ev: Event): void {
-    const img = ev.target as HTMLImageElement | null;
-    if (!img) return;
-    if ((img as any).dataset?.fallback === '1') return;
-    (img as any).dataset = { ...(img as any).dataset, fallback: '1' };
-    img.src = this.placeholderImg;
-  }
-
-  /** يستخرج الـ ID من أي رابط Google Drive */
-  private gId(url: string): string {
-    const m = url.match(/\/d\/([^/]+)\//) || url.match(/[?&]id=([^&]+)/);
-    return m ? m[1] : url;
-  }
-
-  /** رابط صورة مصغّرة سريع من Google Drive */
-  private gThumb(urlOrId: string, width = 1600): string {
-    const id = /^(http|https):\/\//.test(urlOrId) ? this.gId(urlOrId) : urlOrId;
-    return `https://drive.google.com/thumbnail?id=${id}&sz=w${width}`;
-  }
-
-  /* --------- البيانات (مفاتيح الترجمة) --------- */
-  // ملاحظة: العنوان والملخص للتقرير المميز تحت home.featured.*
+  /* ---------- التقرير المميّز (معاد) + بطاقات التقارير ---------- */
   featuredReport = {
     slug: 'mali-fuel-terror-smuggling',
     titleKey: 'home.featured.title',
@@ -204,7 +88,6 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     localLink: '/reports'
   };
 
-  // ملاحظة: لكل بطاقة: titleKey + excerptKey يجب إضافتهم في ملفات الترجمة
   reportCards = [
     {
       slug: 'europe-russian-gas',
@@ -242,4 +125,142 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
       localLink: '/reports'
     }
   ];
+
+  /* ---------- مساعدة البناء ---------- */
+  placeholderImg = 'assets/placeholder.jpg'; // غيّره إذا لزم
+
+  constructor(private i18n: TranslateService) {}
+
+  ngOnInit(): void {
+    // ضبط اللغة/الاتجاه الافتراضي من ngx-translate
+    this.currentLang = this.i18n.currentLang || this.i18n.getDefaultLang?.() || 'en';
+    this.currentDir = this.isRtlLang(this.currentLang) ? 'rtl' : 'ltr';
+
+    // ترجمة الشارات للشريحة الحالية
+    this.computeTags(this.index);
+
+    // الاشتراك لتحديث الواجهة عند تغيير اللغة
+    this.langSub = this.i18n.onLangChange.subscribe(ev => {
+      const lang = (ev as any)?.lang || this.i18n.currentLang || 'en';
+      this.currentLang = lang;
+      this.currentDir = this.isRtlLang(lang) ? 'rtl' : 'ltr';
+
+      // إعادة حساب الشارات (وليس ضروريًا إعادة تحميل الشرائح)
+      this.computeTags(this.index);
+
+      // ملاحظة: إذا أردت تغيير dir على مستوى المستند بأكمله:
+      // document.documentElement.dir = this.currentDir;
+    });
+  }
+
+  ngAfterViewInit(): void { this.restartProgress(); }
+
+  ngOnDestroy(): void {
+    this.clearTimer();
+    this.langSub?.unsubscribe();
+  }
+
+  /* ---------- سلايدر: التنقّل + التوقيت ---------- */
+  next(): void { this.go(this.index + 1); }
+  prev(): void { this.go(this.index - 1); }
+
+  go(i: number): void {
+    const n = this.slides.length;
+    this.index = (i + n) % n;
+    this.computeTags(this.index);
+    this.restartProgress();
+  }
+
+  onProgressDone(): void { if (!this.paused) this.next(); }
+
+  pause(): void {
+    if (this.paused) return;
+    this.paused = true;
+    const now = performance.now();
+    this.remaining -= (now - this.startedAt);
+    this.clearTimer();
+    this.setBarPlayState('paused');
+  }
+
+  resume(): void {
+    if (!this.paused) return;
+    this.paused = false;
+    this.startedAt = performance.now();
+    this.setBarPlayState('running');
+    this.timerId = setTimeout(() => this.next(), Math.max(0, this.remaining));
+  }
+
+  private restartProgress(): void {
+    const el = this.barRef?.nativeElement;
+    if (el) {
+      el.style.animation = 'none';
+      el.style.transform = 'scaleX(0)';
+      void el.offsetWidth; // force reflow
+      el.style.animation = `heroGrow ${this.durationMs}ms linear forwards`;
+      el.style.animationPlayState = this.paused ? 'paused' : 'running';
+    }
+
+    this.clearTimer();
+    this.remaining = this.durationMs;
+    this.startedAt = performance.now();
+    if (!this.paused) this.timerId = setTimeout(() => this.next(), this.remaining);
+  }
+
+  private clearTimer(){ if (this.timerId){ clearTimeout(this.timerId); this.timerId = null; } }
+  private setBarPlayState(state:'running'|'paused'){ const el = this.barRef?.nativeElement; if (el) el.style.animationPlayState = state; }
+
+  /* ---------- ترجمة الشارات للشريحة الحالية ---------- */
+  private computeTags(i: number): void {
+    const tk = this.slides[i].tagsKeys;
+    if (Array.isArray(tk)) {
+      this.tags = tk.map(k => this.i18n.instant(k));
+    } else {
+      const v = this.i18n.instant(tk);
+      this.tags = Array.isArray(v) ? v : [v];
+    }
+  }
+
+  /* ---------- SVG Icons helper ---------- */
+  iconPath(name: Slide['icon']): string {
+    switch (name) {
+      case 'globe':  return 'M12 2a10 10 0 100 20 10 10 0 000-20zm0 18c2.5-2 4-5.5 4-8s-1.5-6-4-8c-2.5 2-4 5.5-4 8s1.5 6 4 8zm-8-8h16m-8-8v16';
+      case 'users':  return 'M16 11a3 3 0 100-6 3 3 0 000 6zm-8 0a3 3 0 100-6 3 3 0 000 6zm0 2c-3 0-6 1.5-6 3.5V19h12v-2.5C14 14.5 11 13 8 13zm8 0c-.7 0-1.4.1-2 .3 1.8.8 3 2 3 3.2V19h6v-2.5c0-2-3-3.5-7-3.5z';
+      case 'target': return 'M12 22a10 10 0 110-20 10 10 0 010 20zm0-6a4 4 0 100-8 4 4 0 000 8zm0-4l6-6';
+      case 'file':   return 'M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12V8l-4-6zm0 0v6h6';
+      case 'news':   return 'M4 4h14v12H4zM2 6h2v10a2 2 0 002 2h12a2 2 0 002-2V6';
+      case 'image':  return 'M3 5h18v14H3zM7 9a2 2 0 110-4 2 2 0 010 4zm-4 10l6-6 4 4 3-3 5 5';
+      case 'link':   return 'M10 13a5 5 0 010-7l2-2a5 5 0 017 7l-1 1m-4 4a5 5 0 01-7 0l-2-2a5 5 0 017-7l1 1';
+      case 'bulb':   return 'M9 18h6M10 22h4M12 2a7 7 0 00-4 12c.5.5 1 1.5 1 2h6c0-.5.5-1.5 1-2A7 7 0 0012 2z';
+      case 'mail':   return 'M4 5h16v14H4zM4 7l8 6 8-6';
+      default:       return '';
+    }
+  }
+
+  /* ---------- صور: placeholder + Google Drive helpers ---------- */
+  onImgError(ev: Event): void {
+    const img = ev.target as HTMLImageElement | null;
+    if (!img) return;
+    if ((img as any).dataset?.fallback === '1') return;
+    (img as any).dataset = { ...(img as any).dataset, fallback: '1' };
+    img.src = this.placeholderImg;
+  }
+
+  // استخراج id من روابط Google Drive الشائعة
+  private gId(url: string): string {
+    const m = url.match(/\/d\/([^/]+)\//) || url.match(/[?&]id=([^&]+)/);
+    return m ? m[1] : url;
+  }
+
+  // رابط الصورة المصغّرة من Drive
+  private gThumb(urlOrId: string, width = 1600): string {
+    const id = /^(http|https):\/\//.test(urlOrId) ? this.gId(urlOrId) : urlOrId;
+    return `https://drive.google.com/thumbnail?id=${id}&sz=w${width}`;
+  }
+
+  /* ---------- مساعدة: هل اللغة RTL ؟ ---------- */
+  private isRtlLang(lang: string): boolean {
+    if (!lang) return false;
+    const code = lang.split('-')[0].toLowerCase();
+    return ['ar', 'he', 'fa', 'ur'].includes(code);
+  }
 }

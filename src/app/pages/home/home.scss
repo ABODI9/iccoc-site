@@ -1,320 +1,482 @@
+/* home.component.scss */
 /*---------------------------------------------------------
-  الصفحة الرئيسية - أنماط SCSS
-  المؤلف: مجتمع ICCOC
-  الوصف: أنماط الصفحة الرئيسية لموقع ICCOC الإلكتروني
-  ملاحظات مهمّة:
-  - بطاقات التقارير (report-row.) نفس ستايل التقرير المميّز (featured-report.)
-  - مفاتيح الترجمة: العنوان من titleKey والملخّص من excerptKey
+  الصفحة الرئيسية - أنماط SCSS (معدلة لعرض كل البطاقات كمميزة)
+  ملاحظات: إحفظ هذا الملف واستبدل به القديم. تأكد من وجود
+  assets/placeholder.jpg أو غيّره لمسار آخر.
 ----------------------------------------------------------*/
 
-/* مسافات عامة */
+/* ========== مسافات و Container ========== */
 .section   { padding: 42px 0; }
 .container { max-width: 1200px; margin: auto; padding: 0 20px; }
 .mt-16     { margin-top: 16px; }
 .mt-24     { margin-top: 24px; }
 
-/* 🎨 متغيّرات */
+/* ========== متغيرات مركزيّة لتسهيل التعديل لاحقاً ========== */
 :root{
-  --card-min-h: 360px;     /* كان ~260px */
-  --card-img-min-h: 320px; /* كان ~220px */
-  --card-radius: 22px;
+  --card-min-h: 320px;            /* خففت قليلاً لأن لدينا عدة بطاقات */
+  --card-img-min-h: 240px;
+  --card-radius: 18px;
   --card-border: #e5eef9;
-  --card-bg: #0b2240;
-  --card-shadow: 0 16px 40px rgba(2,6,23,.10);
-  --card-shadow-hover: 0 22px 48px rgba(2,6,23,.20);
-
-  /* التظليل الأزرق للصور في "المميّز" فقط */
-  --blue-tint: linear-gradient(
-    135deg,
-    rgba(29,78,216,.35),   /* قلّلت الشفافية */
-    rgba(14,165,233,.25),
-    rgba(15,23,42,.35)
-  );
+  --card-bg: linear-gradient(135deg, rgba(10,25,55,1), rgba(5,20,45,1));
+  --card-bg-solid: #0b2240;
+  --card-shadow: 0 14px 36px rgba(2,6,23,.10);
+  --card-shadow-hover: 0 20px 48px rgba(2,6,23,.20);
+  --overlay: linear-gradient(135deg, rgba(29,78,216,.24), rgba(14,165,233,.12));
 }
 
-/* ========================== السلايدر ========================== */
-.hero-shell{
-  position: relative;
-  height: 85vh;
-  min-height: 560px;
-  border-radius: 28px;
-  overflow: hidden;
-  box-shadow: 0 20px 50px rgba(2,6,23,.18);
-}
-.bg-layer{
-  position: absolute; inset: 0;
-  background-size: cover; background-position: center;
-  opacity: 0; transform: scale(1.08);
-  transition: opacity .9s ease, transform .9s ease;
-}
+/* =========================
+   سلايدر — الاحتفاظ بالتصميم الأصلي
+   ========================= */
+.hero-shell{ position: relative; height: 85vh; min-height: 560px; border-radius: 28px; overflow: hidden; box-shadow: 0 20px 50px rgba(2,6,23,.18); }
+.bg-layer{ position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transform: scale(1.08); transition: opacity .9s ease, transform .9s ease; }
 .bg-active{ opacity: 1; transform: scale(1); }
 .bg-grad{ position: absolute; inset: 0; }
-
 .grad-blue-1{ background: linear-gradient(135deg, rgba(29,78,216,.88), rgba(14,165,233,.78), rgba(15,23,42,.92)); }
 .grad-blue-2{ background: linear-gradient(135deg, rgba(2,132,199,.9),  rgba(37,99,235,.8),  rgba(7,89,133,.9)); }
 .grad-blue-3{ background: linear-gradient(135deg, rgba(30,64,175,.9),  rgba(59,130,246,.82), rgba(2,132,199,.9)); }
 .grad-blue-4{ background: linear-gradient(135deg, rgba(14,165,233,.9), rgba(37,99,235,.82), rgba(30,58,138,.92)); }
 
-.hero-content{
-  position: relative; z-index: 2; height: 100%;
-  display: grid; place-items: center; text-align: center;
-  color: #fff; padding: 20px;
-}
-.icon-wrap{
-  display: inline-grid; place-items: center;
-  width: 92px; height: 92px; border-radius: 28px;
-  background: rgba(255,255,255,.18); backdrop-filter: blur(6px);
-  border: 1px solid rgba(255,255,255,.35);
-  box-shadow: 0 20px 40px rgba(0,0,0,.18);
-  margin-bottom: 22px; transition: transform .25s ease;
-}
+.hero-content{ position: relative; z-index: 2; height: 100%; display: grid; place-items: center; text-align: center; color: #fff; padding: 20px; }
+.icon-wrap{ display: inline-grid; place-items: center; width: 92px; height: 92px; border-radius: 28px; background: rgba(255,255,255,.18); backdrop-filter: blur(6px); border: 1px solid rgba(255,255,255,.35); box-shadow: 0 20px 40px rgba(0,0,0,.18); margin-bottom: 22px; transition: transform .25s ease; }
 .icon-wrap:hover{ transform: scale(1.05); }
 .icon{ width: 56px; height: 56px; fill: none; stroke: #fff; stroke-width: 1.6; }
-
-.hero-title{
-  font-weight: 900; font-size: clamp(34px, 6vw, 64px); line-height: 1.1;
-  text-shadow: 0 10px 20px rgba(0,0,0,.25); margin: 0 0 10px;
-}
-.hero-sub{
-  font-weight: 600; font-size: clamp(16px, 2.5vw, 22px); opacity: .95;
-  margin: 0 auto 18px; max-width: 820px;
-  text-shadow: 0 6px 16px rgba(0,0,0,.22);
-}
-
+.hero-title{ font-weight: 900; font-size: clamp(34px, 6vw, 64px); line-height: 1.1; text-shadow: 0 10px 20px rgba(0,0,0,.25); margin: 0 0 10px; }
+.hero-sub{ font-weight: 600; font-size: clamp(16px, 2.5vw, 22px); opacity: .95; margin: 0 auto 18px; max-width: 820px; text-shadow: 0 6px 16px rgba(0,0,0,.22); }
 .tags{ display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 14px; }
-.tag{
-  padding: 8px 14px; border-radius: 999px;
-  background: rgba(255,255,255,.25); color: #fff;
-  border: 1px solid rgba(255,255,255,.45);
-  font-weight: 700; font-size: 13px;
-  box-shadow: 0 10px 20px rgba(0,0,0,.18);
-}
-
-.cta-btn{
-  display: inline-block; margin-bottom: 14px;
-  padding: 10px 18px; border-radius: 999px; text-decoration: none; font-weight: 800;
-  background: rgba(255,255,255,.92); color: #0b2240; border: 1px solid rgba(255,255,255,.6);
-  box-shadow: 0 12px 24px rgba(0,0,0,.18);
-}
-.cta-btn:hover{ filter: brightness(.98); }
-
-/* المؤقّت */
-.progress{
-  position: relative; width: min(520px,92%); height: 8px;
-  margin: 8px auto 0; background: rgba(255,255,255,.22);
-  border-radius: 999px; overflow: hidden;
-}
-.bar{
-  position: absolute; inset: 0; border-radius: 999px; background: #fff;
-  box-shadow: 0 8px 16px rgba(255,255,255,.35);
-  transform-origin: left center; transform: scaleX(0); animation: none;
-}
+.tag{ padding: 8px 14px; border-radius: 999px; background: rgba(255,255,255,.25); color: #fff; border: 1px solid rgba(255,255,255,.45); font-weight: 700; font-size: 13px; box-shadow: 0 10px 20px rgba(0,0,0,.18); }
+.cta-btn{ display: inline-block; margin-bottom: 14px; padding: 10px 18px; border-radius: 999px; text-decoration: none; font-weight: 800; background: rgba(255,255,255,.92); color: #0b2240; border: 1px solid rgba(255,255,255,.6); box-shadow: 0 12px 24px rgba(0,0,0,.18); }
+.progress{ position: relative; width: min(520px,92%); height: 8px; margin: 8px auto 0; background: rgba(255,255,255,.22); border-radius: 999px; overflow: hidden; }
+.bar{ position: absolute; inset: 0; border-radius: 999px; background: #fff; box-shadow: 0 8px 16px rgba(255,255,255,.35); transform-origin: left center; transform: scaleX(0); }
 @keyframes heroGrow{ from{ transform: scaleX(0);} to{ transform: scaleX(1);} }
-
-/* أزرار التنقل */
-.nav-btn{
-  position: absolute; top: 50%; transform: translateY(-50%);
-  width: 54px; height: 54px; border-radius: 999px;
-  border: 1px solid rgba(255,255,255,.45);
-  background: rgba(255,255,255,.92); color: #0b2240;
-  box-shadow: 0 18px 30px rgba(2,6,23,.25);
-  cursor: pointer; transition: background .2s ease, transform .2s ease;
-  z-index: 5; display: grid; place-items: center;
-}
+.nav-btn{ position: absolute; top: 50%; transform: translateY(-50%); width: 54px; height: 54px; border-radius: 999px; border: 1px solid rgba(255,255,255,.45); background: rgba(255,255,255,.92); color: #0b2240; box-shadow: 0 18px 30px rgba(2,6,23,.25); cursor: pointer; transition: background .2s ease, transform .2s ease; z-index: 5; display: grid; place-items: center; }
 .nav-btn svg{ width: 26px; height: 26px; }
 .nav-btn:hover{ background:#fff; transform: translateY(-50%) scale(1.06); }
 .nav-btn.left{ left: 16px; } .nav-btn.right{ right: 16px; }
-
-/* نقاط */
-.dots{
-  position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%);
-  display: flex; gap: 8px; z-index: 5;
-}
-.dot{
-  width: 12px; height: 12px; border-radius: 999px;
-  background: rgba(255,255,255,.55); border: 0; cursor: pointer;
-  transition: all .25s ease;
-}
+.dots{ position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 5; }
+.dot{ width: 12px; height: 12px; border-radius: 999px; background: rgba(255,255,255,.55); border: 0; cursor: pointer; transition: all .25s ease; }
 .dot.active{ width: 36px; background:#fff; }
 
-/* ====================== التقرير المميّز ====================== */
-/* ====================== التقرير المميّز ====================== */
-.featured-report{
+/* =========================
+   قالب البطاقة "مميّز" مطبق على كل تقارير
+   ========================= */
+.report-card, .featured-report {
   display: grid;
-  grid-template-columns: 1fr;     /* موبايل: عمود واحد */
-  gap: 10px;                      /* ↓ قربّت الأعمدة من بعض (كان 16px) */
-  border-radius: 22px;
+  grid-template-columns: 1fr;
+  border-radius: var(--card-radius);
   overflow: hidden;
   border: 1px solid var(--card-border);
   box-shadow: var(--card-shadow);
   background: var(--card-bg);
   color: #fff;
-}
-
-/* ديسكتوب: عمودين متساويين وقرب أكثر */
-@media (min-width: 900px){
-  .featured-report{ grid-template-columns: 1fr 1fr; }  /* كان 1.1fr 1fr */
-}
-
-.featured-report .thumb{
-  position: relative;
-  min-height: 300px;              /* رفعتها شوي لتوازن الارتفاع */
-  background-size: cover;
-  background-position: center;
-}
-.featured-report .thumb::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background: var(--blue-tint);
-  mix-blend-mode: multiply;
-  pointer-events:none;
-}
-
-.featured-report .body{
-  padding: 18px;                  /* ↓ قللت الحشوة شوي */
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  background-color:#030944;
-}
-.featured-report .title{
-  margin:0 0 8px;
-  font-size:clamp(22px,3.2vw,28px);
-  font-weight:900;
-  color:#fff;
-}
-.featured-report .excerpt{
-  margin:0 0 14px;
-  line-height:1.7;
-  color:#fff;
-}
-.featured-report .actions{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-}
-.featured-report .btn{
-  padding:10px 16px;
-  border-radius:12px;
-  text-decoration:none;
-  font-weight:800;
-}
-.featured-report .btn.primary{ background:#fff; color:#000; }
-.featured-report .btn.ghost{ background:transparent; color:#fff; border:1px solid #030645; }
-
-/* ====================== بطاقات التقارير (نفس تصميم المميّز) ====================== */
-.reports-list{
-  display:grid;
-  gap:18px;
-}
-
-/* بطاقات أفقية أكبر + صورة واضحة تمامًا */
-.report-row{
-  display:grid;
-  grid-template-columns: 1.1fr 1fr; /* صورة أكبر قليلاً */
-  min-height: var(--card-min-h);    /* 360px الآن */
-  border-radius: var(--card-radius);
-  overflow:hidden;
-  border:1px solid rgba(59,130,246,.35);
-  background: linear-gradient(135deg, rgba(10,25,55,1), rgba(5,20,45,1));
-  color:#fff;
-  box-shadow: var(--card-shadow);
-  text-decoration:none;
+  text-decoration: none;
   transition: transform .25s ease, box-shadow .25s ease, filter .25s ease;
-}
-.report-row:hover{
-  transform: translateY(-3px);
-  box-shadow: var(--card-shadow-hover);
-  filter: brightness(1.04);
+  min-height: var(--card-min-h);
+  margin-bottom: 18px;
 }
 
-/* الصورة الجانبية */
-.report-row .thumb{
-  position:relative;
-  min-height: var(--card-img-min-h);  /* 320px الآن */
-  background-size: cover;             /* يملأ العمود بالكامل */
-  background-position: center;
+/* شاشات كبيرة: عمودان متناسقان */
+@media (min-width: 900px){
+  .report-card, .featured-report { grid-template-columns: 48% 52%; align-items: stretch; min-height: 260px; }
 }
-/* لإظهار الصورة «واضحة بالكامل»: ألغيت التظليل هنا */
-.report-row .thumb::after{ content:none; }
+
+/* thumb (صندوق الصورة) */
+.report-card .thumb,
+.featured-report .thumb {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 16/9;
+  min-height: var(--card-img-min-h);
+  overflow: hidden;
+  background-color: #0b2240;
+}
+
+/* img داخل thumb */
+.report-card .thumb img,
+.featured-report .thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* overlay فوق الصورة لإعطاء طابع موحّد */
+.report-card .thumb::after,
+.featured-report .thumb::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--overlay);
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  transition: opacity .2s ease;
+}
 
 /* جسم البطاقة */
-.report-row .body{
-  padding:24px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  background: linear-gradient(135deg, rgba(20,40,90,.9), rgba(10,25,55,.95));
-  color:#fff;
-}
-.report-row .title{
-  margin:0 0 8px;
-  font-size: clamp(20px, 2.2vw, 26px);  /* زدت الحجم قليلاً */
-  line-height:1.25;
-  font-weight:900;
-  color:#fff;
-  text-shadow:0 6px 16px rgba(0,0,0,.25);
-}
-.report-row .excerpt{
-  margin:0 0 14px;
-  line-height:1.7;
-  color:#dbeafe;
-  font-size:16px;                      /* أكبر سنة */
-}
-.report-row .actions{
-  display:flex;
-  gap:10px;
-  align-items:center;
-}
-.report-row .actions .spacer{ flex:1 1 auto; }
-.report-row .actions .btn.primary{
-  display:inline-block;
-  background:#fff; color:#0b2240;
-  border-radius:12px; padding:10px 16px;
-  font-weight:800; box-shadow:0 12px 24px rgba(0,0,0,.14);
+.report-card .body,
+.featured-report .body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  justify-content: space-between;
+  background-color: rgba(11,34,64,0.95);
 }
 
-/* اتجاه تلقائي */
-[dir="rtl"] .report-row{ grid-template-columns: 1fr 1.1fr; }
-[dir="rtl"] .report-row .thumb{ order:2; }
-[dir="rtl"] .report-row .body { order:1; }
-[dir="rtl"] .report-row.alt .thumb{ order:1; }
-[dir="rtl"] .report-row.alt .body { order:2; }
-
-[dir="ltr"] .report-row{ grid-template-columns: 1.1fr 1fr; }
-[dir="ltr"] .report-row .thumb{ order:1; }
-[dir="ltr"] .report-row .body { order:2; }
-[dir="ltr"] .report-row.alt .thumb{ order:2; }
-[dir="ltr"] .report-row.alt .body { order:1; }
-
-/* موبايل: تكديس عمودي */
-@media (max-width: 800px){
-  .report-row{ grid-template-columns: 1fr; }
-  [dir="rtl"] .report-row .thumb,
-  [dir="ltr"] .report-row .thumb{ order:-1; } /* الصورة فوق */
+/* عنوان وملخّص */
+.report-card .title,
+.featured-report .title {
+  margin: 0;
+  font-size: clamp(18px, 2.6vw, 24px);
+  font-weight: 900;
+  color: #fff;
+}
+.report-card .excerpt,
+.featured-report .excerpt {
+  margin: 0;
+  line-height: 1.6;
+  color: rgba(230,240,255,0.95);
+  font-size: 15px;
+  opacity: .95;
+  flex: 1 1 auto;
 }
 
-/* ====================== الدعوات (CTA) ====================== */
-.cta-grid{
-  display: grid; grid-template-columns: 1fr; gap: 14px;
+/* إجراءات */
+.report-card .actions,
+.featured-report .actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: 8px;
 }
-@media (min-width:900px){
-  .cta-grid{ grid-template-columns: repeat(3,1fr); }
+
+/* أزرار */
+.report-card .btn,
+.featured-report .btn {
+  padding: 10px 16px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 110px;
+  cursor: pointer;
+  border: 0;
+  background: #fff;
+  color: #0b2240;
+  box-shadow: 0 12px 24px rgba(0,0,0,.14);
 }
-.cta{
-  border-radius: 22px; padding: 22px;
-  border: 1px solid var(--card-border);
-  color: #fff; box-shadow: 0 16px 40px rgba(2,6,23,.12);
+
+/* hover لطيف على الأجهزة التي تدعم hover */
+@media (hover: hover) and (pointer: fine) {
+  .report-card:hover, .featured-report:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--card-shadow-hover);
+    filter: brightness(1.03);
+  }
 }
+
+/* ========== دعم RTL / LTR الديناميكي ========== */
+/* نستخدم attr dir على الـ section (في HTML) لذلك هذه القواعد تعمل تلقائياً */
+[dir="rtl"] .report-card { grid-template-columns: 52% 48%; }
+[dir="rtl"] .report-card .thumb { order: 2; }
+[dir="rtl"] .report-card .body { order: 1; }
+[dir="rtl"] .report-card.alt .thumb { order: 1; }
+[dir="rtl"] .report-card.alt .body  { order: 2; }
+
+[dir="ltr"] .report-card { grid-template-columns: 48% 52%; }
+[dir="ltr"] .report-card .thumb { order: 1; }
+[dir="ltr"] .report-card .body { order: 2; }
+[dir="ltr"] .report-card.alt .thumb { order: 2; }
+[dir="ltr"] .report-card.alt .body  { order: 1; }
+
+/* موبايل: تكديس عمودي (قواعد أخيرة لتجاوز أي قواعد سابقة) */
+@media (max-width: 800px) {
+  .report-card, .featured-report {
+    display: flex !important;
+    flex-direction: column !important;
+    border-radius: var(--card-radius) !important;
+    overflow: hidden !important;
+    min-height: auto !important;
+  }
+  .report-card .thumb, .featured-report .thumb {
+    order: 0 !important;
+    width: 100% !important;
+    aspect-ratio: 16/9 !important;
+    min-height: 160px !important;
+  }
+  .report-card .body, .featured-report .body {
+    order: 1 !important;
+  }
+  .report-card .btn, .featured-report .btn {
+    min-width: 100% !important;
+    padding: 12px 14px !important;
+  }
+}
+
+/* =========================
+   CTA (نفس الأنماط) 
+   ========================= */
+.cta-grid{ display: grid; grid-template-columns: 1fr; gap: 14px; }
+@media (min-width:900px){ .cta-grid{ grid-template-columns: repeat(3,1fr); } }
+.cta{ border-radius: 22px; padding: 22px; border: 1px solid var(--card-border); color: #fff; box-shadow: 0 16px 40px rgba(2,6,23,.12); }
 .cta-icon{ font-size: 28px; margin-bottom: 8px; }
 .cta h4{ margin: 0 0 6px; font-weight: 900; }
 .cta p{ margin: 0 0 12px; color: rgba(255,255,255,.92); }
-.cta .btn{
-  display: inline-block; background:#fff; color:#0b2240;
-  padding: 10px 16px; border-radius: 12px; text-decoration: none; border: 0;
+.cta .btn{ display: inline-block; background:#fff; color:#0b2240; padding: 10px 16px; border-radius: 12px; text-decoration: none; border: 0; box-shadow: 0 12px 24px rgba(0,0,0,.14); }
+.cta .btn:hover{ filter: brightness(.97); }
+.cta-blue   { background: linear-gradient(135deg, rgba(29,78,216,.88), rgba(14,165,233,.78), rgba(15,23,42,.92)); }
+.cta-amber  { background: linear-gradient(135deg, rgba(2,132,199,.9),  rgba(37,99,235,.8),  rgba(7,89,133,.9)); }
+.cta-emerald{ background: linear-gradient(135deg, rgba(14,165,233,.9), rgba(37,99,235,.82), rgba(30,58,138,.92)); }
+/* home.component.scss */
+/*---------------------------------------------------------
+  الصفحة الرئيسية - أنماط SCSS (معدلة لعرض كل البطاقات كمميزة)
+  ملاحظات: إحفظ هذا الملف واستبدل به القديم. تأكد من وجود
+  assets/placeholder.jpg أو غيّره لمسار آخر.
+----------------------------------------------------------*/
+
+/* ========== مسافات و Container ========== */
+.section   { padding: 42px 0; }
+.container { max-width: 1200px; margin: auto; padding: 0 20px; }
+.mt-16     { margin-top: 16px; }
+.mt-24     { margin-top: 24px; }
+
+/* ========== متغيرات مركزيّة لتسهيل التعديل لاحقاً ========== */
+:root{
+  --card-min-h: 320px;            /* خففت قليلاً لأن لدينا عدة بطاقات */
+  --card-img-min-h: 240px;
+  --card-radius: 18px;
+  --card-border: #e5eef9;
+  --card-bg: linear-gradient(135deg, rgba(10,25,55,1), rgba(5,20,45,1));
+  --card-bg-solid: #0b2240;
+  --card-shadow: 0 14px 36px rgba(2,6,23,.10);
+  --card-shadow-hover: 0 20px 48px rgba(2,6,23,.20);
+  --overlay: linear-gradient(135deg, rgba(29,78,216,.24), rgba(14,165,233,.12));
+}
+
+/* =========================
+   سلايدر — الاحتفاظ بالتصميم الأصلي
+   ========================= */
+.hero-shell{ position: relative; height: 85vh; min-height: 560px; border-radius: 28px; overflow: hidden; box-shadow: 0 20px 50px rgba(2,6,23,.18); }
+.bg-layer{ position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transform: scale(1.08); transition: opacity .9s ease, transform .9s ease; }
+.bg-active{ opacity: 1; transform: scale(1); }
+.bg-grad{ position: absolute; inset: 0; }
+.grad-blue-1{ background: linear-gradient(135deg, rgba(29,78,216,.88), rgba(14,165,233,.78), rgba(15,23,42,.92)); }
+.grad-blue-2{ background: linear-gradient(135deg, rgba(2,132,199,.9),  rgba(37,99,235,.8),  rgba(7,89,133,.9)); }
+.grad-blue-3{ background: linear-gradient(135deg, rgba(30,64,175,.9),  rgba(59,130,246,.82), rgba(2,132,199,.9)); }
+.grad-blue-4{ background: linear-gradient(135deg, rgba(14,165,233,.9), rgba(37,99,235,.82), rgba(30,58,138,.92)); }
+
+.hero-content{ position: relative; z-index: 2; height: 100%; display: grid; place-items: center; text-align: center; color: #fff; padding: 20px; }
+.icon-wrap{ display: inline-grid; place-items: center; width: 92px; height: 92px; border-radius: 28px; background: rgba(255,255,255,.18); backdrop-filter: blur(6px); border: 1px solid rgba(255,255,255,.35); box-shadow: 0 20px 40px rgba(0,0,0,.18); margin-bottom: 22px; transition: transform .25s ease; }
+.icon-wrap:hover{ transform: scale(1.05); }
+.icon{ width: 56px; height: 56px; fill: none; stroke: #fff; stroke-width: 1.6; }
+.hero-title{ font-weight: 900; font-size: clamp(34px, 6vw, 64px); line-height: 1.1; text-shadow: 0 10px 20px rgba(0,0,0,.25); margin: 0 0 10px; }
+.hero-sub{ font-weight: 600; font-size: clamp(16px, 2.5vw, 22px); opacity: .95; margin: 0 auto 18px; max-width: 820px; text-shadow: 0 6px 16px rgba(0,0,0,.22); }
+.tags{ display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 14px; }
+.tag{ padding: 8px 14px; border-radius: 999px; background: rgba(255,255,255,.25); color: #fff; border: 1px solid rgba(255,255,255,.45); font-weight: 700; font-size: 13px; box-shadow: 0 10px 20px rgba(0,0,0,.18); }
+.cta-btn{ display: inline-block; margin-bottom: 14px; padding: 10px 18px; border-radius: 999px; text-decoration: none; font-weight: 800; background: rgba(255,255,255,.92); color: #0b2240; border: 1px solid rgba(255,255,255,.6); box-shadow: 0 12px 24px rgba(0,0,0,.18); }
+.progress{ position: relative; width: min(520px,92%); height: 8px; margin: 8px auto 0; background: rgba(255,255,255,.22); border-radius: 999px; overflow: hidden; }
+.bar{ position: absolute; inset: 0; border-radius: 999px; background: #fff; box-shadow: 0 8px 16px rgba(255,255,255,.35); transform-origin: left center; transform: scaleX(0); }
+@keyframes heroGrow{ from{ transform: scaleX(0);} to{ transform: scaleX(1);} }
+.nav-btn{ position: absolute; top: 50%; transform: translateY(-50%); width: 54px; height: 54px; border-radius: 999px; border: 1px solid rgba(255,255,255,.45); background: rgba(255,255,255,.92); color: #0b2240; box-shadow: 0 18px 30px rgba(2,6,23,.25); cursor: pointer; transition: background .2s ease, transform .2s ease; z-index: 5; display: grid; place-items: center; }
+.nav-btn svg{ width: 26px; height: 26px; }
+.nav-btn:hover{ background:#fff; transform: translateY(-50%) scale(1.06); }
+.nav-btn.left{ left: 16px; } .nav-btn.right{ right: 16px; }
+.dots{ position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 5; }
+.dot{ width: 12px; height: 12px; border-radius: 999px; background: rgba(255,255,255,.55); border: 0; cursor: pointer; transition: all .25s ease; }
+.dot.active{ width: 36px; background:#fff; }
+
+/* =========================
+   قالب البطاقة "مميّز" مطبق على كل تقارير
+   ========================= */
+.report-card, .featured-report {
+  display: grid;
+  grid-template-columns: 1fr;
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  border: 1px solid var(--card-border);
+  box-shadow: var(--card-shadow);
+  background: var(--card-bg);
+  color: #fff;
+  text-decoration: none;
+  transition: transform .25s ease, box-shadow .25s ease, filter .25s ease;
+  min-height: var(--card-min-h);
+  margin-bottom: 18px;
+}
+
+/* شاشات كبيرة: عمودان متناسقان */
+@media (min-width: 900px){
+  .report-card, .featured-report { grid-template-columns: 48% 52%; align-items: stretch; min-height: 260px; }
+}
+
+/* thumb (صندوق الصورة) */
+.report-card .thumb,
+.featured-report .thumb {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 16/9;
+  min-height: var(--card-img-min-h);
+  overflow: hidden;
+  background-color: #0b2240;
+}
+
+/* img داخل thumb */
+.report-card .thumb img,
+.featured-report .thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* overlay فوق الصورة لإعطاء طابع موحّد */
+.report-card .thumb::after,
+.featured-report .thumb::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--overlay);
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  transition: opacity .2s ease;
+}
+
+/* جسم البطاقة */
+.report-card .body,
+.featured-report .body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  justify-content: space-between;
+  background-color: rgba(11,34,64,0.95);
+}
+
+/* عنوان وملخّص */
+.report-card .title,
+.featured-report .title {
+  margin: 0;
+  font-size: clamp(18px, 2.6vw, 24px);
+  font-weight: 900;
+  color: #fff;
+}
+.report-card .excerpt,
+.featured-report .excerpt {
+  margin: 0;
+  line-height: 1.6;
+  color: rgba(230,240,255,0.95);
+  font-size: 15px;
+  opacity: .95;
+  flex: 1 1 auto;
+}
+
+/* إجراءات */
+.report-card .actions,
+.featured-report .actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: 8px;
+}
+
+/* أزرار */
+.report-card .btn,
+.featured-report .btn {
+  padding: 10px 16px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 110px;
+  cursor: pointer;
+  border: 0;
+  background: #fff;
+  color: #0b2240;
   box-shadow: 0 12px 24px rgba(0,0,0,.14);
 }
+
+/* hover لطيف على الأجهزة التي تدعم hover */
+@media (hover: hover) and (pointer: fine) {
+  .report-card:hover, .featured-report:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--card-shadow-hover);
+    filter: brightness(1.03);
+  }
+}
+
+/* ========== دعم RTL / LTR الديناميكي ========== */
+/* نستخدم attr dir على الـ section (في HTML) لذلك هذه القواعد تعمل تلقائياً */
+[dir="rtl"] .report-card { grid-template-columns: 52% 48%; }
+[dir="rtl"] .report-card .thumb { order: 2; }
+[dir="rtl"] .report-card .body { order: 1; }
+[dir="rtl"] .report-card.alt .thumb { order: 1; }
+[dir="rtl"] .report-card.alt .body  { order: 2; }
+
+[dir="ltr"] .report-card { grid-template-columns: 48% 52%; }
+[dir="ltr"] .report-card .thumb { order: 1; }
+[dir="ltr"] .report-card .body { order: 2; }
+[dir="ltr"] .report-card.alt .thumb { order: 2; }
+[dir="ltr"] .report-card.alt .body  { order: 1; }
+
+/* ترتيب ديناميكي يعتمد على الكلاس (يوفّر سلوكًا واضحًا ومبسطًا) */
+.report-card.lang-ltr { grid-template-columns: 48% 52%; }
+.report-card.lang-ltr .thumb { order: 1; }
+.report-card.lang-ltr .body  { order: 2; text-align: left; }
+
+.report-card.lang-rtl { grid-template-columns: 52% 48%; }
+.report-card.lang-rtl .thumb { order: 2; }
+.report-card.lang-rtl .body  { order: 1; text-align: right; }
+
+/* تأكد أيضاً من تغطية featured إذا أردت له أن يتفاعل بنفس الطريقة */
+.featured-report.lang-ltr { grid-template-columns: 48% 52%; }
+.featured-report.lang-ltr .thumb { order: 1; }
+.featured-report.lang-ltr .body  { order: 2; text-align: left; }
+
+.featured-report.lang-rtl { grid-template-columns: 52% 48%; }
+.featured-report.lang-rtl .thumb { order: 2; }
+.featured-report.lang-rtl .body  { order: 1; text-align: right; }
+
+
+/* موبايل: تكديس عمودي (قواعد أخيرة لتجاوز أي قواعد سابقة) */
+@media (max-width: 800px) {
+  .report-card, .featured-report {
+    display: flex !important;
+    flex-direction: column !important;
+    border-radius: var(--card-radius) !important;
+    overflow: hidden !important;
+    min-height: auto !important;
+  }
+  .report-card .thumb, .featured-report .thumb {
+    order: 0 !important;
+    width: 100% !important;
+    aspect-ratio: 16/9 !important;
+    min-height: 160px !important;
+  }
+  .report-card .body, .featured-report .body {
+    order: 1 !important;
+  }
+  .report-card .btn, .featured-report .btn {
+    min-width: 100% !important;
+    padding: 12px 14px !important;
+  }
+}
+
+/* =========================
+   CTA (نفس الأنماط) 
+   ========================= */
+.cta-grid{ display: grid; grid-template-columns: 1fr; gap: 14px; }
+@media (min-width:900px){ .cta-grid{ grid-template-columns: repeat(3,1fr); } }
+.cta{ border-radius: 22px; padding: 22px; border: 1px solid var(--card-border); color: #fff; box-shadow: 0 16px 40px rgba(2,6,23,.12); }
+.cta-icon{ font-size: 28px; margin-bottom: 8px; }
+.cta h4{ margin: 0 0 6px; font-weight: 900; }
+.cta p{ margin: 0 0 12px; color: rgba(255,255,255,.92); }
+.cta .btn{ display: inline-block; background:#fff; color:#0b2240; padding: 10px 16px; border-radius: 12px; text-decoration: none; border: 0; box-shadow: 0 12px 24px rgba(0,0,0,.14); }
 .cta .btn:hover{ filter: brightness(.97); }
 .cta-blue   { background: linear-gradient(135deg, rgba(29,78,216,.88), rgba(14,165,233,.78), rgba(15,23,42,.92)); }
 .cta-amber  { background: linear-gradient(135deg, rgba(2,132,199,.9),  rgba(37,99,235,.8),  rgba(7,89,133,.9)); }

@@ -1,23 +1,19 @@
-<!-- ===================== الصفحة الرئيسية (Home) ===================== -->
-<section class="section" dir="rtl">
+<!-- home.html -->
+<!-- الصفحة الرئيسية: قالب كامل مع سلايدر + تقرير مميّز + قائمة بطاقات تقارير + CTA -->
+<!-- ملاحظة: نستخدم attr.dir على section ليتغير الاتجاه تلقائياً مع اللغة -->
+<section class="section" [attr.dir]="currentDir">
   <div class="container">
 
-    <!-- ============ سلايدر المقدّمة ============ -->
+    <!-- ===================== السلايدر (Hero Slider) ===================== -->
     <div class="hero-shell" (mouseenter)="pause()" (mouseleave)="resume()">
-      <!-- خلفيات السلايدر -->
       <ng-container *ngFor="let s of slides; let i = index">
-        <div class="bg-layer"
-             [class.bg-active]="i === index"
-             [style.background-image]="'url(' + s.bg + ')'">
+        <div class="bg-layer" [class.bg-active]="i === index" [style.background-image]="'url(' + s.bg + ')'">
           <div class="bg-grad" [ngClass]="s.gradient"></div>
         </div>
       </ng-container>
 
-      <!-- محتوى السلايدر -->
       <div class="hero-content">
-        <a class="icon-wrap"
-           [routerLink]="slides[index].route"
-           [attr.aria-label]="(slides[index].titleKey | translate)">
+        <a class="icon-wrap" [routerLink]="slides[index].route" [attr.aria-label]="(slides[index].titleKey | translate)">
           <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
             <path [attr.d]="iconPath(slides[index].icon)"></path>
           </svg>
@@ -26,7 +22,6 @@
         <h1 class="hero-title">{{ slides[index].titleKey | translate }}</h1>
         <p class="hero-sub">{{ slides[index].subtitleKey | translate }}</p>
 
-        <!-- شارات ديناميكية من مفاتيح الترجمة -->
         <div class="tags">
           <span class="tag" *ngFor="let t of tags">{{ t }}</span>
         </div>
@@ -35,103 +30,80 @@
           {{ (slides[index].ctaKey || slides[index].titleKey) | translate }}
         </a>
 
-        <!-- شريط التقدم -->
         <div class="progress">
-          <div class="bar"
-               #bar
-               (animationend)="onProgressDone()"
-               [style.animationPlayState]="paused ? 'paused' : 'running'">
-          </div>
+          <div class="bar" #bar (animationend)="onProgressDone()" [style.animationPlayState]="paused ? 'paused' : 'running'"></div>
         </div>
       </div>
 
-      <!-- أزرار السلايدر -->
-      <button class="nav-btn left" type="button"
-              (click)="prev()"
-              [attr.aria-label]="'home.prev' | translate">
-        <svg viewBox="0 0 24 24">
-          <path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2" fill="none"
-                stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+      <button class="nav-btn left" type="button" (click)="prev()" [attr.aria-label]="'home.prev' | translate">
+        <svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
 
-      <button class="nav-btn right" type="button"
-              (click)="next()"
-              [attr.aria-label]="'home.next' | translate">
-        <svg viewBox="0 0 24 24">
-          <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" fill="none"
-                stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+      <button class="nav-btn right" type="button" (click)="next()" [attr.aria-label]="'home.next' | translate">
+        <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
 
-      <!-- نقاط السلايدر -->
       <div class="dots">
-        <button *ngFor="let _ of slides; let i = index"
-                class="dot"
-                [class.active]="i === index"
-                (click)="go(i)"
-                [attr.aria-label]="'home.goto_slide' | translate:{ num: i + 1 }">
-        </button>
+        <button *ngFor="let _ of slides; let i = index" class="dot" [class.active]="i === index" (click)="go(i)" [attr.aria-label]="'home.goto_slide' | translate:{ num: i + 1 }"></button>
       </div>
     </div>
 
-    <!-- ============ التقرير المميّز ============ -->
-    <div class="featured-report mt-24" dir="rtl">
-      <!-- الصورة الخلفية للتقرير المميّز -->
-      <div class="thumb"
-           [style.background-image]="'url(' + featuredReport.img + ')'"
-           [style.background-color]="'#0b2240'"></div>
+    <!-- ===================== التقرير المميّز (ثابت في الأعلى) ===================== -->
+   <!-- ===================== التقرير المميّز (يتغير مع اللغة الآن) ===================== -->
+<div class="featured-report mt-24"
+     *ngIf="featuredReport"
+     [attr.aria-label]="(featuredReport.titleKey | translate)"
+     [class.lang-rtl]="currentDir === 'rtl'"
+     [class.lang-ltr]="currentDir === 'ltr'">
 
-      <!-- منطقة النص -->
-      <div class="body">
-        <!-- ملاحظة: العنوان والملخص من الترجمة -->
-        <h3 class="title">{{ 'home.featured.title' | translate }}</h3>
-        <p class="excerpt">{{ 'home.featured.excerpt' | translate }}</p>
+  <div class="thumb">
+    <img [src]="featuredReport.img" [alt]="(featuredReport.titleKey | translate)"
+         loading="lazy" (error)="onImgError($event)" />
+  </div>
 
-        <div class="actions">
-          <a class="btn primary"
-             [routerLink]="'/reports'"
-             [queryParams]="{ r: featuredReport.slug }">
-            {{ 'home.more_details' | translate }}
-          </a>
-        </div>
-      </div>
+  <div class="body">
+    <h3 class="title">{{ featuredReport.titleKey | translate }}</h3>
+    <p class="excerpt">{{ featuredReport.excerptKey | translate }}</p>
+
+    <div class="actions">
+      <a class="btn primary" [routerLink]="featuredReport.localLink"
+         [queryParams]="{ r: featuredReport.slug }">
+        {{ 'home.more_details' | translate }}
+      </a>
     </div>
-
-    <!-- ============ بطاقات التقارير (نفس تصميم المميّز) ============ -->
-    <!-- ملاحظة: كل بطاقة = صورة جانبية + لوحة نص بنفس التدرّج -->
-    <!-- ============ بطاقات التقارير (مطابقة للمميّز) ============ -->
-<!-- ============ بطاقات التقارير (نفس شكل التقرير المميّز) ============ -->
-<!-- بطاقات التقارير (نفس شكل التقرير المميز تمامًا) -->
-<div class="reports-list mt-16" dir="rtl">
-  <a class="report-row"
-     *ngFor="let r of reportCards; let i = index"
-     [class.alt]="i % 2 === 1"  
-     [routerLink]="r.localLink || '/reports'"
-     [queryParams]="r.slug ? { r: r.slug } : null"
-     [attr.aria-label]="(r.titleKey | translate)">
-
-    <!-- صورة على جانب + تظليل أزرق -->
-    <div class="thumb"
-         [style.background-image]="'url(' + r.img + ')'">
-    </div>
-
-    <!-- نص على الجانب الآخر -->
-    <div class="body">
-      <h3 class="title">{{ r.titleKey   | translate }}</h3>
-      <p  class="excerpt">{{ r.excerptKey| translate }}</p>
-
-      <div class="actions">
-        <span class="spacer"></span>
-        <span class="btn primary">{{ 'home.more_details' | translate }}</span>
-      </div>
-    </div>
-  </a>
+  </div>
 </div>
 
+    <!-- ===================== قائمة البطاقات (كلها بمظهر مميّز) ===================== -->
+    <div class="reports-list mt-16">
+     <!-- لكل بطاقة نحدّد كلاس لغوي ديناميكي -->
+<a class="report-card"
+   *ngFor="let r of reportCards; let i = index"
+   [routerLink]="r.localLink || '/reports'"
+   [queryParams]="r.slug ? { r: r.slug } : null"
+   [attr.aria-label]="(r.titleKey | translate)"
+   [class.lang-rtl]="currentDir === 'rtl'"
+   [class.lang-ltr]="currentDir === 'ltr'">
+  <div class="thumb">
+    <img [src]="r.img" [alt]="(r.titleKey | translate)" loading="lazy" (error)="onImgError($event)" />
+  </div>
 
+  <div class="body">
+    <h3 class="title">{{ r.titleKey | translate }}</h3>
+    <p class="excerpt">{{ r.excerptKey | translate }}</p>
 
-    <!-- ============ الدعوات (CTA) ============ -->
+    <div class="actions">
+      <span class="spacer"></span>
+      <a class="btn primary" [routerLink]="r.localLink || '/reports'" [queryParams]="r.slug ? { r: r.slug } : null">
+        {{ 'home.more_details' | translate }}
+      </a>
+    </div>
+  </div>
+</a>
+
+    </div>
+
+    <!-- ===================== CTA grid (كما كان) ===================== -->
     <div class="cta-grid mt-16">
       <div class="cta cta-blue">
         <div class="cta-icon">💡</div>
