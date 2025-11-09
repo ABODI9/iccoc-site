@@ -21,7 +21,8 @@
     "reports": "Reports",
     "initiative": "Initiative",
     "links": "Links",
-    "contact": "Contact Us"
+    "contact": "Contact Us",
+    "media": "Media"
   },
 
 
@@ -132,10 +133,7 @@
     ]
   },
 
-  "media": {
-    "title": "Media",
-    "welcome": "We welcome media coverage related to the Commission’s work. For coordination: media@iccoc.eu"
-  },
+  
 
   "news": {
     "title": "Reports & News",
@@ -218,6 +216,50 @@
 
   "reports": {
   "title": "Reports & News"
-}
+},
+
+ "media": {
+    "title": "Media Center",
+    "welcome": "Welcome to the studies and reports section",
+    "recent": "Latest Articles",
+    "read_more": "Read More",
+    "subscribe": "Subscribe",
+    "subscribe_desc": "Get reports and studies first",
+    "back": "Back",
+    "not_found": "Article not found"
+  },
+
+  "articles": {
+
+    "mali": {
+      "title": "Mali: the crossroads between smuggling, terrorism and transnational crime",
+      "body": "Mali :the crossroads between smuggling, terrorism and transnational crime.\nMali is suffering from a severe fuel crisis, compounded by other accumulated crises including security, political, and financial problems. International experts estimate that the current regime in the country could collapse within a short period. This hypothesis is reinforced by the loss of government control over several northern regions of the country and the ability of the armed Azawad movement to extend its control there."
+    },
+
+    "haftar": {
+      "title": "Haftar: An Empire of Money, Power, and Corruption",
+      "body": "Haftar: An Empire of Money, Power, and Corruption\nSince seizing control of eastern Libya, retired General Khalifa Haftar has amassed a huge fortune through various business activities and other operations to acquire money through legal and illegal means. He and his sons, especially his expected successor Saddam Haftar, have become the sole masters."
+    },
+
+    "morocco": {
+      "title": "Morocco: Accumulated crises and corruption undermine reform efforts",
+      "body": "Morocco: Accumulated crises and corruption undermine reform efforts. Moroccan Prime Minister and businessman Aziz Akhannouch came to power a few years ago with many promises of economic, financial and political reform, fighting corruption and achieving sustainable development, but little of that has been achieved."
+    },
+
+    "europe": {
+      "title": "Will Europe Wean Itself Off Russian Gas?",
+      "body": "Will Europe Wean Itself Off Russian Gas?\nSince the start of the Russian war on Ukraine nearly three and a half years ago, Europe has been steadily and rapidly striving to reduce its dependence on Russian gas. However, this trend has encountered numerous obstacles, including the scarcity of viable alternatives and the indispensable reliance of some European countries, particularly those in Eastern Europe, on Russian gas. Can Europe tame its appetite for Russian Gas in light of international pressure from Washington."
+    },
+
+    "smuggling": {
+      "title": "People smuggling, networks and political dimensions",
+      "body": "People smuggling, networks and political dimensions\nThe story of human smuggling across borders into Europe and America intertwines organized crime, terrorism, drug and arms trafficking, and political corruption, making the unraveling of this dilemma one of the biggest challenges facing political, security, and economic decision-makers in both the West and the East."
+    },
+
+    "sudan": {
+      "title": "Support Militia in Sudan, Lines of support",
+      "body": "Support Militia in Sudan, Lines of support\nMany crimes have been committed by the Rapid Support Forces in Sudan since their confrontation with the Sudanese army began several years ago, but the crimes committed by the militia members and published on social media revealed unprecedented brutality and the involvement of regional and international support networks in what happened."
+    }
+  }
 
 }

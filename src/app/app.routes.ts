@@ -8,6 +8,7 @@ export const routes: Routes = [
   { path: 'reports', loadComponent: () => import('./pages/reports/reports').then(m => m.Reports) },
   { path: 'initiative', loadComponent: () => import('./pages/initiative/initiative').then(m => m.Initiative) },
   { path: 'links', loadComponent: () => import('./pages/links/links').then(m => m.Links) },
+  { path: 'media', loadComponent: () => import('./pages/media/media').then(m => m.Media) },
   { path: 'contact', loadComponent: () => import('./pages/contact/contact').then(m => m.Contact) },
   { path: '**', redirectTo: '' }
 ];

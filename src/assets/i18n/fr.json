@@ -21,7 +21,8 @@
     "reports": "Rapports",
     "initiative": "Initiative",
     "links": "Liens",
-    "contact": "Contact"
+    "contact": "Contact",
+    "media": "Médias"
   },
 
 
@@ -131,10 +132,7 @@
     ]
   },
 
-  "media": {
-    "title": "Médias",
-    "welcome": "Nous accueillons les couvertures médiatiques liées au travail de la Commission. Coordination : media@iccoc.eu"
-  },
+
 
   "news": {
     "title": "Rapports & actualités",
@@ -217,6 +215,51 @@
 
   "reports": {
   "title": "Rapports & actualités"
-}
+},
+
+ "media": {
+    "title": "Centre des médias",
+    "welcome": "Bienvenue dans la section des études et des rapports",
+    "recent": "Derniers articles",
+    "read_more": "Lire la suite",
+    "subscribe": "S'abonner",
+    "subscribe_desc": "Recevez les rapports et études en premier",
+    "back": "Retour",
+    "not_found": "Article introuvable"
+  },
+
+  "articles": {
+
+    "mali": {
+      "title": "Mali : au carrefour de la contrebande, du terrorisme et du crime transfrontalier",
+      "body": "Mali : au carrefour de la contrebande, du terrorisme et du crime transfrontalier.\nLe Mali souffre d'une grave crise du carburant, qui s'ajoute à d'autres crises accumulées, notamment sécuritaires, politiques et financières. Les experts internationaux estiment que le régime actuel pourrait s'effondrer dans un court laps de temps. Cette hypothèse est renforcée par la perte de contrôle du gouvernement sur plusieurs régions du nord du pays et la capacité du mouvement armé de l'Azawad à y étendre son contrôle."
+    },
+
+    "haftar": {
+      "title": "Haftar : un empire de l'argent, du pouvoir et de la corruption",
+      "body": "Haftar : un empire de l'argent, du pouvoir et de la corruption.\nDepuis qu'il a pris le contrôle de l'est de la Libye, le général retraité Khalifa Haftar a amassé une immense fortune à travers diverses activités commerciales et d'autres opérations visant à acquérir de l'argent par des moyens légaux et illégaux. Lui et ses fils, notamment son successeur présumé Saddam Haftar, sont devenus les seuls maîtres."
+    },
+
+    "morocco": {
+      "title": "Maroc : des crises accumulées et une corruption qui entrave les efforts de réforme",
+      "body": "Maroc : des crises accumulées et une corruption qui entrave les efforts de réforme.\nLe Premier ministre marocain et homme d'affaires Aziz Akhannouch est arrivé au pouvoir il y a quelques années avec de nombreuses promesses de réformes économiques, financières et politiques, de lutte contre la corruption et de réalisation du développement durable, mais peu de ces promesses ont été concrétisées."
+    },
+
+    "europe": {
+      "title": "L'Europe parviendra-t-elle à se sevrer du gaz russe ?",
+      "body": "L'Europe parviendra-t-elle à se sevrer du gaz russe ?\nDepuis le début de la guerre russe contre l'Ukraine il y a près de trois ans et demi, l'Europe s'efforce rapidement et progressivement de réduire sa dépendance au gaz russe. Toutefois, cette démarche se heurte à de nombreux obstacles, notamment le manque d'alternatives viables et la dépendance incontournable de certains pays européens, en particulier en Europe de l'Est, au gaz russe. L'Europe parviendra-t-elle à maîtriser son appétit pour le gaz russe sous la pression internationale de Washington ?"
+    },
+
+    "smuggling": {
+      "title": "Trafic d'êtres humains, réseaux et dimensions politiques",
+      "body": "Trafic d'êtres humains, réseaux et dimensions politiques.\nL'histoire du trafic d'êtres humains à travers les frontières vers l'Europe et l'Amérique mêle crime organisé, terrorisme, trafic de drogue et d'armes et corruption politique, faisant du démantèlement de ce fléau l'un des plus grands défis auxquels sont confrontés les décideurs politiques, sécuritaires et économiques, tant en Occident qu'en Orient."
+    },
+
+    "sudan": {
+      "title": "Milices de soutien rapide au Soudan : lignes de soutien et d'approvisionnement",
+      "body": "Milices de soutien rapide au Soudan : lignes de soutien et d'approvisionnement.\nDe nombreux crimes ont été commis par les Forces de soutien rapide au Soudan depuis le début de leur confrontation avec l'armée soudanaise il y a plusieurs années, et les crimes perpétrés par les membres de la milice, diffusés sur les réseaux sociaux, ont révélé une brutalité sans précédent ainsi que l'implication de réseaux de soutien régionaux et internationaux dans les événements."
+    }
+
+  }
 
 }

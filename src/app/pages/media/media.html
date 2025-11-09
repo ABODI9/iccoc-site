@@ -1,0 +1,87 @@
+<!-- src/app/pages/media/media.html -->
+<section class="section" [attr.dir]="currentDir">
+  <div class="container">
+    <!-- Hero -->
+    <div class="hero" [style.backgroundImage]="'url(' + heroBg + ')'">
+      <div class="wrap card soft">
+        <h1 class="page-title">{{ 'media.title' | translate }}</h1>
+        <p class="muted">{{ 'media.welcome' | translate }}</p>
+      </div>
+    </div>
+
+    <!-- زر العودة -->
+    <div class="mt-16 actions-top">
+      <button class="btn" *ngIf="activeSlug" (click)="goBack()">&larr; {{ 'media.back' | translate }}</button>
+    </div>
+
+    <!-- عرض مقال واحد -->
+    <ng-container *ngIf="activeSlug; else listView">
+      <div *ngIf="selectedArticle as a; else notFound" class="article-card card soft mt-16">
+        <div class="article-layout">
+          <div class="thumb">
+            <img [src]="a.img" [alt]="(a.titleKey | translate)" (error)="onImgError($event)" />
+          </div>
+
+          <div class="body">
+            <h2 class="title">{{ a.titleKey | translate }}</h2>
+            <p class="muted excerpt">{{ a.titleKey | translate }}</p>
+
+            <!-- المحتوى: صفحة HTML مؤمّنة أو نص i18n -->
+            <div class="content" [innerHTML]="currentArticleHtml"></div>
+
+            <div class="article-actions" style="margin-top:18px;display:flex;gap:8px;align-items:center;">
+              <button class="btn primary" (click)="goSubscribe()">{{ 'media.subscribe' | translate }}</button>
+
+              <!-- اقرأ المزيد: نفتح صفحة HTML المولدة حسب اللغة في تبويب جديد -->
+              <a class="btn" href="#" (click)="openExternal(a); $event.preventDefault()">
+                {{ 'media.read_more' | translate }}
+              </a>
+
+              <!-- بديل: رابط لتقارير داخلية (إن أردت استخدامه أزل التعليق) -->
+              <!-- <a class="btn" [routerLink]="['/reports']">{{ 'media.read_more' | translate }}</a> -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <ng-template #notFound>
+        <div class="card soft mt-16">{{ 'media.not_found' | translate }}</div>
+      </ng-template>
+    </ng-container>
+
+    <!-- عرض القائمة -->
+    <ng-template #listView>
+      <div class="list-header mt-16">
+        <h2>{{ 'media.recent' | translate }}</h2>
+        <p class="muted">{{ 'media.subscribe_desc' | translate }}</p>
+      </div>
+
+      <div class="grid cols-3 mt-8">
+        <ng-container *ngFor="let a of articles">
+          <article class="card media-card">
+            <div class="thumb">
+              <img [src]="a.img" [alt]="(a.titleKey | translate)" (error)="onImgError($event)"/>
+            </div>
+
+            <div class="body">
+              <h3 class="title">{{ a.titleKey | translate }}</h3>
+              <p class="excerpt">{{ (a.bodyKey ? (a.bodyKey | translate) : '') | slice:0:160 }}...</p>
+
+              <div class="actions">
+                <!-- دائماً نفتح الصفحة الخارجية اللغوية المولدة -->
+                <a class="btn primary" href="#" (click)="openExternal(a); $event.preventDefault()">
+                  {{ 'media.read_more' | translate }}
+                </a>
+
+                <!-- بديل داخلي: افتح صفحة المقال داخل التطبيق -->
+                
+
+                <button class="btn" (click)="goSubscribe()">{{ 'media.subscribe' | translate }}</button>
+              </div>
+            </div>
+          </article>
+        </ng-container>
+      </div>
+    </ng-template>
+  </div>
+</section>

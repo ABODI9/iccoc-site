@@ -27,9 +27,11 @@
         {{ l.key | translate }}
       </a>
 
+
       <a routerLink="/contact" routerLinkActive="active">
         {{ 'nav.contact' | translate }}
       </a>
+
     </nav>
 
     <!-- اختيار اللغة (يظهر بالديسكتوب) -->
@@ -88,6 +90,7 @@
     <a *ngFor="let l of servicesLinks" [routerLink]="l.to" (click)="closeMenu()">
       {{ l.key | translate }}
     </a>
+
 
     <a routerLink="/contact" (click)="closeMenu()">{{ 'nav.contact' | translate }}</a>
   </nav>

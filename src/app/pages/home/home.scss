@@ -291,6 +291,20 @@
 /* =========================
    قالب البطاقة "مميّز" مطبق على كل تقارير
    ========================= */
+
+/* variables (تقدر تعدّل القيم هنا) */
+:root {
+  --card-radius: 12px;
+  --card-border: rgba(11,34,64,0.06);
+  --card-shadow: 0 12px 30px rgba(10,30,60,0.06);
+  --card-shadow-hover: 0 22px 60px rgba(10,30,60,0.10);
+  --card-bg: linear-gradient(180deg, rgba(8,25,50,0.03), rgba(255,255,255,0.02));
+  --overlay: linear-gradient(0deg, rgba(0,0,0,0.06), rgba(0,0,0,0.02));
+  --card-min-h: 260px;
+  --card-img-min-h: 160px;
+}
+
+/* base card */
 .report-card, .featured-report {
   display: grid;
   grid-template-columns: 1fr;
@@ -311,7 +325,7 @@
   .report-card, .featured-report { grid-template-columns: 48% 52%; align-items: stretch; min-height: 260px; }
 }
 
-/* thumb (صندوق الصورة) */
+/* thumb (صندوق الصورة) - نحافظ على aspect-ratio */
 .report-card .thumb,
 .featured-report .thumb {
   position: relative;
@@ -320,20 +334,29 @@
   aspect-ratio: 16/9;
   min-height: var(--card-img-min-h);
   overflow: hidden;
-  background-color: #0b2240;
+  background-color: #0b2240; /* خلفية موحّدة لملء المساحات */
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding: 8px; /* مسافة داخلية صغيرة */
+  box-sizing: border-box;
 }
 
-/* img داخل thumb */
+/* img داخل thumb: نعرض الصورة كاملة (contain) ومركزها */
 .report-card .thumb img,
 .featured-report .thumb img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;    /* ← عرض الصورة كاملة بدون اقتطاع */
   object-position: center;
   display: block;
+  border-radius: 6px;
+  background-color: rgba(255,255,255,0.02); /* طفيف خلف الصورة */
 }
 
-/* overlay فوق الصورة لإعطاء طابع موحّد */
+/* overlay فوق الصورة لإعطاء طابع موحّد (يبقى شفاف حتى لو contain) */
 .report-card .thumb::after,
 .featured-report .thumb::after {
   content: "";
@@ -372,6 +395,7 @@
   font-size: 15px;
   opacity: .95;
   flex: 1 1 auto;
+  text-align: justify;
 }
 
 /* إجراءات */
@@ -411,7 +435,6 @@
 }
 
 /* ========== دعم RTL / LTR الديناميكي ========== */
-/* نستخدم attr dir على الـ section (في HTML) لذلك هذه القواعد تعمل تلقائياً */
 [dir="rtl"] .report-card { grid-template-columns: 52% 48%; }
 [dir="rtl"] .report-card .thumb { order: 2; }
 [dir="rtl"] .report-card .body { order: 1; }
@@ -433,7 +456,6 @@
 .report-card.lang-rtl .thumb { order: 2; }
 .report-card.lang-rtl .body  { order: 1; text-align: right; }
 
-/* تأكد أيضاً من تغطية featured إذا أردت له أن يتفاعل بنفس الطريقة */
 .featured-report.lang-ltr { grid-template-columns: 48% 52%; }
 .featured-report.lang-ltr .thumb { order: 1; }
 .featured-report.lang-ltr .body  { order: 2; text-align: left; }
@@ -442,8 +464,7 @@
 .featured-report.lang-rtl .thumb { order: 2; }
 .featured-report.lang-rtl .body  { order: 1; text-align: right; }
 
-
-/* موبايل: تكديس عمودي (قواعد أخيرة لتجاوز أي قواعد سابقة) */
+/* موبايل: تكديس عمودي */
 @media (max-width: 800px) {
   .report-card, .featured-report {
     display: flex !important;
@@ -466,6 +487,18 @@
     padding: 12px 14px !important;
   }
 }
+
+/* إضافات اختيارية مفيدة */
+/* لو تحب خلفية متدرجة بدل اللون الصلب تحت الصورة ضع هذا */
+.report-card .thumb .img-wrapper,
+.featured-report .thumb .img-wrapper {
+  width: 100%;
+  height: 100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
 
 /* =========================
    CTA (نفس الأنماط) 

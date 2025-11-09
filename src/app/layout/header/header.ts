@@ -31,6 +31,7 @@ export class HeaderComponent implements OnInit {
     { to: '/about', key: 'nav.about' },
     { to: '/who', key: 'nav.who' },
     { to: '/reports', key: 'nav.reports' },
+    { to: '/media', key: 'nav.media' },
   ];
 
   /** روابط قسم الخدمات/المبادرات */
