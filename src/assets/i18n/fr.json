@@ -31,38 +31,40 @@
   },
 
   "home": {
-      "welcome": "Bienvenue sur le site officiel de l’Autorité internationale de lutte contre la corruption et le crime organisé, une organisation non gouvernementale et à but non lucratif basée à Genève, en Suisse.",
-      "more_details": "Plus de détails",
-      "prev": "Précédent",
-      "next": "Suivant",
-      "goto_slide": "Aller à la diapositive {{num}}",
-      "featured": {
-        "title": "Mali : Le carrefour de la contrebande, du terrorisme et du crime transnational",
-        "excerpt": "Le Mali traverse une grave crise du carburant aggravée par des crises politiques, sécuritaires et financières. La perte de contrôle du gouvernement sur le nord et la montée des groupes armés font du Mali un point chaud où se croisent terrorisme, contrebande et crime organisé."
-      },
-      "cards": {
-        "europe_gas": {
-          "title": "Europe : Peut-elle se sevrer du gaz russe ?",
-          "excerpt": "Depuis le début de la guerre en Ukraine, l’Europe tente de réduire sa dépendance au gaz russe. Mais le manque d’alternatives et la dépendance de certains pays d’Europe de l’Est compliquent considérablement cette tâche."
-        },
-        "morocco": {
-          "title": "Maroc : Crises accumulées et corruption minent les réformes",
-          "excerpt": "Le Premier ministre marocain Aziz Akhannouch est arrivé au pouvoir avec des promesses de réforme et de lutte contre la corruption, mais peu de progrès ont été réalisés. La corruption et le chômage persistent, menaçant la stabilité sociale."
-        },
-        "haftar": {
-          "title": "Haftar : L’empire de l’argent, du pouvoir et de la corruption",
-          "excerpt": "Depuis qu’il a pris le contrôle de l’est de la Libye, Khalifa Haftar a accumulé une immense richesse grâce à des activités légales et illégales, consolidant ainsi son pouvoir et celui de sa famille."
-        },
-        "human_smuggling": {
-          "title": "Trafic d’êtres humains : Réseaux et dimensions politiques",
-          "excerpt": "Le trafic d’êtres humains se mêle au crime organisé, au terrorisme et à la corruption politique, constituant l’un des défis mondiaux les plus complexes."
-        },
-        "sudan_rsf": {
-          "title": "Forces de soutien rapide au Soudan : Réseaux de soutien et d’appui",
-          "excerpt": "Les Forces de soutien rapide au Soudan ont commis de nombreuses atrocités, révélant des réseaux régionaux et internationaux impliqués dans leurs opérations."
-        }
-      }
+  "welcome": "Bienvenue sur le site officiel de l’Autorité internationale de lutte contre la corruption et le crime organisé, une organisation non gouvernementale basée à Genève.",
+  "more_details": "Plus de détails",
+  "prev": "Précédent",
+  "next": "Suivant",
+  "goto_slide": "Aller à la diapositive {{num}}",
+
+  "featured": {
+    "title": "Mali : Carrefour du terrorisme et du crime",
+    "excerpt": "Le Mali cumule crises sécuritaires et économiques. Groupes armés et réseaux illicites en font un foyer d’instabilité régionale."
+  },
+
+  "cards": {
+    "europe_gas": {
+      "title": "L’Europe et le gaz russe",
+      "excerpt": "L’Europe cherche à rompre sa dépendance au gaz russe. Manque d’alternatives et forte dépendance entravent la transition."
     },
+    "morocco": {
+      "title": "Maroc : Réformes face à la corruption",
+      "excerpt": "Chômage et corruption fragilisent les réformes. L’insatisfaction sociale s’intensifie malgré les engagements annoncés."
+    },
+    "haftar": {
+      "title": "Haftar : Pouvoir et influence",
+      "excerpt": "Haftar étend son influence via finance et réseaux. Son contrôle à l’Est libyen redéfinit l’équilibre régional."
+    },
+    "human_smuggling": {
+      "title": "Trafic humain : Enjeux politiques",
+      "excerpt": "Trafic, corruption et crime organisé s’entremêlent. Défi global exigeant des réponses politiques et sécuritaires."
+    },
+    "sudan_rsf": {
+      "title": "Soudan : Soutien au RSF",
+      "excerpt": "Les RSF révèlent des réseaux logistiques transnationaux. Soutien structuré dépassant les frontières internes."
+    }
+  }
+},
 
 
   "about": {

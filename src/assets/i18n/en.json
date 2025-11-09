@@ -32,41 +32,41 @@
     "home_title": "International Commission Against Corruption and Organised Crime",
     "home_sub": "Welcome to the official website – a non-governmental, non-profit body based in Geneva, Switzerland."
   },
+"home": {
+  "welcome": "Welcome to the official website of the International Authority for Combating Corruption and Organized Crime, a non-governmental, non-profit organization headquartered in Geneva, Switzerland.",
+  "more_details": "More details",
+  "prev": "Previous",
+  "next": "Next",
+  "goto_slide": "Go to slide {{num}}",
 
-  "home": {
-      "welcome": "Welcome to the official website of the International Authority for Combating Corruption and Organized Crime, a non-governmental, non-profit organization headquartered in Geneva, Switzerland.",
-      "more_details": "More details",
-      "prev": "Previous",
-      "next": "Next",
-      "goto_slide": "Go to slide {{num}}",
-      "featured": {
-        "title": "Mali: The crossroads of smuggling, terrorism, and transnational crime",
-        "excerpt": "Mali is suffering from a severe fuel crisis, compounded by other accumulated crises including security, political, and financial instability. International experts estimate that the current regime could collapse within a short time. The government's loss of control in the north, the rise of armed groups, and regional entanglements have turned Mali into a hotspot where terrorism, smuggling, and organized crime intersect."
-      },
-      "cards": {
-        "europe_gas": {
-          "title": "Europe: Can it wean itself off Russian gas?",
-          "excerpt": "Since the start of the Russian war on Ukraine, Europe has been striving to reduce its dependence on Russian gas. However, the lack of viable alternatives and the reliance of several Eastern European countries make this mission extremely difficult."
-        },
-        "morocco": {
-          "title": "Morocco: Accumulated crises and corruption undermine reform",
-          "excerpt": "Moroccan Prime Minister and businessman Aziz Akhannouch came to power with promises of reform and anti-corruption, but little has been achieved. Corruption, unemployment, and mismanagement persist, threatening social stability."
-        },
-        "haftar": {
-          "title": "Haftar: An empire of money, power, and corruption",
-          "excerpt": "Since seizing control of eastern Libya, Khalifa Haftar has built vast wealth through legal and illegal means, consolidating power with his family and expanding influence across Libya and neighboring states."
-        },
-        "human_smuggling": {
-          "title": "Human smuggling: Networks and political dimensions",
-          "excerpt": "Human smuggling intertwines with organized crime, terrorism, drug and arms trafficking, and political corruption, making it one of the toughest challenges for global policymakers."
-        },
-        "sudan_rsf": {
-          "title": "Sudan’s Rapid Support Forces: Lines of support and supply",
-          "excerpt": "Since clashing with the Sudanese army, the Rapid Support Forces have committed numerous atrocities, revealing the involvement of regional and international networks backing their operations."
-        }
-      }
+  "featured": {
+    "title": "Mali: The crossroads of smuggling, terrorism, and transnational crime",
+    "excerpt": "Mali faces overlapping crises of fuel, security, and politics. Armed groups and smuggling networks are turning it into a regional hub for crime and instability."
+  },
+
+  "cards": {
+    "europe_gas": {
+      "title": "Europe: Can it wean itself off Russian gas?",
+      "excerpt": "Europe seeks alternatives to Russian gas amid political pressure. Limited options and high dependency make the transition complex and uncertain."
     },
-
+    "morocco": {
+      "title": "Morocco: Crises and corruption challenge reform",
+      "excerpt": "Economic promises collide with rising corruption and unemployment. Public frustration grows as reform outcomes fall short across key sectors."
+    },
+    "haftar": {
+      "title": "Haftar: Empire of money, power, and corruption",
+      "excerpt": "Haftar built vast influence through wealth and networks. His control reshaped eastern Libya, fueling political ambition and regional extension."
+    },
+    "human_smuggling": {
+      "title": "Human smuggling: Networks and political dimensions",
+      "excerpt": "Smuggling networks intersect with corruption and organized crime. A global challenge requiring political, security, and economic solutions."
+    },
+    "sudan_rsf": {
+      "title": "Sudan’s Rapid Support Forces: Supply networks",
+      "excerpt": "RSF operations reveal regional and international backing. Evidence shows structured supply and support beyond internal boundaries."
+    }
+  }
+},
 
   "about": {
     "title": "About the Commission",
