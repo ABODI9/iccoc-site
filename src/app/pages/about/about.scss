@@ -6,12 +6,9 @@
   --brand: #0f766e;
   --accent: #14b8a6;
   --border: #e2e8f0;
-
-  /* تحكم سريع بارتفاع الصورة داخل كل بطاقة */
-  /* غيّرها لـ 16/9 أو 4/3 حسب ما تحب */
-  /* ملاحظة: لا يمكن استخدام custom property داخل aspect-ratio مباشرة حتى الآن */
 }
 
+/* جذر المستضيف */
 :host {
   display: block;
   color: var(--text);
@@ -25,30 +22,86 @@
   padding: 0 18px;
 }
 
-/* HERO (كما هي) */
+
+/* HERO */
 .hero {
-  position: relative;
+  position: relative; /* مهم: الحاوية النسبية لكي يعمل الإسناد المطلق للكرت */
   border-radius: 24px;
   overflow: hidden;
   margin: 24px 0 40px;
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
 
-  .hero-img { width: 100%; height: 420px; object-fit: cover; display: block; }
-
-  .hero-content {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.45);
-    color: #fff;
-    display: grid;
-    place-items: center;
-    text-align: center;
-    padding: 18px;
+  .hero-img {
+    width: 100%;
+    height: 420px;
+    object-fit: cover;
+    display: block;
   }
 
-  .hero-title { font-size: clamp(28px, 6vw, 48px); margin: 0; }
-  .hero-subtitle { font-size: 1.2rem; margin-top: 8px; max-width: 780px; }
+  /* الكرت أبيض عائم في منتصف الصورة */
+  .floating-card {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%); /* يركّز الكرت تماماً في منتصف الحاوية */
+    width: clamp(260px, 48%, 520px);
+    max-width: 520px;
+    padding: 22px 28px;
+    background: #ffffff;
+    color: var(--text);
+    border-radius: 14px;
+    box-shadow: 0 14px 40px rgba(2,6,23,0.18);
+    border: 1px solid rgba(2,6,23,0.06);
+    text-align: center;
+    direction: rtl;
+    z-index: 3;
+    line-height: 1.25;
+    pointer-events: auto;
+  }
+
+  .floating-card .hero-title {
+    margin: 0;
+    font-size: clamp(22px, 4.5vw, 36px);
+    font-weight: 700;
+  }
+
+  .floating-card .hero-subtitle {
+    margin-top: 8px;
+    font-size: 1rem;
+    color: var(--muted);
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* لو تبغى نسخة زجاجية بدل الصلب:
+     استعمل class="floating-card floating-card--glass" */
+  .floating-card--glass {
+    background: rgba(255,255,255,0.88);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border: 1px solid rgba(255,255,255,0.6);
+    box-shadow: 0 10px 28px rgba(2,6,23,0.10);
+  }
+
+  /* responsive tweaks */
+  @media (max-width: 900px) {
+    .hero-img { height: 360px; }
+    .floating-card { width: 84%; padding: 18px 20px; }
+  }
+
+  @media (max-width: 640px) {
+    .hero-img { height: 300px; }
+    .floating-card {
+      width: 92%;
+      padding: 14px 16px;
+      transform: translate(-50%, -40%); /* يرفعه شوية عشان لا يغطي نص أكبر */
+    }
+    .floating-card .hero-title { font-size: 20px; }
+    .floating-card .hero-subtitle { font-size: 0.95rem; }
+  }
 }
+
 
 /* GRID & CARDS */
 .grid { display: grid; gap: 18px; }
@@ -74,7 +127,7 @@
 /* SECTION TITLES */
 .section-title { margin-top: 40px; font-size: 26px; color: var(--brand); }
 
-/* ===================== OBJECTIVES ===================== */
+/* OBJECTIVES */
 .objectives-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
@@ -91,7 +144,7 @@
   transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
   display: flex;
   flex-direction: column;
-  min-height: 320px; /* بطاقات أطول لراحة القراءة */
+  min-height: 320px;
   text-align: center;
 
   &:hover {
@@ -101,11 +154,10 @@
   }
 }
 
-/* صورة متناسقة بنسبة أبعاد ثابتة */
 .image-wrapper {
   position: relative;
   width: 100%;
-  aspect-ratio: 3 / 2; /* اجعلها 16/9 أو 4/3 حسب ذوقك */
+  aspect-ratio: 3 / 2;
   overflow: hidden;
   background: #eef2f7;
 
@@ -121,7 +173,7 @@
 
   .idx {
     position: absolute;
-    inset-inline-start: 10px; /* يدعم RTL */
+    inset-inline-start: 10px;
     top: 10px;
     width: 42px;
     height: 42px;
@@ -139,7 +191,7 @@
   color: var(--text);
   line-height: 1.7;
   font-size: 1rem;
-  flex: 1; /* يملأ بقية مساحة البطاقة لارتفاعات متساوية */
+  flex: 1;
 }
 
 /* FOOTER */
@@ -151,8 +203,6 @@
   padding-top: 20px;
 }
 
-/* RESPONSIVE */
 @media (max-width: 640px) {
-  .hero .hero-img { height: 300px; }
   .objective-card { min-height: 300px; }
 }

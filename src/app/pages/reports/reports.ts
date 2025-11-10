@@ -25,8 +25,7 @@ const LOGO =
   'https://drive.google.com/uc?export=view&id=1YOyaPSUuhfUxFcGseqIE_FXlDqpSYxgl';
 
 // صورة خلفية الهيرو (غيّر الـ id لو أردت)
-const HERO_BG =
-  'https://drive.google.com/uc?export=view&id=1TcqCQOWapiGIHxbrnSAd5Ha4dfWVEO1t';
+const HERO_BG = 'assets/report-img/newspaper.png';
 
 @Component({
   selector: 'app-reports',

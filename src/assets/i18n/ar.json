@@ -112,16 +112,16 @@
     "title": "ماذا نفعل",
     "subtitle": "برامج وأنشطة عملية",
     "items": [
-      { "img": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=800&auto=format&fit=crop", "text": "عقد ندوات ومؤتمرات وورش عمل…" },
-      { "img": "https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=800&auto=format&fit=crop", "text": "إنشاء فريق محلي ودولي لتعديل وتطوير القوانين." },
-      { "img": "https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?q=80&w=800&auto=format&fit=crop", "text": "عقد شراكات وتفاهمات مع الجهات ذات الاختصاص." },
-      { "img": "https://images.unsplash.com/photo-1517976487492-576ea346b021?q=80&w=800&auto=format&fit=crop", "text": "مذكرات تفاهم مع المؤسسات الدولية ذات العلاقة." },
-      { "img": "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=800&auto=format&fit=crop", "text": "التعاون مع الجامعات ومنظمات المجتمع المدني…" },
-      { "img": "https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?q=80&w=800&auto=format&fit=crop", "text": "تلقي البلاغات وإحالتها للتحقق والمتابعة." },
-      { "img": "https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=800&auto=format&fit=crop", "text": "حملات توعية مجتمعية عبر الإعلام." },
-      { "img": "https://images.unsplash.com/photo-1496134731652-92ad7d726f48?q=80&w=800&auto=format&fit=crop", "text": "استثمار المناسبات الدولية للترويج للنزاهة." },
-      { "img": "https://images.unsplash.com/photo-1483478550801-ceba5fe50e8e?q=80&w=800&auto=format&fit=crop", "text": "تعزيز الشراكة المجتمعية بين الأطراف المختلفة." },
-      { "img": "https://images.unsplash.com/photo-1557800636-894a64c1696f?q=80&w=800&auto=format&fit=crop", "text": "المشاركة في الجوائز الدولية لمكافحة الفساد." }
+      { "text": "عقد ندوات ومؤتمرات وورش عمل…" },
+      { "text": "إنشاء فريق محلي ودولي لتعديل وتطوير القوانين." },
+      { "text": "عقد شراكات وتفاهمات مع الجهات ذات الاختصاص." },
+      { "text": "مذكرات تفاهم مع المؤسسات الدولية ذات العلاقة." },
+      { "text": "التعاون مع الجامعات ومنظمات المجتمع المدني…" },
+      { "text": "تلقي البلاغات وإحالتها للتحقق والمتابعة." },
+      { "text": "حملات توعية مجتمعية عبر الإعلام." },
+      { "text": "استثمار المناسبات الدولية للترويج للنزاهة." },
+      { "text": "تعزيز الشراكة المجتمعية بين الأطراف المختلفة." },
+      { "text": "المشاركة في الجوائز الدولية لمكافحة الفساد." }
     ]
   },
 

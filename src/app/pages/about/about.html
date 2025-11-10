@@ -1,12 +1,15 @@
 <main class="container">
   <!-- HERO -->
   <header class="hero" role="banner" aria-label="{{ 'about.title' | translate }}">
-    <img class="hero-img" [src]="heroImage" alt="Hero" />
-    <div class="hero-content">
-      <h1 class="hero-title">{{ titleKey | translate }}</h1>
-      <p class="hero-subtitle">{{ subtitleKey | translate }}</p>
-    </div>
-  </header>
+  <img class="hero-img" [src]="heroImage" alt="Hero" />
+
+  <!-- المربع الأبيض العائم: موضوع مباشرة داخل .hero -->
+  <div class="floating-card" role="region" aria-label="تقارير وأخبار">
+    <h1 class="hero-title" aria-level="1">{{ titleKey | translate }}</h1>
+    <p class="hero-subtitle">{{ subtitleKey | translate }}</p>
+  </div>
+</header>
+
 
   <!-- FEATURE CARDS -->
   <section class="grid cols-3" aria-label="Highlights">
@@ -29,14 +32,10 @@
         <img [src]="goal.img"
              [attr.alt]="goal.alt || ('goal ' + (i + 1))"
              loading="lazy"
-             (error)="onImgError(goal)" />
+              />
         <div class="idx">{{ i + 1 }}</div>
       </div>
       <p class="objective-text">{{ goal.text }}</p>
     </article>
   </section>
-
-  <footer class="footer">
-    {{ 'app.footer' | translate : { year: currentYear } }}
-  </footer>
 </main>
