@@ -101,21 +101,21 @@
   },
 
   "what": {
-    "title": "Nos actions",
-    "subtitle": "Programmes et activités concrètes",
-    "items": [
-      { "img": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=800&auto=format&fit=crop", "text": "Organisation et participation à des séminaires, conférences et ateliers…" },
-      { "img": "https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=800&auto=format&fit=crop", "text": "Constitution d’équipes nationales et internationales pour adapter et développer les lois." },
-      { "img": "https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?q=80&w=800&auto=format&fit=crop", "text": "Partenariats et protocoles d’accord avec les organismes compétents." },
-      { "img": "https://images.unsplash.com/photo-1517976487492-576ea346b021?q=80&w=800&auto=format&fit=crop", "text": "Signature de protocoles d’accord avec des institutions internationales." },
-      { "img": "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=800&auto=format&fit=crop", "text": "Coopération avec les universités et les organisations de la société civile…" },
-      { "img": "https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?q=80&w=800&auto=format&fit=crop", "text": "Réception des signalements et transmission pour vérification et suivi." },
-      { "img": "https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=800&auto=format&fit=crop", "text": "Campagnes de sensibilisation via les médias." },
-      { "img": "https://images.unsplash.com/photo-1496134731652-92ad7d726f48?q=80&w=800&auto=format&fit=crop", "text": "Valorisation des journées internationales pour promouvoir l’intégrité." },
-      { "img": "https://images.unsplash.com/photo-1483478550801-ceba5fe50e8e?q=80&w=800&auto=format&fit=crop", "text": "Renforcement des partenariats multi-acteurs." },
-      { "img": "https://images.unsplash.com/photo-1557800636-894a64c1696f?q=80&w=800&auto=format&fit=crop", "text": "Participation à des prix internationaux de lutte contre la corruption." }
-    ]
-  },
+  "title": "Ce que nous faisons",
+  "subtitle": "Programmes et activités pratiques",
+  "items": [
+    { "id": "act-1", "name": "Ateliers", "text": "Organisation de séminaires, conférences et ateliers…" },
+    { "id": "act-2", "name": "Développement des lois", "text": "Créer des équipes locales et internationales pour modifier et développer les lois." },
+    { "id": "act-3", "name": "Partenariats", "text": "Établir des partenariats et des accords avec les autorités compétentes." },
+    { "id": "act-4", "name": "Protocoles d'accord", "text": "Signer des protocoles d’accord avec les institutions internationales concernées." },
+    { "id": "act-5", "name": "Universités & ONG", "text": "Coopération avec les universités et les organisations de la société civile…" },
+    { "id": "act-6", "name": "Traitement des signalements", "text": "Réception et transmission des signalements pour vérification et suivi." },
+    { "id": "act-7", "name": "Campagnes de sensibilisation", "text": "Lancer des campagnes de sensibilisation communautaire via les médias." },
+    { "id": "act-8", "name": "Événements mondiaux", "text": "Exploiter les occasions internationales pour promouvoir l’intégrité." },
+    { "id": "act-9", "name": "Partenariat communautaire", "text": "Renforcer les partenariats communautaires entre les différentes parties." },
+    { "id": "act-10", "name": "Récompenses internationales", "text": "Participation aux prix internationaux de lutte contre la corruption." }
+  ]
+},
 
   "activities": {
     "title": "Nos actions",

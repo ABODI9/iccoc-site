@@ -99,21 +99,22 @@
   },
 
   "what": {
-    "title": "我们在做什么",
-    "subtitle": "务实的项目与活动",
-    "items": [
-      { "img": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=800&auto=format&fit=crop", "text": "举办并参与研讨会、会议与工作坊…" },
-      { "img": "https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=800&auto=format&fit=crop", "text": "组建国内外团队以修订和完善相关法律。" },
-      { "img": "https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?q=80&w=800&auto=format&fit=crop", "text": "与相关机构建立伙伴关系与谅解备忘录。" },
-      { "img": "https://images.unsplash.com/photo-1517976487492-576ea346b021?q=80&w=800&auto=format&fit=crop", "text": "与国际机构签署谅解备忘录。" },
-      { "img": "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=800&auto=format&fit=crop", "text": "与高校和民间组织开展合作…" },
-      { "img": "https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?q=80&w=800&auto=format&fit=crop", "text": "接收举报并移交相关部门核查与跟进。" },
-      { "img": "https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=800&auto=format&fit=crop", "text": "通过媒体开展公众宣传与教育。" },
-      { "img": "https://images.unsplash.com/photo-1496134731652-92ad7d726f48?q=80&w=800&auto=format&fit=crop", "text": "借助国际纪念日宣传廉洁价值观。" },
-      { "img": "https://images.unsplash.com/photo-1483478550801-ceba5fe50e8e?q=80&w=800&auto=format&fit=crop", "text": "加强不同主体之间的社会协作与伙伴关系。" },
-      { "img": "https://images.unsplash.com/photo-1557800636-894a64c1696f?q=80&w=800&auto=format&fit=crop", "text": "参与国际反腐败奖项活动。" }
-    ]
-  },
+  "title": "我们在做什么",
+  "subtitle": "实践项目与活动",
+  "items": [
+    { "id": "act-1", "name": "研讨会", "text": "举办研讨会、会议和讲习班…" },
+    { "id": "act-2", "name": "法律发展", "text": "建立地方和国际团队以修改和完善法律。" },
+    { "id": "act-3", "name": "合作伙伴", "text": "与相关机构建立合作伙伴关系和协议。" },
+    { "id": "act-4", "name": "谅解备忘录", "text": "与相关国际机构签署谅解备忘录。" },
+    { "id": "act-5", "name": "大学与非政府组织", "text": "与大学和民间组织合作…" },
+    { "id": "act-6", "name": "报告处理", "text": "接收举报并进行核实和跟进处理。" },
+    { "id": "act-7", "name": "宣传活动", "text": "通过媒体开展社会宣传活动。" },
+    { "id": "act-8", "name": "国际活动", "text": "利用国际活动推广诚信理念。" },
+    { "id": "act-9", "name": "社区伙伴关系", "text": "加强各方之间的社区伙伴关系。" },
+    { "id": "act-10", "name": "国际奖项", "text": "参与国际反腐败奖项。" }
+  ]
+}
+,
 
   "activities": {
     "title": "我们在做什么",

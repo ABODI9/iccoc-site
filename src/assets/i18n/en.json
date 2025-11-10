@@ -102,21 +102,21 @@
   },
 
   "what": {
-    "title": "What We Do",
-    "subtitle": "Practical programs and activities",
-    "items": [
-      { "img": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=800&auto=format&fit=crop", "text": "Organizing and participating in seminars, conferences and workshops…" },
-      { "img": "https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=800&auto=format&fit=crop", "text": "Forming national and international teams to amend and develop laws." },
-      { "img": "https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?q=80&w=800&auto=format&fit=crop", "text": "Building partnerships and MOUs with relevant entities." },
-      { "img": "https://images.unsplash.com/photo-1517976487492-576ea346b021?q=80&w=800&auto=format&fit=crop", "text": "Signing memoranda of understanding with international institutions." },
-      { "img": "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=800&auto=format&fit=crop", "text": "Cooperating with universities and civil society organizations…" },
-      { "img": "https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?q=80&w=800&auto=format&fit=crop", "text": "Receiving reports and referring them for verification and follow-up." },
-      { "img": "https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=800&auto=format&fit=crop", "text": "Public awareness campaigns through media." },
-      { "img": "https://images.unsplash.com/photo-1496134731652-92ad7d726f48?q=80&w=800&auto=format&fit=crop", "text": "Leveraging international days to promote integrity." },
-      { "img": "https://images.unsplash.com/photo-1483478550801-ceba5fe50e8e?q=80&w=800&auto=format&fit=crop", "text": "Strengthening multi-stakeholder social partnerships." },
-      { "img": "https://images.unsplash.com/photo-1557800636-894a64c1696f?q=80&w=800&auto=format&fit=crop", "text": "Participating in international anti-corruption awards." }
-    ]
-  },
+  "title": "What We Do",
+  "subtitle": "Practical Programs & Activities",
+  "items": [
+    { "id": "act-1", "name": "Workshops", "text": "Organizing seminars, conferences, and workshops…" },
+    { "id": "act-2", "name": "Law Development", "text": "Forming local and international teams to amend and develop laws." },
+    { "id": "act-3", "name": "Partnerships", "text": "Establishing partnerships and agreements with relevant authorities." },
+    { "id": "act-4", "name": "MOUs", "text": "Signing memorandums of understanding with related international institutions." },
+    { "id": "act-5", "name": "Universities & NGOs", "text": "Cooperating with universities and civil society organizations…" },
+    { "id": "act-6", "name": "Reports Handling", "text": "Receiving reports and referring them for verification and follow-up." },
+    { "id": "act-7", "name": "Awareness Campaigns", "text": "Launching community awareness campaigns through the media." },
+    { "id": "act-8", "name": "Global Events", "text": "Leveraging international occasions to promote integrity." },
+    { "id": "act-9", "name": "Community Partnership", "text": "Strengthening community partnerships among various stakeholders." },
+    { "id": "act-10", "name": "International Awards", "text": "Participating in international anti-corruption awards." }
+  ]
+},
 
   "activities": {
     "title": "What We Do",
