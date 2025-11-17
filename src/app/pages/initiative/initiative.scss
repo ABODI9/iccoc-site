@@ -1,0 +1,45 @@
+/* ============================
+   صفحة المبادرة (initiative)
+   ============================ */
+
+/* سكشن خاص بالصفحة */
+.initiative-section {
+  padding: 42px 0;
+}
+
+/* ✅ مسافة 35px بين البلوكات داخل الـ container
+   (بين الهيرو والكارد، وبين أي عناصر أخرى تضيفها لاحقًا) */
+.initiative-section .container > * + * {
+  margin-top: 35px;
+}
+
+/* الهيرو (نفس ستايل الهيرو العام) */
+.hero {
+  background-size: cover;
+  background-position: center;
+  border-radius: 16px;
+  padding: 18px;
+}
+
+/* صندوق العنوان داخل الهيرو */
+.wrap.card.soft {
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+/* كارد نص المبادرة */
+.initiative-text {
+  border-radius: 16px;
+  line-height: 1.8;
+}
+
+/* فاصل بين الفقرات داخل نفس الكارد */
+.initiative-text p + p {
+  margin-top: 12px;
+}
+
+/* نص ثانوي */
+.muted {
+  color: #64748b;
+}

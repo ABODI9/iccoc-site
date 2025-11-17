@@ -1,2 +1,52 @@
+/* ============================
+   صفحة الروابط (Links)
+   ============================ */
 
-/* يعتمد على الأنماط العامة */
+/* سكشن الروابط */
+.section-links {
+  padding: 42px 0;
+}
+
+/* ✅ مسافة 35px بين البلوكات داخل الـ container
+   (بين الهيرو وشبكة الروابط، وبين أي بلوكات تضيفها بعدين) */
+.section-links .container > * + * {
+  margin-top: 35px;
+}
+
+/* نستخدم الهيرو العام من الثيم، لكن لو حاب نضمن أساسياته: */
+.hero {
+  background-size: cover;
+  background-position: center;
+  border-radius: 16px;
+  padding: 18px;
+}
+
+/* كارد العنوان داخل الهيرو */
+.wrap.card.soft {
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+/* شبكة الروابط (تستفيد من .grid .cols-2 العامة) */
+
+
+/* شكل كروت الروابط */
+.link-card {
+  display: block;
+  padding: 16px;
+  border-radius: 16px;
+  border: 1px solid #e5eef9;
+  background: #fff;
+  color: #0b2240;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: 0 10px 24px rgba(2,6,23,.08);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.link-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 32px rgba(2,6,23,.16);
+}

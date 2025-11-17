@@ -1,29 +1,33 @@
-<section class="section">
+<section class="section what-section">
   <div class="container">
+
+    <!-- Hero -->
     <div
       class="hero"
-      style="background:url('https://images.unsplash.com/photo-1542744173-05336fcc7ad4?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;"
+      [style.background]="'url(' + heroBg + ') center/cover no-repeat'"
     >
       <div class="wrap">
-        <div class="card soft" style="max-width:920px">
+        <div class="card soft hero-card">
           <h1>{{ title }}</h1>
           <p class="muted">{{ subtitle }}</p>
         </div>
       </div>
     </div>
-  </div>
-</section>
 
-<section class="section">
-  <div class="container">
-    <div class="grid cols-3">
+    <!-- الأنشطة / ما نقوم به -->
+    <div class="grid cols-3 activities-grid">
       <div class="card goal" *ngFor="let a of activities; let i = index">
-        <img [src]="a.img" alt="activity {{ i + 1 }}">
+        <img
+          [src]="a.img"
+          [alt]="'activity ' + (i + 1)"
+          (error)="imgError($event)"
+        >
         <div>
           <div class="muted">{{ i + 1 }}.</div>
           <div>{{ a.text }}</div>
         </div>
       </div>
     </div>
+
   </div>
 </section>

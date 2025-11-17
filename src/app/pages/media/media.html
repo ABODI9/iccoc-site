@@ -1,5 +1,5 @@
 <!-- src/app/pages/media/media.html -->
-<section class="section" [attr.dir]="currentDir">
+<section class="section media-section" [attr.dir]="currentDir">
   <div class="container">
     <!-- Hero -->
     <div class="hero" [style.backgroundImage]="'url(' + heroBg + ')'">
@@ -10,29 +10,36 @@
     </div>
 
     <!-- زر العودة -->
-    <div class="mt-16 actions-top">
-      <button class="btn" *ngIf="activeSlug" (click)="goBack()">&larr; {{ 'media.back' | translate }}</button>
+    <div class="actions-top">
+      <button class="btn" *ngIf="activeSlug" (click)="goBack()">
+        &larr; {{ 'media.back' | translate }}
+      </button>
     </div>
 
     <!-- عرض مقال واحد -->
     <ng-container *ngIf="activeSlug; else listView">
-      <div *ngIf="selectedArticle as a; else notFound" class="article-card card soft mt-16">
+      <div *ngIf="selectedArticle as a; else notFound" class="article-card card soft">
         <div class="article-layout">
           <div class="thumb">
-            <img [src]="a.img" [alt]="(a.titleKey | translate)" (error)="onImgError($event)" />
+            <img
+              [src]="a.img"
+              [alt]="(a.titleKey | translate)"
+              (error)="onImgError($event)"
+            />
           </div>
 
           <div class="body">
             <h2 class="title">{{ a.titleKey | translate }}</h2>
             <p class="muted excerpt">{{ a.titleKey | translate }}</p>
 
-            <!-- المحتوى: صفحة HTML مؤمّنة أو نص i18n -->
+            <!-- المحتوى: صفحة HTML أو نص من i18n -->
             <div class="content" [innerHTML]="currentArticleHtml"></div>
 
-            <div class="article-actions" style="margin-top:18px;display:flex;gap:8px;align-items:center;">
-              <button class="btn primary" (click)="goSubscribe()">{{ 'media.subscribe' | translate }}</button>
+            <div class="article-actions">
+              <button class="btn primary" (click)="goSubscribe()">
+                {{ 'media.subscribe' | translate }}
+              </button>
 
-              <!-- اقرأ المزيد: نفتح صفحة HTML المولدة حسب اللغة في تبويب جديد -->
               <a class="btn" href="#" (click)="openExternal(a); $event.preventDefault()">
                 {{ 'media.read_more' | translate }}
               </a>
@@ -42,34 +49,48 @@
       </div>
 
       <ng-template #notFound>
-        <div class="card soft mt-16">{{ 'media.not_found' | translate }}</div>
+        <div class="card soft not-found-card">
+          {{ 'media.not_found' | translate }}
+        </div>
       </ng-template>
     </ng-container>
 
     <!-- عرض القائمة -->
     <ng-template #listView>
-      <div class="list-header mt-16">
+      <div class="list-header">
         <h2>{{ 'media.recent' | translate }}</h2>
         <p class="muted">{{ 'media.subscribe_desc' | translate }}</p>
       </div>
 
-      <div class="grid cols-3 mt-8">
+      <div class="grid cols-3 media-grid">
         <ng-container *ngFor="let a of articles">
           <article class="card media-card">
             <div class="thumb">
-              <img [src]="a.img" [alt]="(a.titleKey | translate)" (error)="onImgError($event)"/>
+              <img
+                [src]="a.img"
+                [alt]="(a.titleKey | translate)"
+                (error)="onImgError($event)"
+              />
             </div>
 
             <div class="body">
               <h3 class="title">{{ a.titleKey | translate }}</h3>
-              <p class="excerpt">{{ (a.bodyKey ? (a.bodyKey | translate) : '') | slice:0:160 }}...</p>
+              <p class="excerpt">
+                {{ (a.bodyKey ? (a.bodyKey | translate) : '') | slice:0:160 }}...
+              </p>
 
               <div class="actions">
-                <a class="btn primary" href="#" (click)="openExternal(a); $event.preventDefault()">
+                <a
+                  class="btn primary"
+                  href="#"
+                  (click)="openExternal(a); $event.preventDefault()"
+                >
                   {{ 'media.read_more' | translate }}
                 </a>
 
-                <button class="btn" (click)="goSubscribe()">{{ 'media.subscribe' | translate }}</button>
+                <button class="btn" (click)="goSubscribe()">
+                  {{ 'media.subscribe' | translate }}
+                </button>
               </div>
             </div>
           </article>

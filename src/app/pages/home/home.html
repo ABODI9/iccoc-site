@@ -18,14 +18,22 @@
         </a>
 
         <h1 class="hero-title">{{ slides[index].titleKey | translate }}</h1>
-        <p class="hero-sub">{{ slides[index].subtitleKey | translate }}</p>
 
-        <div class="tags">
+        <!-- تقدر تخليها كذا أو تضيف *ngIf لو حابب تخفيها لما يكون المفتاح فاضي -->
+        <p class="hero-sub" *ngIf="slides[index].subtitleKey">
+          {{ slides[index].subtitleKey | translate }}
+        </p>
+
+        <!-- هنا كان الخطأ: *naIf → *ngIf -->
+        <div class="tags" *ngIf="tags.length">
           <span class="tag" *ngFor="let t of tags">{{ t }}</span>
         </div>
 
-        <a class="cta-btn" [routerLink]="slides[index].route">
-          {{ (slides[index].ctaKey || slides[index].titleKey) | translate }}
+        <!-- وهنا كان الخطأ: slides[index]ctaKey → slides[index].ctaKey -->
+        <a class="cta-btn"
+           *ngIf="slides[index].ctaKey"
+           [routerLink]="slides[index].route">
+          {{ slides[index].ctaKey | translate }}
         </a>
 
         <div class="progress">
@@ -42,10 +50,15 @@
       </button>
 
       <div class="dots">
-        <button *ngFor="let _ of slides; let i = index" class="dot" [class.active]="i === index" (click)="go(i)" [attr.aria-label]="'home.goto_slide' | translate:{ num: i + 1 }"></button>
+        <button *ngFor="let _ of slides; let i = index"
+                class="dot"
+                [class.active]="i === index"
+                (click)="go(i)"
+                [attr.aria-label]="'home.goto_slide' | translate:{ num: i + 1 }"></button>
       </div>
     </div>
 
+    <!-- الباقي عندك صحيح وما يحتاج تغيير -->
     <!-- ===================== التقرير المميّز (ثابت في الأعلى) ===================== -->
     <div class="featured-report mt-24"
          *ngIf="featuredReport"
@@ -63,12 +76,10 @@
         <p class="excerpt">{{ featuredReport.excerptKey | translate }}</p>
 
         <div class="actions">
-          <!-- زر التفاصيل: يوجّه إلى /media/:slug داخل التطبيق -->
           <a class="btn" href="https://iccoc.eu/media" target="_blank" rel="noopener noreferrer">
             {{ 'home.more_details' | translate }}
           </a>
 
-          <!-- زر الاشتراك -->
           <a class="btn" [routerLink]="['/reports']">
             {{ 'home.subscribe' | translate }}
           </a>
@@ -76,7 +87,7 @@
       </div>
     </div>
 
-    <!-- ===================== قائمة البطاقات (كلها بمظهر مميّز) ===================== -->
+    <!-- ===================== قائمة البطاقات ===================== -->
     <div class="reports-list mt-16">
       <article class="report-card"
                *ngFor="let r of reportCards; let i = index"
@@ -99,12 +110,10 @@
           <div class="actions">
             <span class="spacer"></span>
 
-            <!-- زر التفاصيل يذهب إلى /media/:slug -->
             <a class="btn" href="https://iccoc.eu/media" target="_blank" rel="noopener noreferrer">
               {{ 'home.more_details' | translate }}
             </a>
 
-            <!-- زر الاشتراك يذهب لصفحة التقارير -->
             <a class="btn" [routerLink]="['/reports']">
               {{ 'home.subscribe' | translate }}
             </a>

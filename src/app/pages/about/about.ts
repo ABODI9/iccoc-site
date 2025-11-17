@@ -20,7 +20,7 @@ export class About {
   readonly currentYear = new Date().getFullYear();
 
   titleKey = 'about.title';
-  subtitleKey = 'about.vision';
+  subtitleKey = '';
 
   heroImage =
     'https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=1800&auto=format&fit=crop';
@@ -29,17 +29,17 @@ export class About {
     {
       img: 'assets/img-about/awareness.PNG',
       titleKey: 'about.vision',
-      descKey: 'about.mission',
+      descKey: '',
     },
     {
       img: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1200&auto=format&fit=crop',
       titleKey: 'about.values',
-      descKey: 'about.values',
+      descKey: '',
     },
     {
       img: 'assets/img-about/values-team.PNG',
-      titleKey: 'app.org_full',
-      descKey: 'home.welcome',
+      titleKey: 'about.mission',
+      descKey: '',
     },
   ];
 

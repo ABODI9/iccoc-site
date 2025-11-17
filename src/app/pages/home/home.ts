@@ -1,4 +1,4 @@
-// src/app/pages/home/home.component.ts
+// src/app/pages/home/home.ts
 import {
   Component, OnInit, OnDestroy, AfterViewInit,
   ElementRef, ViewChild
@@ -44,34 +44,102 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   currentDir: 'ltr' | 'rtl' = 'ltr';
   private langSub?: Subscription;
 
-  slides: Slide[] = [
-    { icon:'globe', bg:'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=1800&auto=format&fit=crop',
-      titleKey:'hero.home_title', subtitleKey:'hero.home_sub',
-      tagsKeys:['app.org_full','app.org_full_fr','app.org_full_en','app.org_full_zh'],
-      gradient:'grad-blue-1', route:'/', ctaKey:'hero.home_title' },
-    { icon:'users', bg:'https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1700&auto=format&fit=crop',
-      titleKey:'who.title', subtitleKey:'who.body.0',
-      tagsKeys:['who.body.1','who.body.2'], gradient:'grad-blue-2', route:'/who', ctaKey:'who.title' },
-    { icon:'target', bg:'https://images.unsplash.com/photo-1538688423619-a81d3f23454b?q=80&w=1700&auto=format&fit=crop',
-      titleKey:'about.title', subtitleKey:'about.vision', tagsKeys:['about.values'],
-      gradient:'grad-blue-3', route:'/about', ctaKey:'about.title' },
-    { icon:'file', bg:'https://images.unsplash.com/photo-1556761175-4b46a572b786?q=80&w=1700&auto=format&fit=crop',
-      titleKey:'what.title', subtitleKey:'what.subtitle', tagsKeys:['activities.title'],
-      gradient:'grad-blue-4', route:'/what-we-do', ctaKey:'what.title' },
-    { icon:'news', bg:'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1700&auto=format&fit=crop',
-      titleKey:'reports.title', subtitleKey:'home.welcome', tagsKeys:['news.subscribe_title'],
-      gradient:'grad-blue-1', route:'/reports', ctaKey:'reports.title' },
-    { icon:'link', bg:'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?q=80&w=1700&auto=format&fit=crop',
-      titleKey:'links.title', subtitleKey:'media.welcome', tagsKeys:['links.title'],
-      gradient:'grad-blue-2', route:'/links', ctaKey:'links.title' },
-    { icon:'bulb', bg:'https://images.unsplash.com/photo-1543269865-0a740d43b90c?q=80&w=1700&auto=format&fit=crop',
-      titleKey:'initiative.title', subtitleKey:'initiative.lead', tagsKeys:['initiative.body'],
-      gradient:'grad-blue-4', route:'/initiative', ctaKey:'initiative.title' },
-    { icon:'mail', bg:'https://images.unsplash.com/photo-1504384764586-bb4cdc1707b0?q=80&w=1700&auto=format&fit=crop',
-      titleKey:'contact.title', subtitleKey:'home.welcome',
-      tagsKeys:['contact.emails.0','contact.emails.1','contact.emails.2'],
-      gradient:'grad-blue-1', route:'/contact', ctaKey:'contact.title' },
+      slides: Slide[] = [
+    {
+      icon: 'globe',
+      bg: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=1800&auto=format&fit=crop',
+      titleKey: 'hero.home_title',
+      subtitleKey: 'hero.home_sub',
+      // هنا خالي عشان ما يطلع ولا "تاج"
+      tagsKeys: [],
+      gradient: 'grad-blue-1',
+      route: '/'
+      // ما في ctaKey → الزر الأبيض ما يظهر في أول سلايد
+    },
+
+    {
+      icon: 'users',
+      bg: 'https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1700&auto=format&fit=crop',
+      titleKey: 'who.title',
+      subtitleKey: 'who.body.0',
+      tagsKeys: ['who.body.1', 'who.body.2'],
+      gradient: 'grad-blue-2',
+      route: '/who',
+      ctaKey: 'who.title'
+    },
+
+    {
+      icon: 'target',
+      bg: 'https://images.unsplash.com/photo-1538688423619-a81d3f23454b?q=80&w=1700&auto=format&fit=crop',
+      titleKey: 'about.title',
+      subtitleKey: 'about.vision',
+      tagsKeys: ['about.values'],
+      gradient: 'grad-blue-3',
+      route: '/about',
+      ctaKey: 'about.title'
+    },
+
+    {
+      icon: 'file',
+      bg: 'https://images.unsplash.com/photo-1556761175-4b46a572b786?q=80&w=1700&auto=format&fit=crop',
+      titleKey: 'what.title',
+      subtitleKey: 'what.subtitle',
+      tagsKeys: ['activities.title'],
+      gradient: 'grad-blue-4',
+      route: '/what-we-do',
+      ctaKey: 'what.title'
+    },
+
+    {
+      icon: 'news',
+      bg: 'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1700&auto=format&fit=crop',
+      titleKey: 'reports.title',
+      subtitleKey: 'home.welcome',
+      tagsKeys: ['news.subscribe_title'],
+      gradient: 'grad-blue-1',
+      route: '/reports',
+      ctaKey: 'reports.title'
+    },
+
+    {
+      icon: 'link',
+      bg: 'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?q=80&w=1700&auto=format&fit=crop',
+      titleKey: 'links.title',
+      subtitleKey: 'media.welcome',
+      tagsKeys: [],
+      gradient: 'grad-blue-2',
+      route: '/links',
+      ctaKey: 'links.title'
+    },
+
+    {
+      icon: 'bulb',
+      bg: 'https://images.unsplash.com/photo-1543269865-0a740d43b90c?q=80&w=1700&auto=format&fit=crop',
+      titleKey: 'initiative.title',
+      subtitleKey: 'initiative.lead',
+      tagsKeys: ['initiative.body'],
+      gradient: 'grad-blue-4',
+      route: '/initiative',
+      ctaKey: 'initiative.title'
+    },
+
+    {
+      icon: 'mail',
+      bg: 'https://images.unsplash.com/photo-1504384764586-bb4cdc1707b0?q=80&w=1700&auto=format&fit=crop',
+      titleKey: 'contact.title',
+      subtitleKey: '',        // ما في نص تحت العنوان
+      tagsKeys: [
+        'contact.emails.0',
+        'contact.emails.1',
+        'contact.emails.2'
+      ],
+      gradient: 'grad-blue-1',
+      route: '/contact'
+      // ما في ctaKey → الزر الأبيض ما يظهر
+    }
+
   ];
+
 
   /* featured + cards — تأكد أن هذه القيم تتطابق مع slugs في media.page.ts */
   featuredReport = {

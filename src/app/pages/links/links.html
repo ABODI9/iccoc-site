@@ -1,14 +1,27 @@
-
-<section class="section">
+<section class="section section-links">
   <div class="container">
-    <div class="hero" style="background-image:url('https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?q=80&w=1600&auto=format&fit=crop')">
+
+    <!-- الهيرو -->
+    <div
+      class="hero"
+      style="background-image:url('https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?q=80&w=1600&auto=format&fit=crop')"
+    >
       <div class="wrap card soft">
         <h1>{{ 'links.title' | translate }}</h1>
       </div>
     </div>
 
-    <div class="grid cols-2" style="margin-top:16px">
-      <a class="card" *ngFor="let it of items" [href]="it[1]" target="_blank">{{ it[0] }}</a>
+    <!-- شبكة الروابط -->
+    <div class="grid cols-2 links-grid">
+      <a
+        class="card link-card"
+        *ngFor="let it of items"
+        [href]="it[1]"
+        target="_blank"
+      >
+        {{ it[0] }}
+      </a>
     </div>
+
   </div>
 </section>

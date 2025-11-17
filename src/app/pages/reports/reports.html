@@ -1,65 +1,92 @@
-<section class="section">
+<section class="section reports-section">
   <div class="container">
 
     <!-- Hero -->
-    <div class="hero"
-         [style.background]="'url(' + heroBg + ') center/cover no-repeat'">
+    <div
+      class="hero"
+      [style.background]="'url(' + heroBg + ') center/cover no-repeat'"
+    >
       <div class="wrap card soft">
         <h1>{{ 'news.title' | translate }}</h1>
         <p class="muted">{{ 'news.subscribe_title' | translate }}</p>
       </div>
     </div>
 
-    <div class="grid cols-2" style="margin-top:16px">
+    <!-- فورم + أمثلة -->
+    <div class="grid cols-2 reports-grid">
       <!-- Form -->
       <div class="card soft">
-        <form [formGroup]="form" (ngSubmit)="submit()" class="grid">
+        <form [formGroup]="form" (ngSubmit)="submit()" class="grid form-grid">
 
-          <input class="input" formControlName="name" [placeholder]="'news.form.name' | translate">
+          <input
+            class="input"
+            formControlName="name"
+            [placeholder]="'news.form.name' | translate"
+          />
           <div class="muted" *ngIf="ctrl('name').touched && ctrl('name').invalid">
             {{ 'news.errors.name' | translate }}
           </div>
 
-          <input class="input" formControlName="phone" [placeholder]="'news.form.phone' | translate">
+          <input
+            class="input"
+            formControlName="phone"
+            [placeholder]="'news.form.phone' | translate"
+          />
           <div class="muted" *ngIf="ctrl('phone').touched && ctrl('phone').invalid">
             {{ 'news.errors.phone' | translate }}
           </div>
 
           <div class="grid cols-2">
-            <input class="input" formControlName="country" [placeholder]="'news.form.country' | translate">
-            <input class="input" formControlName="city"    [placeholder]="'news.form.city'    | translate">
+            <input
+              class="input"
+              formControlName="country"
+              [placeholder]="'news.form.country' | translate"
+            />
+            <input
+              class="input"
+              formControlName="city"
+              [placeholder]="'news.form.city' | translate"
+            />
           </div>
 
-          <input class="input" type="email" formControlName="email" [placeholder]="'news.form.email' | translate">
+          <input
+            class="input"
+            type="email"
+            formControlName="email"
+            [placeholder]="'news.form.email' | translate"
+          />
           <div class="muted" *ngIf="ctrl('email').touched && ctrl('email').invalid">
             {{ 'news.errors.email' | translate }}
           </div>
 
-          <!-- 🆕 رسالة المشترك -->
+          <!-- رسالة المشترك -->
           <textarea
             class="input textarea"
             rows="5"
             formControlName="message"
             [placeholder]="'contact.message_placeholder' | translate">
           </textarea>
-          
+
           <div class="muted" *ngIf="ctrl('message').touched && ctrl('message').invalid">
             {{ 'contact.message_error' | translate }}
           </div>
-          
 
           <button class="btn" [disabled]="loading" type="submit">
             <span *ngIf="!loading">{{ 'news.form.submit' | translate }}</span>
             <span *ngIf="loading">…</span>
           </button>
 
-          <div class="muted" *ngIf="done" style="color:#16a34a">{{ 'news.success' | translate }}</div>
-          <div class="muted" *ngIf="error" style="color:#dc2626">{{ error }}</div>
+          <div class="muted success" *ngIf="done">
+            {{ 'news.success' | translate }}
+          </div>
+          <div class="muted error" *ngIf="error">
+            {{ error }}
+          </div>
         </form>
       </div>
 
       <!-- Examples -->
-      <div class="card soft">
+      <div class="card soft examples-card">
         <strong>{{ 'news.examples_title' | translate:({default:'Examples'}) }}</strong>
         <ul>
           <li>{{ 'news.ex1' | translate:({default:'Example 1'}) }}</li>

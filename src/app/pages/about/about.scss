@@ -1,19 +1,30 @@
+/* =========================================
+   🎨 المتغيّرات العامة (Theme Variables)
+   ========================================= */
 :root {
-  --bg: #f8fafc;
-  --card: #ffffff;
-  --text: #1e293b;
-  --muted: #64748b;
-  --brand: #0f766e;
-  --accent: #14b8a6;
-  --border: #e2e8f0;
+  --bg: #f8fafc;          /* خلفية الموقع */
+  --card: #fff;           /* خلفيات الكروت */
+  --text: #1e293b;        /* لون النص الأساسي */
+  --muted: #64748b;       /* نص ثانوي */
+  --brand: #0f766e;       /* اللون الأساسي */
+  --accent: #14b8a6;      /* لون مميز */
+  --border: #e2e8f0;      /* لون الإطار */
 }
 
-/* جذر المستضيف */
+/* =========================================
+   🧱 أساس الكومبوننت
+   ========================================= */
+  
+  .section {
+  margin-top: 35px;
+}
+
+
 :host {
   display: block;
+  background: var(--bg);
   color: var(--text);
   font-family: 'Inter', system-ui, sans-serif;
-  background: var(--bg);
 }
 
 .container {
@@ -22,13 +33,14 @@
   padding: 0 18px;
 }
 
-
-/* HERO */
+/* =========================================
+   🖼 HERO
+   ========================================= */
 .hero {
-  position: relative; /* مهم: الحاوية النسبية لكي يعمل الإسناد المطلق للكرت */
+  position: relative;
   border-radius: 24px;
   overflow: hidden;
-  margin: 24px 0 40px;
+  margin: 24px 0 40px;     /* مساحة حول الهيرو */
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
 
   .hero-img {
@@ -38,53 +50,47 @@
     display: block;
   }
 
-  /* الكرت أبيض عائم في منتصف الصورة */
+  /* الكرت الأبيض وسط الصورة */
   .floating-card {
     position: absolute;
     left: 50%;
     top: 50%;
-    transform: translate(-50%, -50%); /* يركّز الكرت تماماً في منتصف الحاوية */
+    transform: translate(-50%, -50%);
     width: clamp(260px, 48%, 520px);
-    max-width: 520px;
     padding: 22px 28px;
-    background: #ffffff;
-    color: var(--text);
+    background: #fff;
     border-radius: 14px;
-    box-shadow: 0 14px 40px rgba(2,6,23,0.18);
-    border: 1px solid rgba(2,6,23,0.06);
+    box-shadow: 0 14px 40px rgba(2,6,23,.18);
+    border: 1px solid rgba(2,6,23,.06);
     text-align: center;
     direction: rtl;
     z-index: 3;
-    line-height: 1.25;
     pointer-events: auto;
+
+    .hero-title {
+      margin: 0;
+      font-size: clamp(22px, 4.5vw, 36px);
+      font-weight: 700;
+    }
+
+    .hero-subtitle {
+      margin-top: 8px;
+      max-width: 90%;
+      font-size: 1rem;
+      color: var(--muted);
+      margin-inline: auto;
+    }
   }
 
-  .floating-card .hero-title {
-    margin: 0;
-    font-size: clamp(22px, 4.5vw, 36px);
-    font-weight: 700;
-  }
-
-  .floating-card .hero-subtitle {
-    margin-top: 8px;
-    font-size: 1rem;
-    color: var(--muted);
-    max-width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  /* لو تبغى نسخة زجاجية بدل الصلب:
-     استعمل class="floating-card floating-card--glass" */
+  /* نسخة زجاجية اختيارية */
   .floating-card--glass {
-    background: rgba(255,255,255,0.88);
+    background: rgba(255,255,255,.88);
     backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    border: 1px solid rgba(255,255,255,0.6);
-    box-shadow: 0 10px 28px rgba(2,6,23,0.10);
+    border: 1px solid rgba(255,255,255,.6);
+    box-shadow: 0 10px 28px rgba(2,6,23,.10);
   }
 
-  /* responsive tweaks */
+  /* استجابة */
   @media (max-width: 900px) {
     .hero-img { height: 360px; }
     .floating-card { width: 84%; padding: 18px 20px; }
@@ -95,39 +101,67 @@
     .floating-card {
       width: 92%;
       padding: 14px 16px;
-      transform: translate(-50%, -40%); /* يرفعه شوية عشان لا يغطي نص أكبر */
+      transform: translate(-50%, -40%);
     }
-    .floating-card .hero-title { font-size: 20px; }
-    .floating-card .hero-subtitle { font-size: 0.95rem; }
+    .hero-title { font-size: 20px; }
+    .hero-subtitle { font-size: .95rem; }
   }
 }
 
+/* =========================================
+   🗂 GRID & CARDS
+   ========================================= */
+.grid {
+  display: grid;
+  gap: 18px;
+}
 
-/* GRID & CARDS */
-.grid { display: grid; gap: 18px; }
-.cols-3 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.cols-3 {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
 
 .card {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 16px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 6px 20px rgba(0,0,0,.05);
   overflow: hidden;
   transition: transform .2s, box-shadow .2s;
 
-  &:hover { transform: translateY(-5px); box-shadow: 0 10px 24px rgba(0,0,0,.08); }
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 24px rgba(0,0,0,.08);
+  }
 
-  .card-thumb { width: 100%; height: 200px; object-fit: cover; display: block; }
+  .card-thumb {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+
   .soft { padding: 18px; }
-  .card-title { color: var(--brand); margin: 0 0 6px; font-size: 1.1rem; }
+
+  .card-title {
+    margin: 0 0 6px;
+    color: var(--brand);
+    font-size: 1.1rem;
+  }
 }
 
 .muted { color: var(--muted); }
 
-/* SECTION TITLES */
-.section-title { margin-top: 40px; font-size: 26px; color: var(--brand); }
+/* =========================================
+   📝 عناوين الأقسام
+   ========================================= */
+.section-title {
+  margin-top: 40px;
+  font-size: 26px;
+  color: var(--brand);
+}
 
-/* OBJECTIVES */
+/* =========================================
+   🎯 OBJECTIVES GRID
+   ========================================= */
 .objectives-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
@@ -141,11 +175,11 @@
   border-radius: 18px;
   overflow: hidden;
   box-shadow: 0 6px 20px rgba(0,0,0,.05);
-  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
   display: flex;
   flex-direction: column;
-  min-height: 320px;
   text-align: center;
+  min-height: 320px;
+  transition: transform .18s, box-shadow .18s, border-color .18s;
 
   &:hover {
     transform: translateY(-3px);
@@ -158,49 +192,49 @@
   position: relative;
   width: 100%;
   aspect-ratio: 3 / 2;
-  overflow: hidden;
   background: #eef2f7;
+  overflow: hidden;
 
   img {
-    width: 100%;
-    height: 100%;
+    width: 100%; height: 100%;
     object-fit: cover;
-    display: block;
     transition: transform .35s ease;
   }
-
   &:hover img { transform: scale(1.05); }
 
   .idx {
     position: absolute;
     inset-inline-start: 10px;
     top: 10px;
-    width: 42px;
-    height: 42px;
+    width: 42px; height: 42px;
     border-radius: 10px;
     background: var(--accent);
     color: #fff;
-    display: grid; place-items: center;
-    font-weight: 800; font-size: 1rem;
+    display: grid;
+    place-items: center;
+    font-weight: 800;
+    font-size: 1rem;
     box-shadow: 0 3px 10px rgba(0,0,0,.25);
   }
 }
 
 .objective-text {
   padding: 16px 18px 22px;
+  font-size: 1rem;
   color: var(--text);
   line-height: 1.7;
-  font-size: 1rem;
   flex: 1;
 }
 
-/* FOOTER */
+/* =========================================
+   🦶 FOOTER
+   ========================================= */
 .footer {
   margin: 50px 0;
+  padding-top: 20px;
   text-align: center;
   color: var(--muted);
   border-top: 1px solid var(--border);
-  padding-top: 20px;
 }
 
 @media (max-width: 640px) {

@@ -1,7 +1,85 @@
-/* يعتمد على الأنماط العامة */
+/* reports.scss */
+/* =========================================
+   صفحة التقارير / الاشتراك في الأخبار
+   ========================================= */
+
+/* استيراد بعض الأنماط العامة من الهوم (اختياري) */
 @use '../home/home.scss';
-.grid{display:grid;gap:16px}
-.cols-2{grid-template-columns:repeat(2,1fr)}
-@media (max-width:900px){.cols-2{grid-template-columns:1fr}}
-.input{width:100%;background:#fff;border:1.2px solid #dbe7fb;border-radius:14px;padding:12px 14px;color:#0f172a;font:inherit}
-.btn{display:inline-block;background:linear-gradient(135deg,#0ea5e9,#38bdf8);color:#fff;padding:12px 18px;border-radius:999px;font-weight:700;text-decoration:none;width:max-content}
+
+/* سكشن الصفحة */
+.reports-section {
+  padding: 42px 0;
+}
+
+/* ✅ 35px بين كل بلوك مباشر داخل الـ container
+   (بين الهيرو وبين grid الفورم + الأمثلة، وأي بلوك تضيفه بعدين) */
+.reports-section .container > * + * {
+  margin-top: 35px;
+}
+
+/* شبكة العمودين (تعتمد على نفس نمطك العام) */
+.grid {
+  display: grid;
+  gap: 16px;
+}
+
+.cols-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (max-width: 900px) {
+  .cols-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* بطاقة الفورم */
+.form-grid {
+  /* نخلي العناصر داخل الفورم متباعدة عموديًا */
+  grid-template-columns: 1fr;
+}
+
+/* الحقول */
+.input {
+  width: 100%;
+  background: #fff;
+  border: 1.2px solid #dbe7fb;
+  border-radius: 14px;
+  padding: 12px 14px;
+  color: #0f172a;
+  font: inherit;
+}
+
+/* textarea ارتفاع أدنى بسيط */
+.textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* حالات النجاح / الخطأ */
+.success {
+  color: #16a34a;
+}
+
+.error {
+  color: #dc2626;
+}
+
+/* زر الإرسال */
+.btn {
+  display: inline-block;
+  background: linear-gradient(135deg, #0ea5e9, #38bdf8);
+  color: #fff;
+  padding: 12px 18px;
+  border-radius: 999px;
+  font-weight: 700;
+  text-decoration: none;
+  width: max-content;
+  border: 0;
+  cursor: pointer;
+}
+
+/* كارد الأمثلة (لو حاب تضيف تنسيق خاص) */
+.examples-card {
+  /* حالياً تستخدم .card .soft العامة – ممكن تضيف أي تخصيص هنا لاحقاً */
+}
